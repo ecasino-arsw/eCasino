@@ -11,4 +11,5 @@ In order to mantain code intergrity, the members of the organization cannot push
 In addition to this, the commits will have an especial syntax as the repository is connected to Taiga, and commit messages will update issues or tasks status to close them. See the following links to know more:
 
 [Changing elements status via commit message](https://tree.taiga.io/support/integrations/changing-elements-status-via-commit-message/)
+
 [Attach commits to elements via commit message](https://tree.taiga.io/support/integrations/attach-commits-to-elements-via-commit-message/)
