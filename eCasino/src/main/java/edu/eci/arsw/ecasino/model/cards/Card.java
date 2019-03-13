@@ -7,6 +7,7 @@ public class Card {
 	
 	public Card(Suit suit, Value value) {
 		setSuit(suit);
+		setValue(value);
 	}
 	
 	public Suit getSuit() {

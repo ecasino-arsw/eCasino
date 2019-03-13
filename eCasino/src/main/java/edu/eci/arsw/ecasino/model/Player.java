@@ -9,6 +9,7 @@ public class Player {
 	
 	public Player(String username) {
 		setUsername(username);
+		hand = new Deck();
 	}
 
 	public String getUsername() {
@@ -27,9 +28,8 @@ public class Player {
 		this.hand = hand;
 	}
 
-	public void draw(Deck playDeck) {
-		hand.addCard(playDeck.drawTopCard());
-		
+	public void draw(Deck deck) {
+		hand.addCard(deck.drawTopCard());
 	}
 
 }

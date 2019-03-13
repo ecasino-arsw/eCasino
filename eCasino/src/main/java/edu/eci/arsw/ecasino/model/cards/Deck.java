@@ -108,4 +108,8 @@ public class Deck {
 		return cardListOutput;
 	}
 
+	public int deckSize() {
+		return cards.size();
+	}
+
 }

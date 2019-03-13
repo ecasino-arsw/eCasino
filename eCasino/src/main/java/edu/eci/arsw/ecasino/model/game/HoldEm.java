@@ -10,8 +10,15 @@ public class HoldEm implements Game {
 	private ArrayList<Player> players;
 	private Deck playDeck, sharedDeck;
 	
-	public HoldEm() {
-		setupGame();
+	public static void main(String[] args) {
+		ArrayList<Player> players = new ArrayList<>();
+		players.add(new Player("velomeister"));
+		new HoldEm(players);
+	}
+	
+	public HoldEm(ArrayList<Player> players) {
+		this.players = players;
+		start();
 	}
 
 	@Override
@@ -29,12 +36,40 @@ public class HoldEm implements Game {
 
 	@Override
 	public void start() {
+		setupGame();
+		flop();
+		middle();
+		river();
+		System.out.println("Players hands:");
+		for (Player player : players) {
+			System.out.println(player.getUsername());
+			System.out.println(player.getHand());
+		}
+	}
+	
+	public void  flop() {
+		for (int i = 0 ;  i < 3; i++) {
+			sharedDeck.addCard(playDeck.drawTopCard());
+		}
+		System.out.println("Flop...");
+	}
+	
+	public void middle() {
+		sharedDeck.addCard(playDeck.drawTopCard());
+		System.out.println("Middle...");
+	}
+	
+	public void river() {
+		sharedDeck.addCard(playDeck.drawTopCard());
+		System.out.println("River...");
+		for (int i = 0; i < sharedDeck.deckSize(); i++) { 
+			System.out.println(sharedDeck.getCard(i).toString());
+		}
 	}
 
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public ArrayList<Player> getPlayers() {
