@@ -6,4 +6,16 @@ public class HoldEm implements Game {
 		
 	}
 
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
