@@ -1,8 +1,20 @@
 package edu.eci.arsw.ecasino.model.game;
 
+import java.util.ArrayList;
+
+import edu.eci.arsw.ecasino.model.Player;
+
 public class Roulette implements Game {
 	
+	private ArrayList<Player> players;
+	
 	public Roulette() {
+		
+	}
+
+	@Override
+	public void setupGame() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -16,6 +28,14 @@ public class Roulette implements Game {
 	public void finish() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
 
 }
