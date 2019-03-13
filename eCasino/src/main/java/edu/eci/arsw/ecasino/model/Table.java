@@ -2,6 +2,8 @@ package edu.eci.arsw.ecasino.model;
 
 import java.util.ArrayList;
 
+import edu.eci.arsw.ecasino.model.game.Game;
+
 public class Table {
 	
 	private Game game;
