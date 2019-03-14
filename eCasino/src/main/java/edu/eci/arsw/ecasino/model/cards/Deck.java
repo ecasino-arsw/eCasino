@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * This class represents a deck of cards. This deck can be used to represent a full deck of cards to play a game,
- * as well as a player's hand or a shared deck in -for example- a Texas Hold'Em game.
+ * This class represents a deck of cards. This deck can be used to represent a
+ * full deck of cards to play a game, as well as a player's hand or a shared
+ * deck in -for example- a Texas Hold'Em game.
+ *
  * @author Daniel Vela
  *
  */
@@ -111,5 +113,53 @@ public class Deck {
 	public int deckSize() {
 		return cards.size();
 	}
+    
+
+    public void draw(Deck comingFrom) {
+        this.cards.add(comingFrom.getCard(0));
+        comingFrom.removeCard(0);
+    }
+
+    public int cardsValue() {
+        int total = 0;
+        int aces = 0;
+        
+        for (Card aCard : this.cards) {
+            System.out.println("valor> "+aCard.getValue());
+            if (aCard.getValue() == Value.ACE) {
+                aces += 1;
+            } else if (aCard.getValue() == Value.TWO) {
+                total += 2;
+            } else if (aCard.getValue() == Value.THREE) {
+                total += 3;
+            } else if (aCard.getValue() == Value.FOUR) {
+                total += 4;
+            } else if (aCard.getValue() == Value.FIVE) {
+                total += 5;
+            } else if (aCard.getValue() == Value.SIX) {
+                total += 6;
+            } else if (aCard.getValue() == Value.SEVEN) {
+                total += 7;
+            } else if (aCard.getValue() == Value.EIGHT) {
+                total += 8;
+            } else if (aCard.getValue() == Value.NINE) {
+                total += 9;
+            } else if (aCard.getValue() == Value.TEN) {
+                total += 10;
+            } else if (aCard.getValue() == Value.JACK) {
+                total += 11;
+            } else if (aCard.getValue() == Value.QUEEN) {
+                total += 12;
+            } else {
+                total += 13;
+            }
+
+        }
+        for(int i=0; i< aces; i++){
+            if(total > 11)total +=1;
+            else total+=11;
+        }
+        return total;
+    }
 
 }
