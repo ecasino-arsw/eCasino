@@ -4,6 +4,7 @@ import edu.eci.arsw.ecasino.model.game.Game;
 
 public class Table {
 	
+	private int id;
 	private Game game;
 	
 	public Table() {
@@ -11,6 +12,14 @@ public class Table {
 	
 	public Table(Game game) {
 		setGame(game);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Game getGame() {
