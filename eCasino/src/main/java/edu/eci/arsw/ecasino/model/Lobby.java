@@ -7,7 +7,8 @@ public class Lobby {
 	private int id;
 	private ArrayList<Table> tables;
 	
-	public Lobby() {
+	public Lobby(int id) {
+		this.id = id;
 		tables = new ArrayList<>();
 	}
 

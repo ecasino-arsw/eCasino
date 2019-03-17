@@ -24,6 +24,11 @@ import edu.eci.arsw.ecasino.persistence.CasinoPersistenceException;
 public class InMemoryCasinoPersistence implements CasinoPersistence {
 	
 	private final Map<Integer, Lobby> lobbies = new HashMap<>();
+	
+	public InMemoryCasinoPersistence() throws CasinoPersistenceException {
+		Lobby lobby = new Lobby(1);
+		addNewLobby(lobby);
+	}
 
 	@Override
 	public void addNewLobby(Lobby lobby) throws CasinoPersistenceException {
