@@ -1,6 +1,7 @@
 package edu.eci.arsw.ecasino.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,16 +20,17 @@ public class CasinoServices {
 	
 	/**
 	 * Adds a new lobby to persistence, the int id of the lobby is assigned incrementally.
+	 * @throws CasinoPersistenceException if the id of the lobby is already taken.
 	 */
-	public void addNewLobby() {
-		cps.addNewLobby();
+	public void addNewLobby(Lobby lobby) throws CasinoPersistenceException {
+		cps.addNewLobby(lobby);
 	}
 	
 	/**
 	 * Gets all lobbies stored in persistence.
 	 * @return a list of all the lobbies.
 	 */
-	public List<Lobby> getAllLobbies() {
+	public Set<Lobby> getAllLobbies() throws CasinoPersistenceException {
 		return cps.getAllLobbies();
 	}
 	
@@ -37,8 +39,12 @@ public class CasinoServices {
 	 * @param id the id of the requested lobby.
 	 * @throws CasinoPersistenceException if the requested lobby doesn't exist.
 	 */
-	public void getLobby(int id) {
-		cps.getLobby(id);
+	public Lobby getLobby(int id) throws CasinoPersistenceException {
+		Lobby lobby = cps.getLobby(id);
+		if (lobby == null) {
+			throw new CasinoPersistenceException("Lobby not found.");
+		}
+		return lobby;
 	}
 	
 	/**

@@ -1,6 +1,7 @@
 package edu.eci.arsw.ecasino.persistence;
 
 import java.util.List;
+import java.util.Set;
 
 import edu.eci.arsw.ecasino.model.Lobby;
 import edu.eci.arsw.ecasino.model.Player;
@@ -8,20 +9,25 @@ import edu.eci.arsw.ecasino.model.Table;
 
 public interface CasinoPersistence {
 	
-	public void addNewLobby();
+	/**
+	 * Adds a new lobby to the list of lobbies in the casino.
+	 * @param lobby the lobby to be added.
+	 * @throws CasinoPersistenceException 
+	 */
+	public void addNewLobby(Lobby lobby) throws CasinoPersistenceException;
 	
 	/**
 	 * Gets all lobbies stored in persistence.
 	 * @return a list of all the lobbies.
 	 */
-	public List<Lobby> getAllLobbies();
+	public Set<Lobby> getAllLobbies();
 	
 	/**
 	 * Gets a lobby identified with the provided id.
 	 * @param id the id of the requested lobby.
 	 * @throws CasinoPersistenceException if the requested lobby doesn't exist.
 	 */
-	public void getLobby(int id);
+	public Lobby getLobby(int id);
 	
 	/**
 	 * Adds a new table to a lobby in persistence, the int id of the table is assigned incrementally.
