@@ -1,6 +1,5 @@
 package edu.eci.arsw.ecasino.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class CasinoServices {
 	 * Adds a new lobby to persistence, the int id of the lobby is assigned incrementally.
 	 */
 	public void addNewLobby() {
-		// TODO: Implementation
+		cps.addNewLobby();
 	}
 	
 	/**
@@ -30,9 +29,7 @@ public class CasinoServices {
 	 * @return a list of all the lobbies.
 	 */
 	public List<Lobby> getAllLobbies() {
-		ArrayList<Lobby> lobbies = new ArrayList<>();
-		// TODO: Implementation
-		return lobbies;  // TODO: Obtain from persistence.
+		return cps.getAllLobbies();
 	}
 	
 	/**
@@ -41,7 +38,7 @@ public class CasinoServices {
 	 * @throws CasinoPersistenceException if the requested lobby doesn't exist.
 	 */
 	public void getLobby(int id) {
-		// TODO: Implementation
+		cps.getLobby(id);
 	}
 	
 	/**
@@ -51,7 +48,7 @@ public class CasinoServices {
 	 * @throws CasinoPersistenceException if the lobby doesn't exist.
 	 */
 	public void addNewTable(Lobby lobby, Table table) {
-		// TODO: Implementation
+		cps.addNewTable(lobby, table);
 	}
 	
 	/**
@@ -59,9 +56,7 @@ public class CasinoServices {
 	 * @return a list of all the tables.
 	 */
 	public List<Table> getAllTables() {
-		ArrayList<Table> tables = new ArrayList<>();
-		// TODO: Implementation
-		return tables;  // TODO: Obtain from persistence.
+		return cps.getAllTables();
 	}
 	
 	/**
@@ -71,9 +66,7 @@ public class CasinoServices {
 	 * @throws CasinoPersistenceException if the provided lobby doesn't exist.
 	 */
 	public List<Table> getAllTablesInLobby(Lobby lobby) {
-		ArrayList<Table> tables = new ArrayList<>();
-		// TODO: Implementation
-		return tables;  // TODO: Obtain from persistence.
+		return cps.getAllTablesInLobby(lobby);
 	}
 	
 	/**
@@ -83,8 +76,7 @@ public class CasinoServices {
 	 * @throws CasinoPersistenceException if the table doesn't exist.
 	 */
 	public Table getTable(int id) {
-		// TODO: Implementation
-		return new Table();  // TODO: Obtain from persistence.
+		return cps.getTable(id);
 	}
 	
 	/**
@@ -93,7 +85,7 @@ public class CasinoServices {
 	 * @throws CasinoPersistenceException if the username is already taken
 	 */
 	public void addNewPlayer(Player player) {
-		// TODO: Implementation
+		cps.addNewPlayer(player);
 	}
 	
 	/**
@@ -101,9 +93,7 @@ public class CasinoServices {
 	 * @return a list of all the users.
 	 */
 	public List<Player> getAllPlayers() {
-		ArrayList<Player> players = new ArrayList<>();
-		// TODO: Implementation
-		return players;  // TODO: Obtain from persistence.
+		return cps.getAllPlayers();
 	}
 	
 	/**
@@ -112,8 +102,7 @@ public class CasinoServices {
 	 * @throws CasinoPersistenceException if the user doesn't exist.
 	 */
 	public Player getPlayer(String username) {
-		// TODO: Implementation
-		return new Player(username); // TODO: Obtain from persistence.
+		return cps.getPlayer(username);
 	}
 
 }
