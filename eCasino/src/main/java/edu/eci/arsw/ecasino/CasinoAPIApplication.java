@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Daniel Vela 
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"edu.eci.arsw.cinema"})
+@ComponentScan(basePackages = {"edu.eci.arsw.ecasino"})
 public class CasinoAPIApplication {
 
     public static void main(String[] args) {

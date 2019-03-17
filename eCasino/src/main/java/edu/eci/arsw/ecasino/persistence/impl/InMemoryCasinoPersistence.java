@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import edu.eci.arsw.ecasino.model.Lobby;
 import edu.eci.arsw.ecasino.model.Player;
 import edu.eci.arsw.ecasino.model.Table;
@@ -21,9 +23,15 @@ import edu.eci.arsw.ecasino.persistence.CasinoPersistenceException;
  *
  * @author Daniel Vela
  */
+@Component("cps")
 public class InMemoryCasinoPersistence implements CasinoPersistence {
 	
 	private final Map<Integer, Lobby> lobbies = new HashMap<>();
+	
+	public InMemoryCasinoPersistence() throws CasinoPersistenceException {
+		Lobby lobby = new Lobby(1);
+		addNewLobby(lobby);
+	}
 
 	@Override
 	public void addNewLobby(Lobby lobby) throws CasinoPersistenceException {
