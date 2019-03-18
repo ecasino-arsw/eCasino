@@ -35,13 +35,14 @@ public interface CasinoPersistence {
 	 * @param table the new table to be added.
 	 * @throws CasinoPersistenceException if the lobby doesn't exist.
 	 */
-	public void addNewTable(Lobby lobby, Table table);
+	public void addNewTable(Lobby lobby, Table table) throws CasinoPersistenceException;
 	
 	/**
 	 * Gets all tables stored in persistence.
 	 * @return a list of all the tables.
+	 * @throws CasinoPersistenceException if there are no tables in persistence.
 	 */
-	public List<Table> getAllTables();
+	public List<Table> getAllTables() throws CasinoPersistenceException;
 	
 	/**
 	 * Gets all tables stored in a specific lobby.
@@ -49,34 +50,45 @@ public interface CasinoPersistence {
 	 * @return a list of all the tables in the requested lobby.
 	 * @throws CasinoPersistenceException if the provided lobby doesn't exist.
 	 */
-	public List<Table> getAllTablesInLobby(Lobby lobby);
+	public List<Table> getAllTablesInLobby(Lobby lobby) throws CasinoPersistenceException;
 	
 	/**
 	 * Gets the table identified with the provided id.
+	 * @param lobby the lobby in which the table is contained.
 	 * @param id the id of the table to find.
 	 * @return the table identified with th provided id.
-	 * @throws CasinoPersistenceException if the table doesn't exist.
+	 * @throws CasinoPersistenceException if the lobby doesn't exist, the table isn't in the given lobby or 
+	 * if the table doesn't exist.
 	 */
-	public Table getTable(int id);
+	public Table getTable(Lobby lobby, int id) throws CasinoPersistenceException;
 	
 	/**
 	 * Adds new user to persistence
 	 * @param player the new player to be added.
 	 * @throws CasinoPersistenceException if the username is already taken
 	 */
-	public void addNewPlayer(Player player);
+	public void addNewPlayer(Player player) throws CasinoPersistenceException;
 	
 	/**
 	 * Gets all users stored in persistence.
 	 * @return a list of all the users.
+	 * @throws CasinoPersistenceException if there are no users.
 	 */
-	public List<Player> getAllPlayers();
+	public List<Player> getAllPlayers() throws CasinoPersistenceException;
 	
 	/**
-	 * Gets an user with the specified username
-	 * @param username the username of the user to find
-	 * @throws CasinoPersistenceException if the user doesn't exist.
+	 * Gets all users playing in a table.
+	 * @return a list of all the users.
+	 * @throws CasinoPersistenceException if there are no users in the table or the table doesn't exist.
 	 */
-	public Player getPlayer(String username);
+	public Player getPlayer(String username) throws CasinoPersistenceException;
+
+	/**
+	 * Gets all users playing in a table.
+	 * @param lobby 
+	 * @return a list of all the users.
+	 * @throws CasinoPersistenceException if there are no users in persistence.
+	 */
+	public List<Player> getAllPlayersInTable(Table table) throws CasinoPersistenceException;
 
 }
