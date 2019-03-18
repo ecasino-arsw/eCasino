@@ -56,45 +56,44 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 	}
 
 	@Override
-	public void addNewTable(Lobby lobby, Table table) {
-		// TODO Auto-generated method stub
+	public void addNewTable(Lobby lobby, Table table) throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
+	}
+
+	@Override
+	public List<Table> getAllTables() throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
+	}
+
+	@Override
+	public List<Table> getAllTablesInLobby(Lobby lobby) throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
+	}
+
+	@Override
+	public Table getTable(Lobby lobby, int id) throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
+	}
+
+	@Override
+	public void addNewPlayer(Player player) throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
 		
 	}
 
 	@Override
-	public List<Table> getAllTables() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Player> getAllPlayers() throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
 	}
 
 	@Override
-	public List<Table> getAllTablesInLobby(Lobby lobby) {
-		// TODO Auto-generated method stub
-		return null;
+	public Player getPlayer(String username) throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
 	}
 
 	@Override
-	public Table getTable(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addNewPlayer(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Player> getAllPlayers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Player getPlayer(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Player> getAllPlayersInTable(Table table) throws CasinoPersistenceException {
+		throw new CasinoPersistenceException("This method is not supported yet.");
 	}
     
 }
