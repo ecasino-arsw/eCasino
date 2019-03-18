@@ -6,16 +6,21 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="https://getbootstrap.com/favicon.ico">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <title>eCasino - login</title>
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
+        
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="css/pricing.css" rel="stylesheet">
+
+        <!-- other styles -->
+        <link href="css/style.css" rel="stylesheet">
 
 
     </head>
@@ -26,7 +31,7 @@
             <h5 class="my-0 mr-md-auto font-weight-normal">eCasino</h5>
             <nav class="my-2 my-md-0 mr-md-3">
                 <a class="p-2 text-dark" href="#">Games</a>
-                <a class="p-2 text-dark" href="#">Torneos</a>
+                <a class="p-2 text-dark" href="#">Tournaments</a>
                 <a class="p-2 text-dark" href="#">Support</a>
             </nav>
             <a class="btn btn-outline-success" href="#">Money</a>
@@ -34,8 +39,80 @@
             <a class="btn btn-outline-warning" href="#">Logout</a>
 
         </div>
+        <!-- Body lobby -->
+        <div id="bodyPrincipal">
+
+            <div class="row">
+                <div class="col-sm-8" >
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#BlackJack">BlackJack</a></li>
+                            <li><a data-toggle="tab" href="#HoldEm">HoldEm</a></li>
+                            <li><a data-toggle="tab" href="#Roulette">Roulette</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            
+                            <div id="BlackJack" class="tab-pane fade in active">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Persons</th>
+                                            <th scope="col">Stakes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Orlando</td>
+                                            <td>BlackJack</td>
+                                            <td>2/5</td>
+                                            <td>$1</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Bogota</td>
+                                            <td>BlackJack</td>
+                                            <td>5/5</td>
+                                            <td>$5</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Paris</td>
+                                            <td>BlackJack</td>
+                                            <td>5/5</td>
+                                            <td>$10</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="HoldEm" class="tab-pane fade">
+                                <h3>Menu 2</h3>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            </div>
+                            <div id="Roulette" class="tab-pane fade">
+                                <h3>Menu 3</h3>
+                                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Details - table</div>
+                        <div class="panel-body">
+                            Select a table so you can see the details in this box
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
+        </div>
 
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
@@ -82,7 +159,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="sj/popper.js"></script>
+    <script src="js/popper.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/holder.js"></script>
     <script>
