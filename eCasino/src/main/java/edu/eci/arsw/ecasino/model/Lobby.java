@@ -1,15 +1,17 @@
 package edu.eci.arsw.ecasino.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Lobby {
 	
 	private int id;
-	private ArrayList<Table> tables;
+	private Map<Integer,Table> tables;
 	
 	public Lobby(int id) {
 		this.id = id;
-		tables = new ArrayList<>();
+		tables = new HashMap<Integer,Table>();
 	}
 
 	public int getId() {
@@ -20,12 +22,20 @@ public class Lobby {
 		this.id = id;
 	}
 
-	public ArrayList<Table> getTables() {
+	public Map<Integer, Table> getTables() {
 		return tables;
 	}
 
-	public void setTables(ArrayList<Table> tables) {
+	public void setTables(Map<Integer, Table> tables) {
 		this.tables = tables;
+	}
+	
+	public Table getTable(int id) {
+		return tables.get(id);
+	}
+	
+	public void addTable(Table table) {
+		tables.put(table.getId(), table);
 	}
 
 }
