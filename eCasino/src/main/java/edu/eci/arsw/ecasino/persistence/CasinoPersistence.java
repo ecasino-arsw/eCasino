@@ -1,6 +1,7 @@
 package edu.eci.arsw.ecasino.persistence;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import edu.eci.arsw.ecasino.model.Lobby;
@@ -50,7 +51,7 @@ public interface CasinoPersistence {
 	 * @return a list of all the tables in the requested lobby.
 	 * @throws CasinoPersistenceException if the provided lobby doesn't exist.
 	 */
-	public List<Table> getAllTablesInLobby(Lobby lobby) throws CasinoPersistenceException;
+	public Map<Integer,Table> getAllTablesInLobby(Lobby lobby) throws CasinoPersistenceException;
 	
 	/**
 	 * Gets the table identified with the provided id.
@@ -74,7 +75,7 @@ public interface CasinoPersistence {
 	 * @return a list of all the users.
 	 * @throws CasinoPersistenceException if there are no users.
 	 */
-	public List<Player> getAllPlayers() throws CasinoPersistenceException;
+	public Set<Player> getAllPlayers() throws CasinoPersistenceException;
 	
 	/**
 	 * Gets all users playing in a table.
@@ -89,6 +90,13 @@ public interface CasinoPersistence {
 	 * @return a list of all the users.
 	 * @throws CasinoPersistenceException if there are no users in persistence.
 	 */
-	public List<Player> getAllPlayersInTable(Table table) throws CasinoPersistenceException;
+	public Set<Player> getAllPlayersInTable(Table table) throws CasinoPersistenceException;
+
+	/**
+	 * Adds an existing player to a table
+	 * @param table the table to join
+	 * @param player the player to add
+	 */
+	public void addPlayerToTable(Table table, Player player);
 
 }
