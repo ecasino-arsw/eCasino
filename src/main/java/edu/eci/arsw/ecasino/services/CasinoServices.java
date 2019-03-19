@@ -151,8 +151,8 @@ public class CasinoServices {
 	 * @param table the table to join
 	 * @param player the player to add
 	 */
-	public void addPlayerToTable(Table table,Player player) throws CasinoPersistenceException{
-		cps.addPlayerToTable(table,player);
+	public void joinTable(Table table,Player player) throws CasinoPersistenceException{
+		cps.joinTable(table,player);
 	}
 
 	/**
