@@ -5,6 +5,8 @@ import edu.eci.arsw.ecasino.model.cards.Deck;
 public class Player {
 	
 	private String username;
+	private Table currentTable;
+	
 	private Deck hand;
 	private int currency;
 	
@@ -47,6 +49,10 @@ public class Player {
 			throw new CasinoException("There is not enough currency to transfer.");
 		}
 		this.currency -= amount;
+	}
+	public void joinTable(Table table) {
+		currentTable=table;
+		table.addPlayer(this);
 	}
 
 }

@@ -151,8 +151,8 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 	}
 
 	@Override
-	public void addPlayerToTable(Table table, Player player) {
-		table.addPlayer(player);
+	public void joinTable(Table table, Player player) {
+		player.joinTable(table);
 		
 	}
 
