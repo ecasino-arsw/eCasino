@@ -1,11 +1,14 @@
 package edu.eci.arsw.ecasino.model;
 
 import edu.eci.arsw.ecasino.model.cards.Deck;
+import edu.eci.arsw.ecasino.model.game.Game;
 
 public class Player {
 	
 	private String username;
 	private Table currentTable;
+	
+	private Lobby currentLobby;
 	
 	private Deck hand;
 	private int currency;
@@ -21,6 +24,14 @@ public class Player {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public Table getCurrentTable() {
+		return currentTable;
+	}
+
+	public Lobby getCurrentLobby() {
+		return currentLobby;
 	}
 
 	public Deck getHand() {
@@ -51,8 +62,20 @@ public class Player {
 		this.currency -= amount;
 	}
 	public void joinTable(Table table) {
+		//falta revisar si esta en lobby y si no esta llena
 		currentTable=table;
 		table.addPlayer(this);
+	}
+	
+	public void joinLobby(Lobby lobby) {
+		//falta revisar si lobby esta lleno
+//		currentLobby=lobby;
+//		lobby.addPlayer(this);
+	}
+	
+	public void createTable(Game game) {
+		currentTable=new Table(game);
+		currentLobby.addTable(currentTable);
 	}
 
 }
