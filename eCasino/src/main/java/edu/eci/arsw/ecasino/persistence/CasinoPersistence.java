@@ -29,6 +29,13 @@ public interface CasinoPersistence {
 	 * @throws CasinoPersistenceException if the requested lobby doesn't exist.
 	 */
 	public Lobby getLobby(int id);
+
+	/**
+	 * Updates the lobby that has the same id of the given lobby.
+	 * @param lobby information to insert in the lobby with the same given ID.
+	 * @throws CasinoPersistenceException if lobby doesn't exist,
+	 */
+	public void updateLobby(Lobby lobby) throws CasinoPersistenceException;
 	
 	/**
 	 * Adds a new table to a lobby in persistence, the int id of the table is assigned incrementally.
@@ -62,6 +69,15 @@ public interface CasinoPersistence {
 	 * if the table doesn't exist.
 	 */
 	public Table getTable(Lobby lobby, int id) throws CasinoPersistenceException;
+
+	/**
+	 * Updates a table with the same ID of the given table and in the lobby of the given ID.
+	 * @param lobbyId the ID of the lobby where the table is located.
+	 * @param table information to insert in the table with the same given ID. 
+	 * @throws CasinoPersistenceException if the lobby doesn't contain a table with
+	 * the given ID or the table doesn't exist.
+	 */
+	void updateTable(int lobbyId, Table table) throws CasinoPersistenceException;
 	
 	/**
 	 * Adds new user to persistence
@@ -98,5 +114,12 @@ public interface CasinoPersistence {
 	 * @param player the player to add
 	 */
 	public void addPlayerToTable(Table table, Player player);
+
+	/**
+	 * Updates a table with the same ID of the given table and in the lobby of the given ID.
+	 * @param player information to insert in the player with the same given username. 
+	 * @throws CasinoPersistenceException if the player doesn't exist.
+	 */
+	void updatePlayer(Player player) throws CasinoPersistenceException;
 
 }

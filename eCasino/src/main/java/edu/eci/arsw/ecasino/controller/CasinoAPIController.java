@@ -20,10 +20,10 @@ import edu.eci.arsw.ecasino.services.CasinoServices;
 
 @RestController
 public class CasinoAPIController {
-		
+
 	@Autowired
 	CasinoServices cs;
-	
+
 	@RequestMapping(value = "/lobbies", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllLobbiesHandler() {
 		try {
@@ -33,7 +33,7 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Lobbies not found.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/lobbies", method = RequestMethod.POST)
 	public ResponseEntity<?> addNewLobbyHandler(@RequestBody Lobby lobby) {
 		try {
@@ -44,7 +44,18 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Could not create new lobby, ID might be taken.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
+	@RequestMapping(value = "/lobbies", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateLobbyHandler(@RequestBody Lobby lobby) {
+		try {
+			cs.updateLobby(lobby);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (CasinoPersistenceException ex) {
+			Logger.getLogger(CasinoAPIController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Could not update lobby, ID might not exist.", HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@RequestMapping(value = "/lobbies/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getLobbyHandler(@PathVariable Integer id) {
 		try {
@@ -54,7 +65,7 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Lobby not found.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/lobbies/{id}/tables", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllTablesInLobbyHandler(@PathVariable Integer id) {
 		try {
@@ -64,7 +75,31 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Lobby not found.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
+	@RequestMapping(value = "/lobbies/{id}/tables", method = RequestMethod.POST)
+	public ResponseEntity<?> addNewLobbyHandler(@PathVariable Integer lobbyId, @RequestBody Table table) {
+		try {
+			cs.addNewTable(cs.getLobby(lobbyId), table);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (CasinoPersistenceException ex) {
+			Logger.getLogger(CasinoAPIController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Could not update table, ID might not exist or isn't in lobby.",
+					HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@RequestMapping(value = "/lobbies/{id}/tables", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateLobbyHandler(@PathVariable Integer lobbyId, @RequestBody Table table) {
+		try {
+			cs.updateTable(lobbyId, table);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (CasinoPersistenceException ex) {
+			Logger.getLogger(CasinoAPIController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Could not update table, ID might not exist or isn't in lobby.",
+					HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables/{tableId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getTableHandler(@PathVariable Integer lobbyId, @PathVariable Integer tableId) {
 		try {
@@ -75,7 +110,7 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Lobby not found.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables/{tableId}/players", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllPlayersInTableHandler(@PathVariable Integer lobbyId, @PathVariable Integer tableId) {
 		try {
@@ -87,7 +122,7 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Lobby not found.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/players", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllPlayersHandler() {
 		try {
@@ -97,7 +132,7 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Players not found.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/players", method = RequestMethod.POST)
 	public ResponseEntity<?> addNewPlayerHandler(@RequestBody Player player) {
 		try {
@@ -108,7 +143,18 @@ public class CasinoAPIController {
 			return new ResponseEntity<>("Could not create new player, username might be taken.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
+	@RequestMapping(value = "/players", method = RequestMethod.PUT)
+	public ResponseEntity<?> updatePlayerHandler(@RequestBody Player player) {
+		try {
+			cs.updatePlayer(player);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (CasinoPersistenceException ex) {
+			Logger.getLogger(CasinoAPIController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Could not create new player, username might be taken.", HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@RequestMapping(value = "/players/{username}", method = RequestMethod.GET)
 	public ResponseEntity<?> getPlayerHandler(@PathVariable String username) {
 		try {

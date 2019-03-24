@@ -48,6 +48,15 @@ public class CasinoServices {
 		}
 		return lobby;
 	}
+
+	/**
+	 * Updates the lobby that has the same id of the given lobby.
+	 * @param lobby information to insert in the lobby with the same given id.
+	 * @throws CasinoPersistenceException if lobby doesn't exist,
+	 */
+	public void updateLobby(Lobby lobby) throws CasinoPersistenceException {
+		cps.updateLobby(lobby);
+	}
 	
 	/**
 	 * Adds a new table to a lobby in persistence, the int id of the table is assigned incrementally.
@@ -88,6 +97,17 @@ public class CasinoServices {
 	 */
 	public Table getTable(Lobby lobby, int id) throws CasinoPersistenceException {
 		return cps.getTable(lobby, id);
+	}
+
+	/**
+	 * Updates a table with the same ID of the given table and in the lobby of the given ID.
+	 * @param lobbyId the ID of the lobby where the table is located.
+	 * @param table information to insert in the table with the same given ID. 
+	 * @throws CasinoPersistenceException if the lobby doesn't contain a table with
+	 * the given ID or the table doesn't exist.
+	 */
+	public void updateTable(int lobbyId, Table table) throws CasinoPersistenceException {
+		cps.updateTable(lobbyId, table);
 	}
 	
 	/**
@@ -133,6 +153,15 @@ public class CasinoServices {
 	 */
 	public void addPlayerToTable(Table table,Player player) throws CasinoPersistenceException{
 		cps.addPlayerToTable(table,player);
+	}
+
+	/**
+	 * Updates a table with the same ID of the given table and in the lobby of the given ID.
+	 * @param player information to insert in the player with the same given username. 
+	 * @throws CasinoPersistenceException if the player doesn't exist.
+	 */
+	public void updatePlayer(Player player) throws CasinoPersistenceException {
+		cps.updatePlayer(player);
 	}
 
 }
