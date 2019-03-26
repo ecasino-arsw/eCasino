@@ -1,12 +1,10 @@
 package edu.eci.arsw.ecasino.model.game;
 
-import com.sun.media.jfxmedia.events.PlayerTimeListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import edu.eci.arsw.ecasino.model.Player;
 import edu.eci.arsw.ecasino.model.cards.Deck;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class BlackJack implements Game {
 
