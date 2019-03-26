@@ -1,1 +1,1 @@
-web: java -jar target/heroku-lab-1.0.jar
+web: java -jar target/eCasino-1.0-SNAPSHOT.jar
