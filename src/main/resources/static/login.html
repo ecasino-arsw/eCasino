@@ -16,7 +16,7 @@
 
         <!-- Custom styles for this template -->
         <link href="css/pricing.css" rel="stylesheet">
-        
+
         <!-- login Styles -->
         <link href="css/login.css" rel="stylesheet">
     </head>
@@ -42,42 +42,46 @@
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                 <div class="login-form">
                     <div class="sign-in-htm">
-                        <div class="group">
-                            <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                            <input id="check" type="checkbox" class="check" checked>
-                            <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                        </div>
-                        <div class="group">
-                            <a href="lobby.html"><input type="submit" class="button" value="Sign In"></a>
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            <a href="#forgot">Forgot Password?</a>
-                        </div>
+                        <form onsubmit="iniciarSesion(); return false" id="regForm">
+                            <div class="group">
+                                <label for="user" class="label">Username</label>
+                                <input id="usernameIn" type="text" class="input">
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">Password</label>
+                                <input id="passIn" type="password" class="input" data-type="password">
+                            </div>
+                            <div class="group">
+                                <input id="check" type="checkbox" class="check" checked>
+                                <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                            </div>
+                            <div class="group">
+                                <button type="submit" class="button" >Sign In</button>
+                            </div>
+                            <div class="hr"></div>
+                            <div class="foot-lnk">
+                                <a href="#forgot">Forgot Password?</a>
+                            </div>
+
+
+                        </form>
                     </div>
                     <div class="sign-up-htm">
                         <div class="group">
                             <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input">
+                            <input id="usernameUp" type="text" class="input">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
+                            <input id="passUp" type="password" class="input" data-type="password">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Repeat Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
+                            <input id="passUp2" type="password" class="input" data-type="password">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Email Address</label>
-                            <input id="pass" type="text" class="input">
+                            <input id="email" type="text" class="input">
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">
@@ -91,7 +95,7 @@
             </div>
         </div>
 
-        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <footer style="width: 80%;margin-left: auto; margin-right: auto;" class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
                 <div class="col-12 col-md">
                     <img class="mb-2" src="Pricing%20example%20for%20Bootstrap_files/bootstrap-solid.svg" alt="" width="24" height="24">
@@ -128,24 +132,26 @@
                 </div>
             </div>
         </footer>
-    </div>
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/holder.js"></script>
-    <script>
-        Holder.addTheme('thumb', {
-            bg: '#55595c',
-            fg: '#eceeef',
-            text: 'Thumbnail'
-        });
-    </script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/holder.js"></script>
+        <script src="js/usersController.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+                            Holder.addTheme('thumb', {
+                                bg: '#55595c',
+                                fg: '#eceeef',
+                                text: 'Thumbnail'
+                            });
+        </script>
 
 
-</body></html>
+    </body></html>
