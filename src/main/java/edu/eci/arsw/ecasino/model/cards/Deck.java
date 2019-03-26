@@ -125,7 +125,7 @@ public class Deck {
         int aces = 0;
         
         for (Card aCard : this.cards) {
-            System.out.println("valor> "+aCard.getValue());
+            //System.out.println("valor> "+aCard.getValue());
             if (aCard.getValue() == Value.ACE) {
                 aces += 1;
             } else if (aCard.getValue() == Value.TWO) {

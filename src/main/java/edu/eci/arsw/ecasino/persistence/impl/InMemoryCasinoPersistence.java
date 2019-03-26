@@ -18,6 +18,7 @@ import edu.eci.arsw.ecasino.model.Lobby;
 import edu.eci.arsw.ecasino.model.Player;
 import edu.eci.arsw.ecasino.model.Table;
 import edu.eci.arsw.ecasino.model.game.BlackJack;
+import edu.eci.arsw.ecasino.model.game.HoldEm;
 import edu.eci.arsw.ecasino.persistence.CasinoPersistence;
 import edu.eci.arsw.ecasino.persistence.CasinoPersistenceException;
 
@@ -32,8 +33,10 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 	private final Map<String,Player> players= new HashMap<>();
 	
 	public InMemoryCasinoPersistence() throws CasinoPersistenceException {
-		Lobby lobby = new Lobby(1);
-		addNewLobby(lobby);
+		Lobby lobby1 = new Lobby(1, "BlackJack");
+		Lobby lobby2 = new Lobby(2, "HoldEm");
+		addNewLobby(lobby1);
+		addNewLobby(lobby2);
 		
 		Player player1 = new Player("DCifuentes");
 		Player player2 = new Player("DVela");
@@ -43,16 +46,25 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 		ArrayList<Player> blackJackPlayers= new ArrayList<>();
 		blackJackPlayers.add(player1);
 		blackJackPlayers.add(player2);
-		Table table1= new Table(1,new BlackJack(blackJackPlayers));
-		
+		Table table1= new Table(1,"Bogota",new BlackJack(blackJackPlayers));
+                
+		ArrayList<Player> blackJackPlayers2= new ArrayList<>();
+		blackJackPlayers2.add(player1);
+		blackJackPlayers2.add(player3);
+		Table table3= new Table(3,"Vegas",new BlackJack(blackJackPlayers2));
+                
+                
 		ArrayList<Player> HoldEmPlayers= new ArrayList<>();
 		HoldEmPlayers.add(player1);
 		HoldEmPlayers.add(player2);
 		HoldEmPlayers.add(player3);
-		Table table2= new Table(2,new BlackJack(HoldEmPlayers));
+		Table table2= new Table(2,"Paris",new BlackJack(HoldEmPlayers));
+                
 		
-		addNewTable(lobby,table1);
-		addNewTable(lobby,table2);
+		addNewTable(lobby1,table1);
+		addNewTable(lobby2,table2);
+		addNewTable(lobby1,table3);
+                
 		
 	}
 
