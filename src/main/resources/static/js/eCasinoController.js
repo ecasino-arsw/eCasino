@@ -3,6 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function loadLobbie() {
+    axios.get('/lobbies')
+            .then(function (response) {
+                var tableBlack = $("#tablesBlackJack");
+                var tableHoldEm = $("#tablesHoldEm");
+                var tableRoulette = $("#tablesRoulette");
+                var cont = 1;
+                var contBlack = 1;
+                var contHoldEm = 1;
+                var contRoul = 0;
+                var lobbies = response.data
+
+                for (var i = 0; i < lobbies.length; i++) {
+                    contRoul += lobbies[i]['numOfTables'];
+                    console.log(lobbies[i]['name']);
+                }
+
+                for (var i = 0; i < lobbies.length; i++) {
+                    var table = lobbies[i]['tables'];
+                    var x = 1;
+                    for (var c = 0; c < lobbies[i]['numOfTables']; c++) {
+
+
+                        var find = false;
+                        while (contRoul >= x && !find) {
+                            if (table[x] === undefined) {
+                                x++;
+                            } else {
+                                
+                                if (lobbies[i]['name'] === "BlackJack") {
+                                    cont = contBlack;
+                                    
+                                    tableBlack.append('<tr><td scope="row">' + cont + "</td><td>" + table[x]['nameTable'] + "</td><td>" + lobbies[i]['name'] + "</td><td>" + table[x]['players'] + "/6" + "</td><td>" + "$" + 0 + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Details</button></td>')
+                                    contBlack++;
+                                }
+                                if (lobbies[i]['name'] === "HoldEm") {
+                                    cont = contHoldEm;
+                                    tableHoldEm.append('<tr><td scope="row">' + cont + "</td><td>" + table[x]['nameTable'] + "</td><td>" + lobbies[i]['name'] + "</td><td>" + table[x]['players'] + "/6" + "</td><td>" + "$" + 0 + " USD" + '</td><td><button class="btn btn-info" name="button">Details</button></td>')
+                                    contHoldEm++;
+                                }
+                                find = true;
+                                x += 1;
+                            }
+
+                        }
+
+                    }
+
+
+                }
+
+            })
+            .catch(function (error) {
+                alert("Error, lobies no load");
+            })
+
+}
 
 
 apiecasino = (function () {
@@ -35,64 +92,3 @@ apiecasino = (function () {
 })();
 
 
-tables = (function () {
-    var search = function (param) {
-        var tableBlack = $("#tablesBlackJack");
-        var tableHoldEm = $("#tablesHoldEm");
-        var tableRoulette = $("#tablesRoulette");
-        var cont = 1;
-        var contBlack = 1;
-        var contHoldEm = 1;
-        var contRoul = 1;
-
-        var lobby = param[1];
-        var nameTable, rowCount, tableSelect;
-        for (var j = 0; j < param[0].length; j++) {
-            nameTable = param[0][j].name;
-            rowCount = lobby[nameTable][0].tables.length;
-            tableSelect = lobby[nameTable][0];
-            for (var i = 0; i < rowCount; i++) {
-                if (tableSelect.tables[i].game.name === "BlackJack") {
-                    cont = contBlack;
-                    tableBlack.append('<tr><td scope="row">' + cont + "</td><td>" + tableSelect.name + "</td><td>" + tableSelect.tables[i].game.name + "</td><td>" + tableSelect.tables[i].game.persons + "/6" + "</td><td>" + "$" + tableSelect.tables[i].game.stakes + " USD" + '</td><td><button class="btn btn-info" name="button" onclick="details.detailsByTable($('+tableSelect.tables[i].game.name.toString() +').val())">Details</button></td>')
-                    contBlack++;
-                }
-                if (tableSelect.tables[i].game.name === "HoldEm") {
-                    cont = contHoldEm;
-                    tableHoldEm.append('<tr><td scope="row">' + cont + "</td><td>" + tableSelect.name + "</td><td>" + tableSelect.tables[i].game.name + "</td><td>" + tableSelect.tables[i].game.persons + "/9" + "</td><td>" + "$" + tableSelect.tables[i].game.stakes + " USD" + "</td>")
-                    contHoldEm++;
-                }
-                if (tableSelect.tables[i].game.name === "Roulette") {
-                    cont = contRoul;
-                    tableRoulette.append('<tr><td scope="row">' + cont + "</td><td>" + tableSelect.name + "</td><td>" + tableSelect.tables[i].game.name + "</td><td>" + tableSelect.tables[i].game.persons + "/15" + "</td><td>" + "$" + tableSelect.tables[i].game.stakes + " USD" + "</td>")
-                    contRoul++;
-                }
-
-            }
-        }
-    }
-
-    return{
-        getTables: function () {
-            return apiecasino.getAllTables(search);
-        }
-    }
-
-})();
-
-
-details = (function () {
-    var search = function (param) {
-        document.getElementById("detailsTable").innerHTML = "Hello <b>world</b>!";
-        
-    }
-
-    return{
-        detailsByTable: function (game) {
-            search(game);
-            console.log("hol"+game);
-            return game;
-        }
-    }
-
-})();

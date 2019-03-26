@@ -25,7 +25,7 @@
 
     </head>
 
-    <body onload="loadLobbie()">
+    <body onload="loadProfile()">
 
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
             <h5 class="my-0 mr-md-auto font-weight-normal">eCasino</h5>
@@ -34,7 +34,7 @@
                 <a class="p-2 text-dark" href="#">Tournaments</a>
                 <a class="p-2 text-dark" href="#">Support</a>
             </nav>
-            <a class="btn btn-outline-success" href="account.html">Account</a>
+            <a class="btn btn-outline-success" href="lobby.html">Lobby</a>
             &nbsp;
             <a onclick="cerrarSesion()" class="btn btn-outline-warning" >Logout</a>
 
@@ -42,75 +42,12 @@
         <!-- Body lobby -->
         <div id="bodyPrincipal">
 
-            <div class="row">
-                <div class="col-sm-8" >
-                    <div class="container">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#BlackJack">BlackJack</a></li>
-                            <li><a data-toggle="tab" href="#HoldEm">HoldEm</a></li>
-                            <li><a data-toggle="tab" href="#Roulette">Roulette</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-
-                            <div id="BlackJack" class="tab-pane fade in active">
-                                <table id="tablesBlackJack" class="table table-hover">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Game</th>
-                                        <th scope="col">Persons</th>
-                                        <th scope="col">Stakes</th>
-                                        <th ></th>
-                                    </tr>
-
-                                </table>
-
-                            </div>
-                            <div id="HoldEm" class="tab-pane fade">
-                                <table id="tablesHoldEm" class="table table-hover">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Game</th>
-                                        <th scope="col">Persons</th>
-                                        <th scope="col">Stakes</th>
-                                        <th ></th>
-                                    </tr>
-
-                                </table>
-                            </div>
-                            <div id="Roulette" class="tab-pane fade">
-                                <table id="tablesRoulette" class="table table-hover">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Game</th>
-                                        <th scope="col">Persons</th>
-                                        <th scope="col">Stakes</th>
-                                        <th ></th>
-                                    </tr>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Details - table</div>
-                        <div id="detailsTable" class="panel-body">
-                            Select a table so you can see the details in this box
-                        </div>
-                    </div>
-                </div>
-            </div>
+            Username: <span id="usernameP"></span>
 
 
         </div>
 
-        <footer style="width: 80%;margin-left: auto; margin-right: auto;" class="pt-4 my-md-5 pt-md-5 border-top">
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
                 <div class="col-12 col-md">
                     <img class="mb-2" src="Pricing%20example%20for%20Bootstrap_files/bootstrap-solid.svg" alt="" width="24" height="24">
