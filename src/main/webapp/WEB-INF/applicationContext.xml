@@ -12,10 +12,10 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/WEB-INF/views/</value>
+			<value>../resources/static/</value>
 		</property>
 		<property name="suffix">
-			<value>.jsp</value>
+			<value>.html</value>
 		</property>
 	</bean>
 
