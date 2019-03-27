@@ -12,7 +12,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>../resources/static/</value>
+			<value>/resources/static/</value>
 		</property>
 		<property name="suffix">
 			<value>.html</value>
