@@ -19,9 +19,4 @@ public class CasinoAPIApplication {
         SpringApplication.run(CasinoAPIApplication.class, args);
     }
 
-    @RequestMapping("/")
-    String index() {
-        return "index";
-    }
-
 }
