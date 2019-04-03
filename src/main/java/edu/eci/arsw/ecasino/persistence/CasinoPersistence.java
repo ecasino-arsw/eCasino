@@ -114,6 +114,13 @@ public interface CasinoPersistence {
 	 * @param player the player to add
 	 */
 	public void joinTable(Table table, Player player);
+	
+	/**
+	 * Adds an existing player to a lobby
+	 * @param lobby the lobby to join
+	 * @param player the player to add
+	 */
+	public void joinLobby(Lobby lobby,Player player);
 
 	/**
 	 * Updates a table with the same ID of the given table and in the lobby of the given ID.

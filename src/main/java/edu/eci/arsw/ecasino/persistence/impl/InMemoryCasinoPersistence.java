@@ -92,8 +92,12 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 
 	@Override
 	public void updateLobby(Lobby lobby) throws CasinoPersistenceException {
-		// TODO Auto-generated method stub
-		throw new CasinoPersistenceException("Method not supported yet.");
+		if(!lobbies.containsKey(lobby.getId())) {
+			throw new CasinoPersistenceException("Could not find a lobby with the given id: " + lobby.getId());
+		}
+		lobbies.get(lobby.getId()).updateLobby(lobby);
+		
+		
 	}
 
 	@Override
@@ -122,8 +126,11 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 
 	@Override
 	public void updateTable(int lobbyId, Table table) throws CasinoPersistenceException {
-		// TODO Auto-generated method stub
-		throw new CasinoPersistenceException("Method not supported yet.");
+		if(!lobbies.containsKey(lobbyId)) {
+			throw new CasinoPersistenceException("Could not find a lobby with the given id: " + lobbyId);
+		}else if(!lobbies.get(lobbyId).getTables().containsKey(table.getId())) {
+			throw new CasinoPersistenceException("Could not find a table with the given id in lobby "+ lobbyId +": " + table.getId());
+		}
 	}
 
 	@Override
@@ -157,8 +164,13 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 
 	@Override
 	public void updatePlayer(Player player) throws CasinoPersistenceException {
-		// TODO Auto-generated method stub
 		throw new CasinoPersistenceException("Method not supported yet.");
+	}
+
+	@Override
+	public void joinLobby(Lobby lobby, Player player) {
+		
+		player.joinLobby(lobby);
 	}
     
 }

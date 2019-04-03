@@ -52,5 +52,9 @@ public class Table {
     public Set<Player> getPlayers() {
         return players;
     }
+    
+    public void updateTable(Table table) {
+    	
+    }
 
 }

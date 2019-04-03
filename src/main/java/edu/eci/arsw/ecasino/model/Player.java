@@ -69,8 +69,8 @@ public class Player {
 	
 	public void joinLobby(Lobby lobby) {
 		//falta revisar si lobby esta lleno
-//		currentLobby=lobby;
-//		lobby.addPlayer(this);
+		currentLobby=lobby;
+		lobby.addPlayer(this);
 	}
 	
 	public void createTable(Game game) {
