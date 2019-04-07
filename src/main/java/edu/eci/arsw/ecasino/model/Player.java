@@ -84,5 +84,17 @@ public class Player {
 		currentTable=new Table(game);
 		currentLobby.addTable(currentTable);
 	}
+	
+	public int getCurrency() {
+		return currency;
+	}
+
+	public void updatePlayer(Player player) {
+		currentTable = player.getCurrentTable();
+		currentLobby = player.getCurrentLobby();
+		hand=player.getHand();
+		currency=player.getCurrency();
+		
+	}
 
 }

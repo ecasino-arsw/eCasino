@@ -129,6 +129,7 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 		}else if(!lobbies.get(lobbyId).getTables().containsKey(table.getId())) {
 			throw new CasinoPersistenceException("Could not find a table with the given id in lobby "+ lobbyId +": " + table.getId());
 		}
+		lobbies.get(lobbyId).getTable(table.getId()).updateTable(table);
 	}
 
 	@Override
@@ -162,7 +163,10 @@ public class InMemoryCasinoPersistence implements CasinoPersistence {
 
 	@Override
 	public void updatePlayer(Player player) throws CasinoPersistenceException {
-		throw new CasinoPersistenceException("Method not supported yet.");
+		if(!players.containsKey(player.getUsername())) {
+			throw new CasinoPersistenceException("Could not find a player with the given username: " + player.getUsername());
+		}
+		players.get(player.getUsername()).updatePlayer(player);
 	}
 
 	@Override

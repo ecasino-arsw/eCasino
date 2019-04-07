@@ -25,6 +25,10 @@ public class Lobby {
         players = new HashSet<Player>();
         this.numOfTables = 0;
     }
+    
+    public Lobby() {
+    	
+    }
 
     private Set<Player> getPlayers() {
 		
