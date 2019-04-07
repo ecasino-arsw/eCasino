@@ -76,7 +76,7 @@ public class CasinoAPIController {
 		}
 	}
 
-	@RequestMapping(value = "/lobbies/{id}/tables", method = RequestMethod.POST)
+	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.POST)
 	public ResponseEntity<?> addNewLobbyHandler(@PathVariable Integer lobbyId, @RequestBody Table table) {
 		try {
 			cs.addNewTable(cs.getLobby(lobbyId), table);

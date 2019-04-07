@@ -9,10 +9,10 @@ public class Player {
 	
 	private String username;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "table")
 	private Table currentTable;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "lobby")
 	private Lobby currentLobby;
 	
 	private Deck hand;
@@ -21,6 +21,10 @@ public class Player {
 	public Player(String username) {
 		setUsername(username);
 		hand = new Deck();
+	}
+	
+	public Player() {
+		
 	}
 
 	public String getUsername() {

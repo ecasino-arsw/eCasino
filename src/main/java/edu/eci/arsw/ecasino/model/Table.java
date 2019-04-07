@@ -13,7 +13,8 @@ public class Table {
     private String nametable;
     private Game game;
     
-    @JsonManagedReference
+    
+    @JsonManagedReference(value = "table")
     private Set<Player> players;
 
     public Table(int id, String nametable, Game game) {
@@ -21,6 +22,10 @@ public class Table {
         this.nametable = nametable;
         this.game = game;
         players = new HashSet<>(game.getPlayers());
+    }
+    
+    public Table() {
+    	
     }
 
     public String getNameTable() {
