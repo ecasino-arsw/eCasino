@@ -1,13 +1,18 @@
 package edu.eci.arsw.ecasino.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import edu.eci.arsw.ecasino.model.cards.Deck;
 import edu.eci.arsw.ecasino.model.game.Game;
 
 public class Player {
 	
 	private String username;
+	
+	@JsonBackReference
 	private Table currentTable;
 	
+	@JsonBackReference
 	private Lobby currentLobby;
 	
 	private Deck hand;
@@ -62,13 +67,11 @@ public class Player {
 		this.currency -= amount;
 	}
 	public void joinTable(Table table) {
-		//falta revisar si esta en lobby y si no esta llena
 		currentTable=table;
 		table.addPlayer(this);
 	}
 	
 	public void joinLobby(Lobby lobby) {
-		//falta revisar si lobby esta lleno
 		currentLobby=lobby;
 		lobby.addPlayer(this);
 	}
