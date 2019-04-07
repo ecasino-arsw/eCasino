@@ -1,6 +1,9 @@
 package edu.eci.arsw.ecasino.model;
 
+import java.util.HashSet;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import edu.eci.arsw.ecasino.model.game.Game;
 
@@ -9,12 +12,15 @@ public class Table {
     private int id;
     private String nametable;
     private Game game;
+    
+    @JsonManagedReference
     private Set<Player> players;
 
     public Table(int id, String nametable, Game game) {
         this.id = id;
         this.nametable = nametable;
         this.game = game;
+        players = new HashSet<>(game.getPlayers());
     }
 
     public String getNameTable() {

@@ -6,10 +6,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class Lobby {
 
     private int id;
     private Map<Integer, Table> tables;
+    
+    @JsonManagedReference
     private Set<Player> players;
     private String name;
     private int numOfTables;

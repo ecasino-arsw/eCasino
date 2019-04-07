@@ -27,8 +27,8 @@ public class BlackJack implements Game {
         System.out.println(playingDeck);
     }*/
 
-    public BlackJack(ArrayList<Player> players) {
-        this.players = players;
+    public BlackJack() {
+    	players = new ArrayList<>();
         start();
     }
 
@@ -133,4 +133,8 @@ public class BlackJack implements Game {
             System.out.println("Fin de Mano");
         }
     }
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
 }
