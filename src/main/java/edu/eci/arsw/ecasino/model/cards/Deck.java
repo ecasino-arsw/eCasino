@@ -162,4 +162,8 @@ public class Deck {
         return total;
     }
 
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
 }

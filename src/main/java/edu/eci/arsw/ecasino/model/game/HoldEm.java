@@ -13,11 +13,11 @@ public class HoldEm implements Game {
 	public static void main(String[] args) {
 		ArrayList<Player> players = new ArrayList<>();
 		players.add(new Player("velomeister"));
-		new HoldEm(players);
+		
 	}
 	
-	public HoldEm(ArrayList<Player> players) {
-		this.players = players;
+	public HoldEm() {
+		players = new ArrayList<>();
 		start();
 	}
 
