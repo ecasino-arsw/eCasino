@@ -89,9 +89,9 @@ public class CasinoAPIController {
 	}
 
 	@RequestMapping(value = "/lobbies/{id}/tables", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateLobbyHandler(@PathVariable Integer lobbyId, @RequestBody Table table) {
+	public ResponseEntity<?> updateLobbyHandler(@PathVariable Integer id, @RequestBody Table table) {
 		try {
-			cs.updateTable(lobbyId, table);
+			cs.updateTable(id, table);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (CasinoPersistenceException ex) {
 			Logger.getLogger(CasinoAPIController.class.getName()).log(Level.SEVERE, null, ex);

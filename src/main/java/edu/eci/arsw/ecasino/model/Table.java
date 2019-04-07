@@ -65,7 +65,9 @@ public class Table {
     }
     
     public void updateTable(Table table) {
-    	
+        nametable = table.getNameTable();
+        game = table.getGame();
+        players = table.getPlayers();
     }
 
 }
