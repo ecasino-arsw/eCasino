@@ -13,7 +13,7 @@ public class Lobby {
     private int id;
     private Map<Integer, Table> tables;
     
-    @JsonManagedReference
+    @JsonManagedReference(value = "lobby")
     private Set<Player> players;
     private String name;
     private int numOfTables;
