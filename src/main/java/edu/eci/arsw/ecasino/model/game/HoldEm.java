@@ -12,7 +12,7 @@ public class HoldEm implements Game {
 	
 	public static void main(String[] args) {
 		ArrayList<Player> players = new ArrayList<>();
-		players.add(new Player("velomeister"));
+		//players.add(new Player("velomeister"));
 		
 	}
 	
