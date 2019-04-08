@@ -1,73 +1,30 @@
-package edu.eci.arsw.ecasino.model;
+package edu.eci.arsw.eCasino.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+public class Table implements Serializable {
 
-import edu.eci.arsw.ecasino.model.game.Game;
+	private Integer id;
+	private Integer lobbyId;
+	
+	public Table() {
+		
+	}
+	
+	public Integer getId() {
+		return id;
+	}
 
-public class Table {
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private int id;
-    private String nametable;
-    private Game game;
-    
-    
-    @JsonManagedReference(value = "table")
-    private Set<Player> players;
+	public Integer getLobbyId() {
+		return lobbyId;
+	}
 
-    public Table(int id, String nametable, Game game) {
-        this.id = id;
-        this.nametable = nametable;
-        this.game = game;
-        players = new HashSet<>(game.getPlayers());
-    }
-    
-    public Table() {
-    	
-    }
-
-    public String getNameTable() {
-        return nametable;
-    }
-
-    public void setNameTable(String nametable) {
-        this.nametable = nametable;
-    }
-
-    public Table(Game game) {
-        setGame(game);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
-
-    public Set<Player> getPlayers() {
-        return players;
-    }
-    
-    public void updateTable(Table table) {
-        nametable = table.getNameTable();
-        game = table.getGame();
-        players = table.getPlayers();
-    }
+	public void setLobbyId(Integer lobbyId) {
+		this.lobbyId = lobbyId;
+	}
 
 }
