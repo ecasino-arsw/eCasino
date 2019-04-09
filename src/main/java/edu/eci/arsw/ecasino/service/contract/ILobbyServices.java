@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.eci.arsw.eCasino.model.Lobby;
+import edu.eci.arsw.ecasino.model.Lobby;
 
 @Service
 public interface ILobbyServices {

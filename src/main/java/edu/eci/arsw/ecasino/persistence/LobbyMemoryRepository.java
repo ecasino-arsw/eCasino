@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import edu.eci.arsw.eCasino.model.Lobby;
+import edu.eci.arsw.ecasino.model.Lobby;
 import edu.eci.arsw.eCasino.persistence.repository.ILobbyRepository;
 
 @Component

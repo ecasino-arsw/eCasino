@@ -1,21 +1,36 @@
-package edu.eci.arsw.eCasino.model;
+package edu.eci.arsw.ecasino.model;
 
 import java.io.Serializable;
 
 public class Lobby implements Serializable {
 
-	private Integer id;
-	
-	public Lobby () {
-		
-	}
-	
-	public Integer getId() {
-		return id;
-	}
+    private Integer id;
+    private String nameGame;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Lobby() {
+    }
+    
+    
+
+    public Lobby(Integer id, String nameGame) {
+        this.id = id;
+        this.nameGame = nameGame;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNameGame() {
+        return nameGame;
+    }
+
+    public void setNameGame(String nameGame) {
+        this.nameGame = nameGame;
+    }
 
 }
