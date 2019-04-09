@@ -1,4 +1,4 @@
-package edu.eci.arsw.ecasino.model;
+package edu.eci.arsw.eCasino.model;
 
 import java.io.Serializable;
 
