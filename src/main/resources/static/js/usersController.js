@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+
 /**
  * @param {cedulaActual} cedula del usuraio actual 
  * @returns {undefined}
@@ -115,8 +116,6 @@ function registarse() {
     }
 
     if (!nullAlert) {
-        alert(nullAlert);
-
         axios.post('/players/', {
                 id: document.getElementById("idUp").value,
                 username: document.getElementById("usernameUp").value,
@@ -127,6 +126,8 @@ function registarse() {
         })
                 .then(function (response) {
                     console.log(response.data);
+                    alert('Registered User')
+                    location.href = "login.html";
                 })
     }
 
@@ -137,6 +138,8 @@ function cerrarSesion() {
     cerrarLocalStorageUsuario()
     location.href = "index.html";
 }
+
+
 
 function loadProfile() {
     axios.get('/players/' + localStorage.getItem('Actual'))
