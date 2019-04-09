@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.eci.arsw.ecasino.model.Lobby;
+import edu.eci.arsw.eCasino.model.Lobby;
 import edu.eci.arsw.eCasino.service.contract.ILobbyServices;
 
 @RestController
@@ -44,7 +44,7 @@ public class LobbyController {
 	@RequestMapping(value = "/lobbies", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> createLobby(@RequestBody Lobby lobby) {
 		try {
-                        System.out.println("lobby>" + lobby.getNameGame());
+                        
 			return new ResponseEntity<>(lobbyServices.create(lobby), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);

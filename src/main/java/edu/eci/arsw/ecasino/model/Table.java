@@ -1,5 +1,6 @@
 package edu.eci.arsw.eCasino.model;
 
+import edu.eci.arsw.eCasino.model.game.interf.IGame;
 import edu.eci.arsw.ecasino.model.Player;
 import java.io.Serializable;
 import java.util.List;
@@ -11,13 +12,15 @@ public class Table implements Serializable {
     private String name;
     private List<Player> players;
     private double stakes;
+    private IGame game;
 
-    public Table(Integer id, Integer lobbyId, String name, List<Player> players, double stakes) {
+    public Table(Integer id, Integer lobbyId, String name, List<Player> players, double stakes, IGame game) {
         this.id = id;
         this.lobbyId = lobbyId;
         this.name = name;
         this.players = players;
         this.stakes = stakes;
+        this.game = game;
     }
 
     public Integer getId() {
@@ -59,6 +62,16 @@ public class Table implements Serializable {
     public void setStakes(double stakes) {
         this.stakes = stakes;
     }
+
+    public IGame getGame() {
+        return game;
+    }
+
+    public void setGame(IGame game) {
+        this.game = game;
+    }
+    
+    
     
 
 }
