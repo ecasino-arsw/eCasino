@@ -74,7 +74,7 @@ public class PlayerController {
 	
         @ResponseBody
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deletePlayerById(@PathVariable Integer id) {
+	public ResponseEntity<?> deletePlayerById(@PathVariable Long id) {
 		try {
                         
                         Player selectPlayer = playerServices.get(id);
