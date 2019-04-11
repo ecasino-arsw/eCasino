@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.eci.arsw.eCasino.model.Table;
-import edu.eci.arsw.eCasino.service.contract.ITableServices;
+import edu.eci.arsw.eCasino.model.GameTable;
+import edu.eci.arsw.eCasino.service.contract.IGameTableServices;
 
 @RestController
-public class TableController {
+public class GameTableController {
 	
 	@Autowired
-	ITableServices tableServices;
+	IGameTableServices tableServices;
 
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.GET)
-	public ResponseEntity<?> getTables(@PathVariable Integer lobbyId) {
+	public ResponseEntity<?> getTables(@PathVariable Long lobbyId) {
 		try {
 			return new ResponseEntity<>(tableServices.list(lobbyId), HttpStatus.OK);
 		} catch (Exception e) {
@@ -32,7 +32,7 @@ public class TableController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getTable(@PathVariable Integer lobbyId, @PathVariable Integer id) {
+	public ResponseEntity<?> getTable(@PathVariable Long lobbyId, @PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(tableServices.get(lobbyId, id), HttpStatus.OK);
 		} catch (Exception e) {
@@ -42,9 +42,9 @@ public class TableController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> createTable(@RequestBody Table table) {
+	public ResponseEntity<?> createTable(@RequestBody GameTable gameTable) {
 		try {
-			return new ResponseEntity<>(tableServices.create(table), HttpStatus.CREATED);
+			return new ResponseEntity<>(tableServices.create(gameTable), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);
 		}
@@ -52,9 +52,9 @@ public class TableController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> updateTable(@RequestBody Table table) {
+	public ResponseEntity<?> updateTable(@RequestBody GameTable gameTable) {
 		try {
-			tableServices.update(table);
+			tableServices.update(gameTable);
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);
@@ -63,9 +63,9 @@ public class TableController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.DELETE, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> deleteTable(@RequestBody Table table) {
+	public ResponseEntity<?> deleteTable(@RequestBody GameTable gameTable) {
 		try {
-			tableServices.delete(table);
+			tableServices.delete(gameTable);
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);

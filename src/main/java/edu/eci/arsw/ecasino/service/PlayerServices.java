@@ -1,24 +1,20 @@
 package edu.eci.arsw.eCasino.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.eCasino.model.Player;
-import edu.eci.arsw.eCasino.persistence.repository.IPlayerRepository;
+import edu.eci.arsw.eCasino.persistence.repository.PlayerRepository;
 import edu.eci.arsw.eCasino.service.contract.IPlayerServices;
 
 @Component
 public class PlayerServices implements IPlayerServices {
 	
 	@Autowired
-	@Qualifier("PlayerMemoryRepository")
-	IPlayerRepository playerRepository;
+	PlayerRepository playerRepository;
 
 	@Override
-	public List<Player> list() {
+	public Iterable<Player> list() {
 		return playerRepository.findAll();
 	}
 
@@ -26,7 +22,7 @@ public class PlayerServices implements IPlayerServices {
 	public Player create(Player player) {
 		if (null == player.getId())
 			throw new RuntimeException("Invalid ID.");
-		else if (playerRepository.find(player.getId()) != null)
+		else if (playerRepository.findOne(player.getId()) != null)
 			throw new RuntimeException("The player exists.");
 		else
 			playerRepository.save(player);
@@ -34,8 +30,8 @@ public class PlayerServices implements IPlayerServices {
 	}
 
 	@Override
-	public Player get(Integer id) {
-		return playerRepository.find(id);
+	public Player get(Long id) {
+		return playerRepository.findOne(id);
 	}
 
 	@Override
@@ -45,7 +41,7 @@ public class PlayerServices implements IPlayerServices {
 
 	@Override
 	public void update(Player player) {
-		playerRepository.update(player);
+		playerRepository.save(player);
 	}
 
 	@Override
