@@ -1,7 +1,5 @@
 package edu.eci.arsw.eCasino.service.contract;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.eCasino.model.Player;
@@ -9,11 +7,11 @@ import edu.eci.arsw.eCasino.model.Player;
 @Service
 public interface IPlayerServices {
 	
-	List<Player> list();
+	Iterable<Player> list();
 	
 	Player create(Player player);
 	
-	Player get(Integer id);
+	Player get(Long id);
 
 	Player get(String username);
 	

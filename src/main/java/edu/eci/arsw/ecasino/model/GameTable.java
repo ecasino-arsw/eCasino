@@ -6,19 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Lobby {
-
+public class GameTable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	protected Lobby() {
+	private Long lobbyId;
+	
+	protected GameTable() {
 	}
-
-	public Lobby(Long id) {
+	
+	public GameTable(Long id, Long lobbyId) {
 		this.id = id;
+		this.lobbyId = lobbyId;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -26,10 +28,13 @@ public class Lobby {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@Override
-	public String toString() {
-		return String.format("Lobby %d", id);
+
+	public Long getLobbyId() {
+		return lobbyId;
+	}
+
+	public void setLobbyId(Long lobbyId) {
+		this.lobbyId = lobbyId;
 	}
 
 }

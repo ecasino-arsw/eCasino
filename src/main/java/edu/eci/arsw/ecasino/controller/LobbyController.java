@@ -32,7 +32,7 @@ public class LobbyController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getLobby(@PathVariable Integer id) {
+	public ResponseEntity<?> getLobby(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(lobbyServices.get(id), HttpStatus.OK);
 		} catch (Exception e) {
