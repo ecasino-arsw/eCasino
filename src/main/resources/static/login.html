@@ -6,6 +6,9 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
         <title>eCasino - login</title>
 
@@ -30,59 +33,76 @@
                 <a class="p-2 text-dark" href="#">Support</a>
                 <a class="p-2 text-dark" href="#">Pricing</a>
             </nav>
-            <a class="btn btn-outline-success" href="login.html">Login</a>
-            &nbsp;
-            <a class="btn btn-outline-primary" href="#">Sign up</a>
+            <a class="btn btn-outline-success" href="login.html">Login / Sign up</a>
 
         </div>
+    <center><div id="alertDiv" style=" width: 50%" ></div></center>
 
-        <div class="login-wrap">
-            <div class="login-html">
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
-                <div class="login-form">
-                    <div class="sign-in-htm">
-                        <form onsubmit="iniciarSesion(); return false" id="regForm">
-                            <div class="group">
-                                <label for="user" class="label">Username</label>
-                                <input id="usernameIn" type="text" class="input">
-                            </div>
-                            <div class="group">
-                                <label for="pass" class="label">Password</label>
-                                <input id="passIn" type="password" class="input" data-type="password">
-                            </div>
-                            <div class="group">
-                                <input id="check" type="checkbox" class="check" checked>
-                                <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                            </div>
-                            <div class="group">
-                                <button type="submit" class="button" >Sign In</button>
-                            </div>
-                            <div class="hr"></div>
-                            <div class="foot-lnk">
-                                <a href="#forgot">Forgot Password?</a>
-                            </div>
+    <div class="login-wrap">
+
+        <div class="login-html">
+
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    <form onsubmit="iniciarSesion(); return false" id="regForm">
+                        <div class="group">
+                            <label for="user" class="label">Username</label>
+                            <input id="usernameIn" type="text" class="input">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="passIn" type="password" class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked>
+                            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                        </div>
+                        <div class="group">
+                            <button type="submit" class="button" >Sign In</button>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <a href="#forgot">Forgot Password?</a>
+                        </div>
 
 
-                        </form>
-                    </div>
-                    <div class="sign-up-htm">
+                    </form>
+                </div>
+                <div class="sign-up-htm">
+                    <form onsubmit="registarse(); return false" id="regForm">
                         <div class="group">
                             <label for="user" class="label">Username</label>
                             <input id="usernameUp" type="text" class="input">
+                            <div id="alertUsername" class="alert alert-danger" role="alert" style="display:none"></div>
+                        </div>
+                        <div class="group">
+                            <label for="user" class="label"># Indetificator</label>
+                            <input id="idUp" type="text" class="input">
+                            <div id="alertId" class="alert alert-warning" role="alert" style="display:none"></div>
+                        </div>
+                        <div class="group">
+                            <label for="user" class="label">Full Name</label>
+                            <input id="fullNameUp" type="text" class="input">
+                            <div id="alertFullName" class="alert alert-warning" role="alert" style="display:none"></div>
+                        </div>                        
+                        <div class="group">
+                            <label for="email" class="label">Email Address</label>
+                            <input id="emailUp" type="text" class="input">
+                            <div id="alertEmail" class="alert alert-warning" role="alert" style="display:none"></div>
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
                             <input id="passUp" type="password" class="input" data-type="password">
+                            <div id="alertPass" class="alert alert-warning" role="alert" style="display:none"></div>
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Repeat Password</label>
                             <input id="passUp2" type="password" class="input" data-type="password">
+                            <div id="alertPass2" class="alert alert-warning" role="alert" style="display:none"></div>
                         </div>
-                        <div class="group">
-                            <label for="pass" class="label">Email Address</label>
-                            <input id="email" type="text" class="input">
-                        </div>
+
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">
                         </div>
@@ -90,68 +110,69 @@
                         <div class="foot-lnk">
                             <label for="tab-1">Already Member?</a>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <footer style="width: 80%;margin-left: auto; margin-right: auto;" class="pt-4 my-md-5 pt-md-5 border-top">
-            <div class="row">
-                <div class="col-12 col-md">
-                    <img class="mb-2" src="Pricing%20example%20for%20Bootstrap_files/bootstrap-solid.svg" alt="" width="24" height="24">
-                    <small class="d-block mb-3 text-muted">© 2019</small>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Features</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Cool stuff</a></li>
-                        <li><a class="text-muted" href="#">Random feature</a></li>
-                        <li><a class="text-muted" href="#">Team feature</a></li>
-                        <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                        <li><a class="text-muted" href="#">Another one</a></li>
-                        <li><a class="text-muted" href="#">Last time</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Resources</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Resource</a></li>
-                        <li><a class="text-muted" href="#">Resource name</a></li>
-                        <li><a class="text-muted" href="#">Another resource</a></li>
-                        <li><a class="text-muted" href="#">Final resource</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>About</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Team</a></li>
-                        <li><a class="text-muted" href="#">Locations</a></li>
-                        <li><a class="text-muted" href="#">Privacy</a></li>
-                        <li><a class="text-muted" href="#">Terms</a></li>
-                    </ul>
-                </div>
+    <footer style="width: 80%;margin-left: auto; margin-right: auto;" class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <img class="mb-2" src="Pricing%20example%20for%20Bootstrap_files/bootstrap-solid.svg" alt="" width="24" height="24">
+                <small class="d-block mb-3 text-muted">© 2019</small>
             </div>
-        </footer>
+            <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Cool stuff</a></li>
+                    <li><a class="text-muted" href="#">Random feature</a></li>
+                    <li><a class="text-muted" href="#">Team feature</a></li>
+                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                    <li><a class="text-muted" href="#">Another one</a></li>
+                    <li><a class="text-muted" href="#">Last time</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Resource</a></li>
+                    <li><a class="text-muted" href="#">Resource name</a></li>
+                    <li><a class="text-muted" href="#">Another resource</a></li>
+                    <li><a class="text-muted" href="#">Final resource</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Locations</a></li>
+                    <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/holder.js"></script>
-        <script src="js/usersController.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/holder.js"></script>
+    <script src="js/usersController.js"></script>
 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script>
-                            Holder.addTheme('thumb', {
-                                bg: '#55595c',
-                                fg: '#eceeef',
-                                text: 'Thumbnail'
-                            });
-        </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+                        Holder.addTheme('thumb', {
+                            bg: '#55595c',
+                            fg: '#eceeef',
+                            text: 'Thumbnail'
+                        });
+    </script>
 
 
-    </body></html>
+</body></html>

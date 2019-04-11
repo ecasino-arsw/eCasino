@@ -44,6 +44,7 @@ public class LobbyController {
 	@RequestMapping(value = "/lobbies", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> createLobby(@RequestBody Lobby lobby) {
 		try {
+                        
 			return new ResponseEntity<>(lobbyServices.create(lobby), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);
