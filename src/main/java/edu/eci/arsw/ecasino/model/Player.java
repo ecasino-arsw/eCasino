@@ -68,13 +68,13 @@ public class Player {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public int getMoney() {
-		return money;
+	
+	public void withdrawMoney(int money) {
+		this.money -= money;
 	}
-
-	public void setMoney(int money) {
-		this.money = money;
+	
+	public void depositMoney(int money) {
+		this.money += money;
 	}
 
 	@Override

@@ -52,10 +52,8 @@ public class Deck {
 
 	public String toString() {
 		String cardListOutput = "";
-		int i = 0;
 		for (Card aCard : this.cards) {
 			cardListOutput += "\n" + aCard.toString();
-			i++;
 		}
 		return cardListOutput;
 	}
