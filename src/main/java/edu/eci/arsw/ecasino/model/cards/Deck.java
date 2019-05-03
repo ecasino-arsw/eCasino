@@ -1,4 +1,4 @@
-package edu.eci.arsw.eCasino.model.cards;
+package edu.eci.arsw.ecasino.model.cards;
 
 import java.util.ArrayList;
 import java.util.Random;

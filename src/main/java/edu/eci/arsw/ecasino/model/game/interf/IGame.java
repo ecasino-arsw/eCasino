@@ -1,4 +1,4 @@
-package edu.eci.arsw.eCasino.model.game.interf;
+package edu.eci.arsw.ecasino.model.game.interf;
 
 public interface IGame {
 

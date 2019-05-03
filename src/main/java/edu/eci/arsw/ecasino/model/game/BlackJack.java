@@ -1,6 +1,6 @@
-package edu.eci.arsw.eCasino.model.game;
+package edu.eci.arsw.ecasino.model.game;
 
-import edu.eci.arsw.eCasino.model.game.interf.IGame;
+import edu.eci.arsw.ecasino.model.game.interf.IGame;
 
 public class BlackJack implements IGame {
 

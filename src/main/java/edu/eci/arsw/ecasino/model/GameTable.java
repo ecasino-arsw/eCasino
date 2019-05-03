@@ -1,4 +1,4 @@
-package edu.eci.arsw.eCasino.model;
+package edu.eci.arsw.ecasino.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

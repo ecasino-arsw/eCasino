@@ -1,4 +1,4 @@
-package edu.eci.arsw.eCasino.controller;
+package edu.eci.arsw.ecasino.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.eci.arsw.eCasino.model.GameTable;
-import edu.eci.arsw.eCasino.service.contract.IGameTableServices;
+import edu.eci.arsw.ecasino.model.GameTable;
+import edu.eci.arsw.ecasino.service.contract.IGameTableServices;
 
 @RestController
 public class GameTableController {

@@ -1,11 +1,11 @@
-package edu.eci.arsw.eCasino.service;
+package edu.eci.arsw.ecasino.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.eci.arsw.eCasino.model.Player;
-import edu.eci.arsw.eCasino.persistence.repository.PlayerRepository;
-import edu.eci.arsw.eCasino.service.contract.IPlayerServices;
+import edu.eci.arsw.ecasino.model.Player;
+import edu.eci.arsw.ecasino.persistence.repository.PlayerRepository;
+import edu.eci.arsw.ecasino.service.contract.IPlayerServices;
 
 @Component
 public class PlayerServices implements IPlayerServices {

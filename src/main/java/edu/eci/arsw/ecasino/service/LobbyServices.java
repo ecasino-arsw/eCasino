@@ -1,11 +1,11 @@
-package edu.eci.arsw.eCasino.service;
+package edu.eci.arsw.ecasino.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.eci.arsw.eCasino.model.Lobby;
-import edu.eci.arsw.eCasino.persistence.repository.LobbyRepository;
-import edu.eci.arsw.eCasino.service.contract.ILobbyServices;
+import edu.eci.arsw.ecasino.model.Lobby;
+import edu.eci.arsw.ecasino.persistence.repository.LobbyRepository;
+import edu.eci.arsw.ecasino.service.contract.ILobbyServices;
 
 @Component
 public class LobbyServices implements ILobbyServices {

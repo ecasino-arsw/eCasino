@@ -1,8 +1,8 @@
-package edu.eci.arsw.eCasino.service.contract;
+package edu.eci.arsw.ecasino.service.contract;
 
 import org.springframework.stereotype.Service;
 
-import edu.eci.arsw.eCasino.model.Lobby;
+import edu.eci.arsw.ecasino.model.Lobby;
 
 @Service
 public interface ILobbyServices {

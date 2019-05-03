@@ -1,12 +1,12 @@
-package edu.eci.arsw.eCasino.service;
+package edu.eci.arsw.ecasino.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.eci.arsw.eCasino.model.GameTable;
-import edu.eci.arsw.eCasino.persistence.repository.GameTableRepository;
-import edu.eci.arsw.eCasino.persistence.repository.LobbyRepository;
-import edu.eci.arsw.eCasino.service.contract.IGameTableServices;
+import edu.eci.arsw.ecasino.model.GameTable;
+import edu.eci.arsw.ecasino.persistence.repository.GameTableRepository;
+import edu.eci.arsw.ecasino.persistence.repository.LobbyRepository;
+import edu.eci.arsw.ecasino.service.contract.IGameTableServices;
 
 @Component
 public class GameTableServices implements IGameTableServices {

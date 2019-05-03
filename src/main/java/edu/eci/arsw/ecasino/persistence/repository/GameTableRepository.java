@@ -1,8 +1,8 @@
-package edu.eci.arsw.eCasino.persistence.repository;
+package edu.eci.arsw.ecasino.persistence.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import edu.eci.arsw.eCasino.model.GameTable;
+import edu.eci.arsw.ecasino.model.GameTable;
 
 public interface GameTableRepository extends CrudRepository<GameTable, Long> {
 	

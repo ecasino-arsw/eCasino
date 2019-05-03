@@ -1,4 +1,4 @@
-package edu.eci.arsw.eCasino.model.cards;
+package edu.eci.arsw.ecasino.model.cards;
 
 public class Card {
 	
