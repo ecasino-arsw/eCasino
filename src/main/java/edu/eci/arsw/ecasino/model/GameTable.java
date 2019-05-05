@@ -12,13 +12,18 @@ public class GameTable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long lobbyId;
+        String name;
+        private double stakes;
 	
 	protected GameTable() {
 	}
 	
-	public GameTable(Long id, Long lobbyId) {
+	public GameTable(Long id, Long lobbyId, String name, double stakes) {
 		this.id = id;
 		this.lobbyId = lobbyId;
+		this.name = name;
+		this.stakes = stakes;
+                
 	}
 	
 	public Long getId() {
@@ -37,4 +42,21 @@ public class GameTable {
 		this.lobbyId = lobbyId;
 	}
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public double getStakes() {
+            return stakes;
+        }
+
+        public void setStakes(double stakes) {
+            this.stakes = stakes;
+        }
+        
+        
 }

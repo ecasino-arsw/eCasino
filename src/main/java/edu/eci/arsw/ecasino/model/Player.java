@@ -15,12 +15,12 @@ public class Player {
 	private String password;
 	private String fullName;
 	private String email;
-	private Integer money;
+	private double money;
 
 	protected Player() {
 	}
 
-	public Player(Long id, String username, String password, String fullName, String email, Integer money) {
+	public Player(Long id, String username, String password, String fullName, String email, double money) {
 		this.id = id;
 		this.username = username;
 		this.password = password;

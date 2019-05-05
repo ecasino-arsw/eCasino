@@ -8,28 +8,39 @@ import javax.persistence.Id;
 @Entity
 public class Lobby {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	protected Lobby() {
-	}
+    private String nameGame;
 
-	public Lobby(Long id) {
-		this.id = id;
-	}
+    protected Lobby() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Lobby(Long id, String nameGame) {
+        this.id = id;
+        this.nameGame = nameGame;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	@Override
-	public String toString() {
-		return String.format("Lobby %d", id);
-	}
+    public String getNameGame() {
+        return nameGame;
+    }
+
+    public void setNameGame(String nameGame) {
+        this.nameGame = nameGame;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Lobby %d", id);
+    }
 
 }
