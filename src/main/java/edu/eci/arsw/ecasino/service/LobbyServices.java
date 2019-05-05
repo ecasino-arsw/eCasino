@@ -22,7 +22,7 @@ public class LobbyServices implements ILobbyServices {
 	public Lobby create(Lobby lobby) {
 		if (null == lobby.getId())
 			throw new RuntimeException("Invalid ID.");
-		else if (lobbyRepository.findOne(lobby.getId()) != null)
+		else if (lobbyRepository.findById(lobby.getId()) != null)
 			throw new RuntimeException("The lobby exists.");
 		else
 			lobbyRepository.save(lobby);
@@ -31,7 +31,7 @@ public class LobbyServices implements ILobbyServices {
 
 	@Override
 	public Lobby get(Long id) {
-		return lobbyRepository.findOne(id);
+		return lobbyRepository.findById(id).get();
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class PlayerServices implements IPlayerServices {
 	public Player create(Player player) {
 		if (null == player.getId())
 			throw new RuntimeException("Invalid ID.");
-		else if (playerRepository.findOne(player.getId()) != null)
+		else if (playerRepository.findById(player.getId()) != null)
 			throw new RuntimeException("The player exists.");
 		else
 			playerRepository.save(player);
@@ -31,7 +31,7 @@ public class PlayerServices implements IPlayerServices {
 
 	@Override
 	public Player get(Long id) {
-		return playerRepository.findOne(id);
+		return playerRepository.findById(id).get();
 	}
 
 	@Override
