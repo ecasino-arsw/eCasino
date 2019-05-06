@@ -34,7 +34,12 @@ public class PlayerController {
 	@RequestMapping(value = "/players/{username}", method = RequestMethod.GET)
 	public ResponseEntity<?> getPlayer(@PathVariable String username) {
 		try {
-			return new ResponseEntity<>(playerServices.get(username), HttpStatus.OK);
+                    if(playerServices.get(username).getId()!=null){
+                        return new ResponseEntity<>(playerServices.get(username), HttpStatus.OK);
+                    }else{
+                        return null;
+                    }
+			
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

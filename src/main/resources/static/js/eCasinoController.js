@@ -61,7 +61,23 @@ function loadLobbie() {
 
 }
 
+function loadBalance() {
+    axios.get('/players/' + localStorage.getItem('Actual'))
+            .then(function (response) {
+                localStorage.setItem('balanceActual',response.data['money']);
+                document.getElementById("moneyL").innerHTML = response.data['money'];
 
+            })
+            .catch(function (error) {
+                alert("Error, No se pudo cargar usuario");
+            })
+
+}
+
+function loadPanel(){
+    loadBalance();
+    loadLobbies()
+}
 
 apiecasino = (function () {
 

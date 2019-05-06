@@ -20,13 +20,12 @@ public class Player {
 	protected Player() {
 	}
 
-	public Player(Long id, String username, String password, String fullName, String email, double money) {
-		this.id = id;
+	public Player( String username, String password, String fullName, String email) {
+		
 		this.username = username;
 		this.password = password;
 		this.fullName = fullName;
 		this.email = email;
-		this.money = money;
 	}
 
 	public Long getId() {
@@ -76,6 +75,14 @@ public class Player {
 	public void depositMoney(int money) {
 		this.money += money;
 	}
+        
+        public double getMoney(){
+            return money;
+        }
+        
+        public void generateBalance(){
+            this.money = 0.0;
+        }
 
 	@Override
 	public String toString() {
