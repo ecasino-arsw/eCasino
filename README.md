@@ -1,22 +1,27 @@
 # eCasino
+The project was developed by Daniel Cifuentes, Juan Villate and Daniel Vela for the ARSW class in 2019-1.
 
-Project developed by Daniel Cifuentes, Juan Villate and Daniel Vela for the ARSW class in 2019-1.
+This project consists of the implementation of an online Casino, in which you can play Roulette, BlackJack and Texas Hold'Em Poker (the implementation of more games is a WIP). The service requires the player to have an account registered.
 
-##  Repository management rules
+The system works in lobbies designated for each game, this lobbies host a number of tables which can vary in the initial payout and the minimum bet.
 
-Commits have to be verified in order to be allowed, this means that the author's name and email has to be updated before commitinfg and pushing. The commit message has to be short and descriptive.
+To play, the player has the ability to join any table that hosts the game that he/she wants to play at any moment, given that he has enough money to pay the initial payout required to play. After the player leaves the table, the money earned (or lost) is registered in the respective account.
 
-In order to mantain code intergrity, the members of the organization cannot push directly to the master branch. Instead, thay have to create a branch with the feature that is being implemented/corrected and their username to be merged by the organization administrator afterwards. This will allow us to keep our local repositories updated and be aware of recent changes to not overwrite them.
+The application works based on a RESTful API, this API is connected to a PostgreSQL database. Both the database and the application are hosted by Heroku. Games are played thorugh WebSockets to minimize API calls and deter possible malfunctions or slowness.
 
-In addition to this, the commits will have an especial syntax as the repository is connected to Taiga, and commit messages will update issues or tasks status to close them. See the following links to know more:
+## Future features
 
-[Changing elements status via commit message](https://tree.taiga.io/support/integrations/changing-elements-status-via-commit-message/)
-
-[Attach commits to elements via commit message](https://tree.taiga.io/support/integrations/attach-commits-to-elements-via-commit-message/)
+- Deposit or withdrawal of money through different payment methods like PayPal, a credit/debit card, etc.
+- Exchange of currency for non-cash prizes.
+- Implementation of more games.
+- Implementation of chat in the table.
+- A social system in which players can make friends and have private chats and give gifts to each other.
+- Players can host private tables to play with friends.
 
 ## Installation instructions
+For the project to work you'll need Java 8 JDK and Maven.
 
-From the root folder of the project, you have to execute the commands:
+After cloning this repository in your preferred installation folder, and from the root folder of the project, you have to execute the commands:
 
     mvn clean compile
-    mvn spring-boot:run
+    mvm spring-boot:run
