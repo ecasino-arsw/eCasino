@@ -9,5 +9,7 @@ import edu.eci.arsw.ecasino.model.Player;
 public interface PlayerRepository extends CrudRepository<Player, Long> {
 	
 	Player getPlayerByUsername(String username);
+        
+	Player getPlayerByEmail(String email);
 
 }

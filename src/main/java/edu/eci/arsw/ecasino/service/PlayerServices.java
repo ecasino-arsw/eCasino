@@ -20,11 +20,16 @@ public class PlayerServices implements IPlayerServices {
 
 	@Override
 	public Player create(Player player) {
-		if (null == player.getId())
-			throw new RuntimeException("Invalid ID.");
-		else if (playerRepository.findById(player.getId()) != null)
+		if (null == player.getUsername())
+			throw new RuntimeException("Invalid Username.");
+		else if (playerRepository.getPlayerByUsername(player.getUsername())!=null)
 			throw new RuntimeException("The player exists.");
+                else if (null == player.getUsername())
+			throw new RuntimeException("Invalid Email.");
+		else if (playerRepository.getPlayerByEmail(player.getEmail())!=null)
+			throw new RuntimeException("The Email exists.");
 		else
+                        player.generateBalance();
 			playerRepository.save(player);
 		return player;
 	}

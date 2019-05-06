@@ -78,12 +78,6 @@ function registarse() {
         alerta = ' Enter your username.';
         document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
     }
-    if (document.getElementById("idUp").value === '') {
-        nullAlert = true;
-        alerta = ' Enter your ID.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
-
-    }
     if (document.getElementById("fullNameUp").value === '') {
         nullAlert = true;
         alerta = ' Enter your Full Name.';
@@ -117,7 +111,6 @@ function registarse() {
 
     if (!nullAlert) {
         axios.post('/players/', {
-                id: document.getElementById("idUp").value,
                 username: document.getElementById("usernameUp").value,
                 password: document.getElementById("passUp").value,
                 fullName: document.getElementById("fullNameUp").value,
