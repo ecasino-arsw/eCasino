@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "edu.eci.arsw.eCasino" })
+@ComponentScan(basePackages = { "edu.eci.arsw.ecasino" })
 public class CasinoApplication {
 
 	public static void main(String[] args) {

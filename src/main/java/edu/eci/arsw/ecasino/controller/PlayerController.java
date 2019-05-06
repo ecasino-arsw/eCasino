@@ -16,7 +16,7 @@ import edu.eci.arsw.ecasino.service.contract.IPlayerServices;
 
 @RestController
 public class PlayerController {
-	
+
 	@Autowired
 	IPlayerServices playerServices;
 
@@ -71,15 +71,15 @@ public class PlayerController {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);
 		}
 	}
-	
-        @ResponseBody
+
+	@ResponseBody
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletePlayerById(@PathVariable Long id) {
 		try {
-                        
-                        Player selectPlayer = playerServices.get(id);
-                        playerServices.delete(selectPlayer);
-                        
+
+			Player selectPlayer = playerServices.get(id);
+			playerServices.delete(selectPlayer);
+
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);
