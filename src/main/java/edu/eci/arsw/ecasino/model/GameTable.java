@@ -14,17 +14,15 @@ public class GameTable {
 	private Long lobbyId;
         private String name;
         private double stakes;
-        private int capacity;
 	
 	protected GameTable() {
 	}
 	
-	public GameTable(Long id, Long lobbyId, String name, double stakes, int capacity) {
-		this.id = id;
+	public GameTable( Long lobbyId, String name, double stakes, int capacity) {
+		
 		this.lobbyId = lobbyId;
 		this.name = name;
 		this.stakes = stakes;
-		this.capacity = capacity;
                 
 	}
 	
@@ -60,13 +58,6 @@ public class GameTable {
             this.stakes = stakes;
         }
 
-        public int getCapacity() {
-            return capacity;
-        }
-
-        public void setCapacity(int capacity) {
-            this.capacity = capacity;
-        }
         
         
         

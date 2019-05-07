@@ -16,7 +16,9 @@ public interface IGameTableServices {
 	GameTable get(Long id);
 	
 	GameTable get(Long lobbyId, Long id);
-
+	
+        GameTable get(String name);
+        
 	void update(GameTable table);
 
 	void delete(GameTable table);

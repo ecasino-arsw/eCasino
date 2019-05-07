@@ -29,14 +29,14 @@ public class GameTableServices implements IGameTableServices {
 
 	@Override
 	public GameTable create(GameTable gameTable) {
-		if (null == gameTable.getId())
-			throw new RuntimeException("Invalid ID.");
+		if (null == gameTable.getName())
+			throw new RuntimeException("Invalid Name.");
 		else if (null == gameTable.getLobbyId())
 			throw new RuntimeException("Invalid lobby ID.");
 		else if (lobbyRepository.findById(gameTable.getLobbyId()) == null)
 			throw new RuntimeException("The lobby doesn't exist.");
-		else if (gameTableRepository.findByIdAndLobbyId(gameTable.getId(), gameTable.getLobbyId()) != null)
-			throw new RuntimeException("The table exists in the lobby.");
+		else if (gameTableRepository.findByName(gameTable.getName()) != null)
+			throw new RuntimeException("The table exist.");
 		else
 			gameTableRepository.save(gameTable);
 		return gameTable;
@@ -61,5 +61,10 @@ public class GameTableServices implements IGameTableServices {
 	public void delete(GameTable gameTable) {
 		gameTableRepository.delete(gameTable);
 	}
+
+        @Override
+        public GameTable get(String name) {
+            return gameTableRepository.findByName(name);
+        }
 
 }
