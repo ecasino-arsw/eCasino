@@ -74,11 +74,12 @@
                                             <option value="blackJack">Black Jack</option>
                                             <option value="rulette">Rulette</option>
                                             <option value="holdEm" >HoldEm</option>
-                                            
+
                                         </select>
                                     </div>
 
                                     <div class="hr"></div>
+                                    <br>
                                     <button class="btn btn-info" type="submit" onclick="createLobby()" name="button">Create</button>
 
 
@@ -87,20 +88,30 @@
 
                             </div>
                             <div id="createTable" class="tab-pane fade">
-                                <form onsubmit="" id="regForm">
-                                    <div class="group">
-                                        <label for="sel1">Select Contry:</label>
-                                        <select class="form-control" id="contry">
-                                            <option>Black Jack</option>
-                                            <option>Rulette</option>
-                                            <option>HoldEm</option>
+                                <form name="formSelectLobby" onsubmit="return false" id="regForm">
+                                    <table id="showLobbies" class="table table-hover">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Game Name</th>
+                                        </tr>
 
-                                        </select>
-                                    </div>
-                                    <div class="hr"></div>
+                                    </table>
+
                                     <div class="group">
-                                        <button type="submit" class="button" >Create</button>
+                                        <br>
+                                        <label for="sel1">Lobby:</label>
+                                        <input type="number" class="form-control" id="lobbyId">
+                                        <label for="sel1">Name Table</label>
+                                        <input type="text" class="form-control" id="nameTable">
+                                        <label for="sel1">Minimum Bet (usd):</label>
+                                        <input type="number" class="form-control" id="stakes">
+                                        
                                     </div>
+
+                                    <div class="hr"></div>
+                                    <br>
+                                    <button class="btn btn-info" type="submit" onclick="createTable()" name="button">Create</button>
+
 
 
                                 </form>
@@ -214,11 +225,11 @@
 
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
-                                    Holder.addTheme('thumb', {
-                                        bg: '#55595c',
-                                        fg: '#eceeef',
-                                        text: 'Thumbnail'
-                                    });
+                                        Holder.addTheme('thumb', {
+                                            bg: '#55595c',
+                                            fg: '#eceeef',
+                                            text: 'Thumbnail'
+                                        });
         </script>
 
 

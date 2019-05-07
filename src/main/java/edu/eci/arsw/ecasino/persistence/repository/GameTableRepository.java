@@ -9,5 +9,7 @@ public interface GameTableRepository extends CrudRepository<GameTable, Long> {
 	Iterable<GameTable> findAllByLobbyId(Long lobbyId);
 	
 	GameTable findByIdAndLobbyId(Long id, Long lobbyId);
+        
+	GameTable findByName(String name);
 
 }
