@@ -42,24 +42,61 @@
                 <div class="col-sm-8" >
                     <div class="container">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#createTable">Create Table</a></li>
+                            <li class="active"><a data-toggle="tab" href="#createLobby">Create new Lobby</a></li>
+                            <li><a data-toggle="tab" href="#createTable">Create Table</a></li>
                             <li><a data-toggle="tab" href="#DeleteTable">Delete Table</a></li>
                             <li><a data-toggle="tab" href="#DeleteUser">Delete User</a></li>
                         </ul>
 
                         <div class="tab-content">
 
-                            <div id="createTable" class="tab-pane fade in active">
-                                <form onsubmit="createLobby(); return false" id="regForm">
+                            <div id="createLobby" class="tab-pane fade in active">
+
+                                <form name="formSelectCountry" onsubmit="return false" id="regForm">
+                                    <br>
                                     <div class="group">
-                                        <label for="user" class="label">ID Lobby</label>
-                                        <input id="idL" type="number" class="input">
+                                        <label for="sel1">Select Country:</label>
+                                        <select onchange="country(this.value)" >
+                                            <option value="">Select..</option>
+                                            <option value="colombia">Colombia</option>
+                                            <option value="panama">Panama</option>
+                                            <option value="costaRica" >Costa rica</option>
+                                            <option value="puertRico" >Puerto Rico</option>
+                                            <option value="argentina" >Argentina</option>
+                                            <option value="brasil" >Brasil</option>
+                                        </select>
                                     </div>
                                     <div class="group">
-                                        <label for="pass" class="label">Game Name</label>
-                                        <input id="nameL" type="text" class="input" data-type="password">
+                                        <br>
+                                        <label for="sel1">Game Name:</label>
+                                        <select onchange="game(this.value)" >
+                                            <option value="">Select..</option>
+                                            <option value="blackJack">Black Jack</option>
+                                            <option value="rulette">Rulette</option>
+                                            <option value="holdEm" >HoldEm</option>
+                                            
+                                        </select>
                                     </div>
 
+                                    <div class="hr"></div>
+                                    <button class="btn btn-info" type="submit" onclick="createLobby()" name="button">Create</button>
+
+
+
+                                </form>
+
+                            </div>
+                            <div id="createTable" class="tab-pane fade">
+                                <form onsubmit="" id="regForm">
+                                    <div class="group">
+                                        <label for="sel1">Select Contry:</label>
+                                        <select class="form-control" id="contry">
+                                            <option>Black Jack</option>
+                                            <option>Rulette</option>
+                                            <option>HoldEm</option>
+
+                                        </select>
+                                    </div>
                                     <div class="hr"></div>
                                     <div class="group">
                                         <button type="submit" class="button" >Create</button>

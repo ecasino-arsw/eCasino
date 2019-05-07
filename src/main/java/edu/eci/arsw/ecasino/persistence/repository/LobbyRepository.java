@@ -5,5 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import edu.eci.arsw.ecasino.model.Lobby;
 
 public interface LobbyRepository extends CrudRepository<Lobby, Long> {
+    
+    Lobby getLobbyByNameGame(String nameGame);
 
 }

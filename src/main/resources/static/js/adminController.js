@@ -3,13 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var optCountry;
+var optGame;
 
+function country(country) {
+    optCountry = country;
+}
+
+function game(game) {
+    optGame = game;
+}
 
 
 function createLobby() {
+
     axios.post('/lobbies/', {
-        id: parseInt(document.getElementById("idL").value),
-        nameGame: document.getElementById("nameL").value
+        
+        nameGame: optGame
+        
         
 
     })
@@ -22,6 +33,7 @@ function createLobby() {
             })
 
 }
+
 
 function loadPanelAdmin() {
     loadUsers();

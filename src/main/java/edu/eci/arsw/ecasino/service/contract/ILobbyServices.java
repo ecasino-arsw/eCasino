@@ -12,6 +12,8 @@ public interface ILobbyServices {
 	Lobby create(Lobby lobby);
 
 	Lobby get(Long id);
+        
+	Lobby get(String nameGame);
 
 	void update(Lobby lobby);
 
