@@ -17,11 +17,16 @@ public class Lobby {
     protected Lobby() {
     }
 
-    public Lobby(Long id, String nameGame) {
-        this.id = id;
+    public Lobby(String nameGame) {
+        
+        
         this.nameGame = nameGame;
     }
 
+    
+
+    
+    
     public String getNameGame() {
         return nameGame;
     }

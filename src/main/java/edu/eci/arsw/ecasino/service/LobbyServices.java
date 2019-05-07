@@ -20,11 +20,19 @@ public class LobbyServices implements ILobbyServices {
 
 	@Override
 	public Lobby create(Lobby lobby) {
-		if (null == lobby.getId())
-			throw new RuntimeException("Invalid ID.");
-		else if (lobbyRepository.findById(lobby.getId()) != null)
+            System.out.println("verificando..");
+		if (null == lobby.getNameGame()){
+                     System.out.println("no valido");
+			throw new RuntimeException("Invalid Game.");
+                }
+                       
+		else if (lobbyRepository.getLobbyByNameGame(lobby.getNameGame())!= null){
+                        System.out.println("country ya puesot" + lobby.getNameGame());
 			throw new RuntimeException("The lobby exists.");
+                        }
+                        
 		else
+                        System.out.println("guardando..");
 			lobbyRepository.save(lobby);
 		return lobby;
 	}
@@ -43,5 +51,10 @@ public class LobbyServices implements ILobbyServices {
 	public void delete(Lobby lobby) {
 		lobbyRepository.delete(lobby);
 	}
+
+        @Override
+        public Lobby get(String nameGame) {
+            return lobbyRepository.getLobbyByNameGame(nameGame);
+        }
 
 }
