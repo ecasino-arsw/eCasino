@@ -20,6 +20,17 @@ public class GameTableController {
 	@Autowired
 	IGameTableServices tableServices;
 
+        
+        @ResponseBody
+	@RequestMapping(value = "/lobbies/tables", method = RequestMethod.GET)
+	public ResponseEntity<?> getTables() {
+		try {
+			return new ResponseEntity<>(tableServices.list(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+        
 	@ResponseBody
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.GET)
 	public ResponseEntity<?> getTables(@PathVariable Long lobbyId) {
@@ -62,10 +73,13 @@ public class GameTableController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/lobbies/{lobbyId}/tables", method = RequestMethod.DELETE, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> deleteTable(@RequestBody GameTable gameTable) {
-		try {
-			tableServices.delete(gameTable);
+	@RequestMapping(value = "/lobbies/{lobbyId}/tables/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteTableById(@RequestBody Long id) {
+		try { 
+                        System.out.println("mesa:"+id);
+                        GameTable selectTable = tableServices.get(id);
+                        System.out.println("mesa:"+tableServices.get(id));
+			tableServices.delete(selectTable);
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);

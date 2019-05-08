@@ -43,7 +43,7 @@
                     <div class="container">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#createLobby">Create new Lobby</a></li>
-                            <li><a data-toggle="tab" href="#createTable">Create Table</a></li>
+                            <li><a data-toggle="tab" href="#createTable">Create new Table</a></li>
                             <li><a data-toggle="tab" href="#DeleteTable">Delete Table</a></li>
                             <li><a data-toggle="tab" href="#DeleteUser">Delete User</a></li>
                         </ul>
@@ -91,7 +91,7 @@
                                 <form name="formSelectLobby" onsubmit="return false" id="regForm">
                                     <table id="showLobbies" class="table table-hover">
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">Lobby #</th>
                                             <th scope="col">Game Name</th>
                                         </tr>
 
@@ -118,11 +118,11 @@
 
                             </div>
                             <div id="DeleteTable" class="tab-pane fade">
-                                <table id="tablesHoldEm" class="table table-hover">
+                                <table id="showTables" class="table table-hover">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Name</th>
                                         <th scope="col">Game</th>
+                                        <th scope="col">Name</th>
                                         <th scope="col">Persons</th>
                                         <th scope="col">Stakes</th>
                                         <th ></th>
@@ -130,19 +130,7 @@
 
                                 </table>
                             </div>
-                            <div id="DeleteLobby" class="tab-pane fade">
-                                <table id="tablesRoulette" class="table table-hover">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Game</th>
-                                        <th scope="col">Persons</th>
-                                        <th scope="col">Stakes</th>
-                                        <th ></th>
-                                    </tr>
-
-                                </table>
-                            </div>
+                           
                             <div id="DeleteUser" class="tab-pane fade">
                                 <table id="showUsers" class="table table-hover">
                                     <tr>

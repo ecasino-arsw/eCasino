@@ -25,7 +25,6 @@ function createLobby() {
 
     })
             .then(function (response) {
-                console.log(response.data);
                 alert('Lobby is create');
             })
             .catch(function (error) {
@@ -47,7 +46,6 @@ function createTable() {
 
     })
             .then(function (response) {
-                console.log(response.data);
                 alert('Lobby is create');
             })
             .catch(function (error) {
@@ -59,30 +57,17 @@ function createTable() {
 
 function loadPanelAdmin() {
     loadUsers();
-    loadLobbies()
+    loadLobbies();
+    loadTables();
 
 }
 
-function loadTables() {
-    axios.get('/tables/')
-            .then(function (response) {
-                document.getElementById("usernameP").innerHTML = response.data['username'];
-                document.getElementById("fullNameP").innerHTML = response.data['fullName'];
-                document.getElementById("emailP").innerHTML = response.data['email'];
-                document.getElementById("idP").innerHTML = response.data['id'];
-                document.getElementById("moneyP").innerHTML = response.data['money'];
 
-            })
-            .catch(function (error) {
-                alert("Error, No se pudo cargar usuario");
-            })
-}
 function loadLobbies() {
     axios.get('/lobbies/')
             .then(function (response) {
                 var table = $("#showLobbies");
                 var lobbies = response.data;
-                console.log(lobbies.length);
                 for (var i = 0; i < lobbies.length; i++) {
                     var selectLobby = lobbies[i];
                     table.append('<tr><td scope="row">' + selectLobby['id'] + "</td><td>" + selectLobby['nameGame'] + "</td>")
@@ -96,21 +81,22 @@ function loadLobbies() {
 }
 
 function loadTables() {
-    axios.get('/lobbies/')
+    axios.get('/lobbies/tables/')
             .then(function (response) {
-                var table = $("#showUsers");
-                var users = response.data;
-                console.log(users.length);
-                for (var i = 0; i < users.length; i++) {
-                    var selectUser = users[i];
-                    var onclick = 'onclick="deleteUser(' + selectUser['id'] + ')"';
-                    table.append('<tr><td scope="row">' + selectUser['id'] + "</td><td>" + selectUser['username'] + "</td><td>" + selectUser['fullName'] + "</td><td>" + selectUser['email'] + "</td><td>" + "$" + selectUser['money'] + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Delete</button></td>')
+                var table = $("#showTables");
+                var tables = response.data;
+                console.log(tables.length);
+                for (var i = 0; i < tables.length; i++) {
+                    var selectTable = tables[i];
+                    console.log(selectTable);
+                    var onclick = 'onclick="deleteTable(' + selectTable['id'] + ','+ selectTable['lobbyId']+ ')"';
+                    table.append('<tr><td scope="row">' + selectTable['id'] + "</td><td>" + selectTable['lobbyId'] + "</td><td>" + selectTable['name'] + "</td><td>" + "</td><td>" + "$" + selectTable['stakes'] + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Delete</button></td>')
 
                 }
 
             })
             .catch(function (error) {
-                alert("Error, No se pudo cargar usuario");
+                alert("Error, No se pudo cargar las mesas");
             })
 
 }
@@ -120,7 +106,6 @@ function loadUsers() {
             .then(function (response) {
                 var table = $("#showUsers");
                 var users = response.data;
-                console.log(users.length);
                 for (var i = 0; i < users.length; i++) {
                     var selectUser = users[i];
                     var onclick = 'onclick="deleteUser(' + selectUser['id'] + ')"';
@@ -140,7 +125,17 @@ function deleteUser(id) {
     alert(id);
     axios.delete('/players/' + id)
             .then(function (response) {
-                alert("User delete");
+                alert("User Delete");
+
+            })
+
+}
+
+function deleteTable(id, lobbyId) {
+    alert(id);
+    axios.delete('/lobbies/'+ lobbyId +'/tables/' + id)
+            .then(function (response) {
+                alert("Table Delete");
 
             })
 

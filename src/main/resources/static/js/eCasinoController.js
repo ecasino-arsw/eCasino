@@ -3,8 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function loadLobbie() {
-    axios.get('/lobbies')
+
+
+function loadBalance() {
+    axios.get('/players/' + localStorage.getItem('Actual'))
+            .then(function (response) {
+                localStorage.setItem('currentBalance', response.data['money']);
+                document.getElementById("moneyL").innerHTML = response.data['money'];
+
+            })
+            .catch(function (error) {
+                alert("Error, No se pudo cargar Balance");
+            })
+
+}
+
+function loadPanel() {
+    saveLobbies();
+    loadTables();
+    loadBalance();
+    
+}
+
+
+function loadTables() {
+    axios.get('/lobbies/tables')
             .then(function (response) {
                 var tableBlack = $("#tablesBlackJack");
                 var tableHoldEm = $("#tablesHoldEm");
@@ -12,100 +35,69 @@ function loadLobbie() {
                 var cont = 1;
                 var contBlack = 1;
                 var contHoldEm = 1;
-                var contRoul = 0;
-                var lobbies = response.data
-
-                for (var i = 0; i < lobbies.length; i++) {
-                    contRoul += lobbies[i]['numOfTables'];
-                    console.log(lobbies[i]['name']);
-                }
-
-                for (var i = 0; i < lobbies.length; i++) {
-                    var table = lobbies[i]['tables'];
-                    var x = 1;
-                    for (var c = 0; c < lobbies[i]['numOfTables']; c++) {
-
-
-                        var find = false;
-                        while (contRoul >= x && !find) {
-                            if (table[x] === undefined) {
-                                x++;
-                            } else {
-                                
-                                if (lobbies[i]['name'] === "BlackJack") {
-                                    cont = contBlack;
-                                    
-                                    tableBlack.append('<tr><td scope="row">' + cont + "</td><td>" + table[x]['nameTable'] + "</td><td>" + lobbies[i]['name'] + "</td><td>" + table[x]['players'] + "/6" + "</td><td>" + "$" + 0 + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Details</button></td>')
-                                    contBlack++;
-                                }
-                                if (lobbies[i]['name'] === "HoldEm") {
-                                    cont = contHoldEm;
-                                    tableHoldEm.append('<tr><td scope="row">' + cont + "</td><td>" + table[x]['nameTable'] + "</td><td>" + lobbies[i]['name'] + "</td><td>" + table[x]['players'] + "/6" + "</td><td>" + "$" + 0 + " USD" + '</td><td><button class="btn btn-info" name="button">Details</button></td>')
-                                    contHoldEm++;
-                                }
-                                find = true;
-                                x += 1;
-                            }
-
-                        }
-
+                var contRoulette = 1;
+                var tables = response.data
+                for (var i = 0; i < tables.length; i++) {
+                    var selectTable = tables[i]
+                    var nameGame = 'lobby' + selectTable['lobbyId'].toString();
+                    var lobby = localStorage.getItem(nameGame);
+                    if (lobby === "blackJack") {
+                        cont = contBlack;
+                        var onclick = 'onclick="joinGame(' + selectTable['id'] + ','+ selectTable['lobbyId']+ ')"';
+                        tableBlack.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/6" + "</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + ' >Details</button></td>')
+                        contBlack++;
                     }
+                    if (lobby === "rulette") {
+                        cont = contRoulette;
+                        var onclick = 'onclick="joinGame(' + selectTable['id'] + ','+ selectTable['lobbyId']+ ')"';
+                        tableRoulette.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/6" + "</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + ' >Details</button></td>')
+                        contRoulette++;
+                    }
+                    if (lobby === "holdEm") {
+                        cont = contHoldEm;
+                        var onclick = 'onclick="joinGame(' + selectTable['id'] + ','+ selectTable['lobbyId']+ ')"';
+                        tableHoldEm.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/6" + "</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Details</button></td>')
+                        contHoldEm++;
+                    }
+                }
+            })
+            .catch(function (error) {
+                alert("Error, prueba fallida");
+            })
 
+}
 
+function saveLobbies() {
+    axios.get('/lobbies/')
+            .then(function (response) {
+                var lobbies = response.data;
+                for (var i = 0; i < lobbies.length; i++) {
+                    var key = 'lobby' + lobbies[i]['id'];
+
+                    localStorage.setItem(key, lobbies[i]['nameGame']);
                 }
 
             })
             .catch(function (error) {
-                alert("Error, lobies no load");
+                alert("Error, lobbies not save");
             })
 
 }
 
-function loadBalance() {
-    axios.get('/players/' + localStorage.getItem('Actual'))
+function joinGame(id,lobbyId){
+    axios.get('/lobbies/'+lobbyId+'/tables/'+ id)
             .then(function (response) {
-                localStorage.setItem('balanceActual',response.data['money']);
-                document.getElementById("moneyL").innerHTML = response.data['money'];
+                var table = response.data;
+                var nameGame = 'lobby' + table['lobbyId'].toString();
+                var lobby = localStorage.getItem(nameGame);
+                alert("Esta apunto de ir a la mesa: "+table['name']+" de "+lobby);
+                localStorage.setItem('currentTable',table['id']);
+                location.href = "game.html";
+                
 
             })
             .catch(function (error) {
-                alert("Error, No se pudo cargar usuario");
+                alert("Error, no se pudo unir");
             })
-
+    
 }
-
-function loadPanel(){
-    loadBalance();
-    loadLobbies()
-}
-
-apiecasino = (function () {
-
-    var lobby = [];
-    var tables = [];
-    tables = [{"name": "Bogota"}, {"name": "Orlando"}, {"name": "Paris"}];
-
-    lobby["Bogota"] = [{"name": "Bogota", "tables": [{"game": {"name": "BlackJack", "persons": "2", "stakes": 5.00}},
-                {"game": {"name": "HoldEm", "persons": "5", "stakes": 50.00}},
-                {"game": {"name": "Roulette", "persons": "8", "stakes": 10.00}}]}];
-
-    lobby["Orlando"] = [{"name": "Orlando", "tables": [{"game": {"name": "BlackJack", "persons": "5", "stakes": 1.00}},
-                {"game": {"name": "HoldEm", "persons": "2", "stakes": 10.00}}]}];
-
-    lobby["Paris"] = [{"name": "Paris", "tables": [{"game": {"name": "BlackJack", "persons": "3", "stakes": 5.00}},
-                {"game": {"name": "Roulette", "persons": "14", "stakes": 3.00}}]}];
-
-
-    return {
-        getAllTables: function (callback) {
-            console.log([tables, lobby]);
-            callback(
-                    [tables, lobby]
-                    );
-
-        }
-    }
-
-})();
-
-

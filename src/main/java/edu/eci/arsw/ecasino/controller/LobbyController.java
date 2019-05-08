@@ -24,8 +24,7 @@ public class LobbyController {
 	@RequestMapping(value = "/lobbies", method = RequestMethod.GET)
 	public ResponseEntity<?> getLobbies() {
 		try {
-                    System.out.println("lobbies: "+lobbyServices.list());
-			return new ResponseEntity<>(lobbyServices.list(), HttpStatus.OK);
+                    	return new ResponseEntity<>(lobbyServices.list(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
