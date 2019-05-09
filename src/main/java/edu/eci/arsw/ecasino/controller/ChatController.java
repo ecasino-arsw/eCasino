@@ -8,6 +8,7 @@ package edu.eci.arsw.ecasino.controller;
 import edu.eci.arsw.ecasino.model.game.ChatMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -26,14 +27,14 @@ public class ChatController {
     SimpMessagingTemplate msgt;
 
     
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+    @MessageMapping("/topic/public{channel}")
+    @SendTo("/topic/public{channel}")
+    public ChatMessage sendMessage(@DestinationVariable String channel,@Payload ChatMessage chatMessage) {
         return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
+    @SendTo("/topic/public{channel}")
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
             SimpMessageHeaderAccessor headerAccessor) {
         // Add username in web socket session

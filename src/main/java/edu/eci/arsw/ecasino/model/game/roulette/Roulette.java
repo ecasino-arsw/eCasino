@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  *
  * @author 
  */
-public class Roulette {
+/*public class Roulette {
 
     private MessageType type;
     private String content;
@@ -46,19 +46,21 @@ public class Roulette {
     public void setSender(String sender) {
         this.sender = sender;
     }
-}
+}*/
 
 
 
-/*public class Roulette {
+public class Roulette {
     static final int CUADRADOS = 38;
     static final int SALDO_INICIAL = 10000;
     static final int SALDO_MINIMO = -10000;
+    public long tableID ;
     
     int [] numerosRuleta;
     boolean [] coloresRuleta;
     
-    public Roulette(int [] numerosRuleta, boolean [] coloresRuleta){
+    public Roulette(){
+        
         int numero = 0;
         int posicion = 0;
         boolean color = false;
@@ -97,5 +99,15 @@ public class Roulette {
         posicion = random.nextInt(CUADRADOS);
         return posicion;
     }
+
+    public long getTableID() {
+        return tableID;
+    }
+
+    public void setTableID(long tableID) {
+        this.tableID = tableID;
+    }
     
-}*/
+    
+    
+}

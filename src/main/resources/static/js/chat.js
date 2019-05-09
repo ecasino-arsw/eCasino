@@ -42,6 +42,7 @@ var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
 var stompClient = null;
 var username = null;
+var channel = null;
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
@@ -50,6 +51,7 @@ function connect(event) {
     console.log(localStorage.getItem('connect'));
     if (localStorage.getItem('connect') === "false" || localStorage.getItem('connect') === null) {
         username = localStorage.getItem('Actual');
+        channel = localStorage.getItem('currentTable');
         if (username) {
             usernamePage.classList.add('hidden');
             chatPage.classList.remove('hidden');
@@ -65,7 +67,7 @@ function connect(event) {
 }
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe('/topic/public'+channel, onMessageReceived);
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
             {},
@@ -85,7 +87,7 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        stompClient.send("/topic/public"+channel, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
