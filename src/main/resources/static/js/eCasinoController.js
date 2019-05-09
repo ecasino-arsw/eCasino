@@ -92,6 +92,8 @@ function joinGame(id,lobbyId){
                 var lobby = localStorage.getItem(nameGame);
                 alert("Esta apunto de ir a la mesa: "+table['name']+" de "+lobby);
                 localStorage.setItem('currentTable',table['id']);
+                localStorage.setItem('currentLobby',lobby);
+                
                 location.href = "game.html";
                 
 
@@ -101,3 +103,5 @@ function joinGame(id,lobbyId){
             })
     
 }
+
+

@@ -34,9 +34,9 @@ function createLobby() {
 }
 
 function createTable() {
-    
 
-    axios.post('/lobbies/'+ document.getElementById('lobbyId').value + '/tables/', {
+
+    axios.post('/lobbies/' + document.getElementById('lobbyId').value + '/tables/', {
 
         lobbyId: document.getElementById('lobbyId').value,
         name: document.getElementById('nameTable').value,
@@ -61,7 +61,6 @@ function loadPanelAdmin() {
     loadTables();
 
 }
-
 
 function loadLobbies() {
     axios.get('/lobbies/')
