@@ -25,18 +25,20 @@ function createLobby() {
 
     })
             .then(function (response) {
-                alert('Lobby is create');
+                var text = ["Success", "Lobby is create"];
+                callAlert(text);
             })
             .catch(function (error) {
-                alert("Error, No se pudo crear lobby");
+                var text = ["Error", "Could not create the lobby"]
+                callAlert(text);
             })
 
 }
 
 function createTable() {
-    
 
-    axios.post('/lobbies/'+ document.getElementById('lobbyId').value + '/tables/', {
+
+    axios.post('/lobbies/' + document.getElementById('lobbyId').value + '/tables/', {
 
         lobbyId: document.getElementById('lobbyId').value,
         name: document.getElementById('nameTable').value,
@@ -46,10 +48,12 @@ function createTable() {
 
     })
             .then(function (response) {
-                alert('Lobby is create');
+                var text = ["Success", "Table is create"];
+                callAlert(text);
             })
             .catch(function (error) {
-                alert("Error, No se pudo crear lobby");
+                var text = ["Error", "Could not create the table"]
+                callAlert(text);
             })
 
 }
@@ -76,7 +80,8 @@ function loadLobbies() {
 
             })
             .catch(function (error) {
-                alert("Error, No se pudo cargar usuario");
+                var text = ["Error", "Could not load the lobbies"]
+                callAlert(text);
             })
 }
 
@@ -89,14 +94,15 @@ function loadTables() {
                 for (var i = 0; i < tables.length; i++) {
                     var selectTable = tables[i];
                     console.log(selectTable);
-                    var onclick = 'onclick="deleteTable(' + selectTable['id'] + ','+ selectTable['lobbyId']+ ')"';
+                    var onclick = 'onclick="deleteTable(' + selectTable['id'] + ',' + selectTable['lobbyId'] + ')"';
                     table.append('<tr><td scope="row">' + selectTable['id'] + "</td><td>" + selectTable['lobbyId'] + "</td><td>" + selectTable['name'] + "</td><td>" + "</td><td>" + "$" + selectTable['stakes'] + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Delete</button></td>')
 
                 }
 
             })
             .catch(function (error) {
-                alert("Error, No se pudo cargar las mesas");
+                var text = ["Error", "Could not load the tables"]
+                callAlert(text);
             })
 
 }
@@ -115,7 +121,8 @@ function loadUsers() {
 
             })
             .catch(function (error) {
-                alert("Error, No se pudo cargar usuario");
+                var text = ["Error", "users could not be loaded"]
+                callAlert(text);
             })
 
 }
@@ -125,18 +132,22 @@ function deleteUser(id) {
     alert(id);
     axios.delete('/players/' + id)
             .then(function (response) {
-                alert("User Delete");
-
+                var text = ["Success", "User Delete"];
+                callAlert(text);
             })
 
 }
 
 function deleteTable(id, lobbyId) {
     alert(id);
-    axios.delete('/lobbies/'+ lobbyId +'/tables/' + id)
+    axios.delete('/lobbies/' + lobbyId + '/tables/' + id)
             .then(function (response) {
-                alert("Table Delete");
-
+                var text = ["Success", "Table Delete"];
+                callAlert(text);
             })
 
+}
+
+function callAlert(text) {
+    alertify.alert(text[0], text[1]).set('label', 'OK');
 }

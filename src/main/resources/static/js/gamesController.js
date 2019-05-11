@@ -7,6 +7,7 @@
 var listNumbers = [];
 var times = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var coin = 1;
+var playGame = false;
 
 function loadGame() {
     document.getElementById("moneyG").innerHTML = localStorage.getItem('currentBalance');
@@ -77,15 +78,14 @@ function loadTableroRoulette() {
 }
 
 function numberSelect(number) {
-    alert(coin);
+
     var pos = listNumbers.indexOf(number);
-    if (coin === 0 && times[number]!==0) {
+    if (coin === 0 && times[number] !== 0) {
         times[number] = 0;
-        
-        
-        listNumbers.splice(pos,1);
-    } 
-    if (coin!==0){
+
+        listNumbers.splice(pos, 1);
+    }
+    if (coin !== 0) {
         if (listNumbers.includes(number) === true) {
             times[number] += coin;
         } else {
@@ -93,58 +93,56 @@ function numberSelect(number) {
             times[number] += coin;
         }
     }
-    console.log(listNumbers);
-
     loadTablero();
 }
 
 function selectValueCoin(value) {
-    document.getElementById("coins").innerHTML = "<div></div>";
-    var divCoins = $("#coins");
-    var select = "class='btn btn-info'";
-    var noSelect = 'class="btn btn-outline-warning"';
-    var width = 'style="width: 75px"';
-    if (value === 1) {
-        coin = 1;
-        divCoins.append('<a ' + select + '><img ' + width + ' src="img/coin100.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width + ' src="img/coin200.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width + ' src="img/coin500.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width + ' src="img/coin1000.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width + ' src="img/coinDelete.png"/></a>');
-    } else if (value === 2) {
-        coin = 2;
-        divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width + ' src="img/coin100.png"/></a>');
-        divCoins.append('<a ' + select + '><img ' + width + ' src="img/coin200.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width + ' src="img/coin500.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width + ' src="img/coin1000.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width + ' src="img/coinDelete.png"/></a>');
-    } else if (value === 5) {
-        coin = 5;
-        divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width + ' src="img/coin100.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width + ' src="img/coin200.png"/></a>');
-        divCoins.append('<a  ' + select + '><img ' + width + ' src="img/coin500.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width + ' src="img/coin1000.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width + ' src="img/coinDelete.png"/></a>');
-    } else if (value === 10) {
-        coin = 10;
-        divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width + ' src="img/coin100.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width + ' src="img/coin200.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width + ' src="img/coin500.png"/></a>');
-        divCoins.append('<a  ' + select + '><img ' + width + ' src="img/coin1000.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width + ' src="img/coinDelete.png"/></a>');
-    } else {
-        coin = 0;
-        divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width + ' src="img/coin100.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width + ' src="img/coin200.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width + ' src="img/coin500.png"/></a>');
-        divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width + ' src="img/coin1000.png"/></a>');
-        divCoins.append('<a  ' + select + '><img ' + width + ' src="img/coinDelete.png"/></a>');
+    if (coin !== value || !playGame) {
+        playGame = true;
+        document.getElementById("coins").innerHTML = "<div></div>";
+        var divCoins = $("#coins");
+        var select = "class='btn btn-info'";
+        var noSelect = 'class="btn btn-outline-warning"';
+        var width = 'style="width: 58px"';
+        var width2 = 'style="width: 45px"';
+
+        if (value === 1) {
+            coin = 1;
+            divCoins.append('<a ' + select + '><img ' + width + ' src="img/coin100.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width2 + ' src="img/coin200.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width2 + ' src="img/coin500.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width2 + ' src="img/coin1000.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width2 + ' src="img/coinDelete.png"/></a>');
+        } else if (value === 2) {
+            coin = 2;
+            divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width2 + ' src="img/coin100.png"/></a>');
+            divCoins.append('<a ' + select + '><img ' + width + ' src="img/coin200.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width2 + ' src="img/coin500.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width2 + ' src="img/coin1000.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width2 + ' src="img/coinDelete.png"/></a>');
+        } else if (value === 5) {
+            coin = 5;
+            divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width2 + ' src="img/coin100.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width2 + ' src="img/coin200.png"/></a>');
+            divCoins.append('<a  ' + select + '><img ' + width + ' src="img/coin500.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width2 + ' src="img/coin1000.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width2 + ' src="img/coinDelete.png"/></a>');
+        } else if (value === 10) {
+            coin = 10;
+            divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width2 + ' src="img/coin100.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width2 + ' src="img/coin200.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width2 + ' src="img/coin500.png"/></a>');
+            divCoins.append('<a  ' + select + '><img ' + width + ' src="img/coin1000.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(0)"  ' + noSelect + '><img ' + width2 + ' src="img/coinDelete.png"/></a>');
+        } else {
+            coin = 0;
+            divCoins.append('<a onclick="selectValueCoin(1)"  ' + noSelect + '><img ' + width2 + ' src="img/coin100.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(2)"  ' + noSelect + '><img ' + width2 + ' src="img/coin200.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(5)"  ' + noSelect + '><img ' + width2 + ' src="img/coin500.png"/></a>');
+            divCoins.append('<a onclick="selectValueCoin(10)"  ' + noSelect + '><img ' + width2 + ' src="img/coin1000.png"/></a>');
+            divCoins.append('<a  ' + select + '><img ' + width + ' src="img/coinDelete.png"/></a>');
+        }
+
     }
-
-
-
-
-
-
 
 }
