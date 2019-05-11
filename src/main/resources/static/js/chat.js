@@ -3,32 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function loadTablero() {
-    if (localStorage.getItem('currentLobby') === 'rulette') {
-        loadTableroRoulette();
-    }
-    if (localStorage.getItem('currentLobby') === 'blackJack') {
-        loadTableroBlackJack();
-    }
-    if (localStorage.getItem('currentLobby') === 'holdEm') {
-        loadTableroHoldEm();
-    }
-}
 
 
 
-function loadTableroRoulette() {
-    var tablero = $("#showGame");
-    tablero.append("<tr><td><button class=btn btn-info>0</button></td><td><button class=btn btn-info>3</button></td><td><button class=btn btn-info>6</button></td></tr>");
-    tablero.append("<tr><td><button class=btn btn-info>00</button></td><td><button class=btn btn-info>2</button></td><td><button class=btn btn-info>5</button></td></tr>");
-
-}
-
-
-function loadGame() {
+function loadConnect() {
     
     connect();
-    loadTablero();
+   
+
+}
+
+function exitTable(){
+    disconnected()
+    location.href = "lobby.html";
 
 }
 
@@ -48,7 +35,6 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 function connect(event) {
-    console.log(localStorage.getItem('connect'));
     if (localStorage.getItem('connect') === "false" || localStorage.getItem('connect') === null) {
         username = localStorage.getItem('Actual');
         channel = localStorage.getItem('currentTable');
@@ -104,17 +90,14 @@ function sendMessage(event) {
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
     var messageElement = document.createElement('li');
-    console.log(message);
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
-        console.log(message);
         
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
-        console.log(message);
-        localStorage.setItem('connect', null);
+        localStorage.setItem('connect', 'false');
         
         
     } else {

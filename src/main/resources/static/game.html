@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
         <title>eCasino - login</title>
 
 
@@ -25,7 +27,7 @@
 
     </head>
 
-    <body onload="loadGame()">
+    <body onload="loadGame(),loadConnect()">
 
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
             <h5 class="my-0 mr-md-auto font-weight-normal">eCasino</h5>
@@ -34,7 +36,7 @@
                 <a class="p-2 text-dark" href="#">Tournaments</a>
                 <a class="p-2 text-dark" href="#">Support</a>
             </nav>
-            <font style="font-size: 17px"><a class="label label-success" href="balance.html">$<span id="moneyL"></span> USD</a><font>
+            <font style="font-size: 17px"><a class="label label-success" href="balance.html">$<span id="moneyG"></span> USD</a></font>
             &nbsp;
             <a class="btn btn-outline-success" href="account.html">Account</a>
             &nbsp;
@@ -42,6 +44,15 @@
 
         </div>
         <!-- Body lobby -->
+        <div style="text-align: center; padding: 3px" class="panel panel-success">
+            <div class="panel-heading">
+                <h3>
+                    You are online <b><span id="usernameG"></span></b>. Table #<span id="tableIdG"></span> - <b><span id="nameGameG"></span></b>
+                    <br> Room Name: <b><span id="nameTableG"></span></b>
+                    <br> <a onclick="exitTable()" class="btn btn-danger" ><b><font color="black">EXIT</font></b></a>
+                </h3>
+            </div>
+        </div>
         <div id="bodyPrincipal">
 
             <div class="row">
@@ -53,7 +64,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Details - table</div>
+                        <div class="panel-heading"><b>Talk to the other players</b></div>
                         <div id="detailsTable" class="panel-body">
                             <noscript>
                             <h2>Sorry! Your browser doesn't support Javascript</h2>
@@ -80,8 +91,8 @@
                                         Connecting...
                                     </div>
                                     <div  style="padding: 2px; height: 150px; overflow-x: hidden; overflow-y: scroll;"><ul id="messageArea" >
-                                    </ul></div>
-                                    
+                                        </ul></div>
+
                                     <form id="messageForm" name="messageForm" nameForm="messageForm">
                                         <div class="form-group">
                                             <div class="input-group clearfix">
