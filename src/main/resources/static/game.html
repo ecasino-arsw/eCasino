@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <title>eCasino - login</title>
+
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/pricing.css" rel="stylesheet">
+
+        <!-- other styles -->
+        <link href="css/style.css" rel="stylesheet">
+
+
+    </head>
+
+    <body onload="loadGame()">
+
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+            <h5 class="my-0 mr-md-auto font-weight-normal">eCasino</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a class="p-2 text-dark" href="#">Games</a>
+                <a class="p-2 text-dark" href="#">Tournaments</a>
+                <a class="p-2 text-dark" href="#">Support</a>
+            </nav>
+            <font style="font-size: 17px"><a class="label label-success" href="balance.html">$<span id="moneyL"></span> USD</a><font>
+            &nbsp;
+            <a class="btn btn-outline-success" href="account.html">Account</a>
+            &nbsp;
+            <a onclick="cerrarSesion()" class="btn btn-outline-warning" >Logout</a>
+
+        </div>
+        <!-- Body lobby -->
+        <div id="bodyPrincipal">
+
+            <div class="row">
+                <div class="col-sm-8" >
+                    <div class="container">
+                        <table id="showGame"></table>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Details - table</div>
+                        <div id="detailsTable" class="panel-body">
+                            <noscript>
+                            <h2>Sorry! Your browser doesn't support Javascript</h2>
+                            </noscript>
+                            <div id="username-page">
+                                <div class="username-page-container">
+                                    <h1 class="title">Type your username</h1>
+                                    <form id="usernameForm" name="usernameForm">
+                                        <div class="form-group">
+                                            <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="accent username-submit">Start Chatting</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="chat-page" class="hidden">
+                                <div class="chat-container">
+                                    <div class="chat-header">
+                                        <h2>CHAT</h2>
+                                    </div>
+                                    <div class="connecting">
+                                        Connecting...
+                                    </div>
+                                    <div  style="padding: 2px; height: 150px; overflow-x: hidden; overflow-y: scroll;"><ul id="messageArea" >
+                                    </ul></div>
+                                    
+                                    <form id="messageForm" name="messageForm" nameForm="messageForm">
+                                        <div class="form-group">
+                                            <div class="input-group clearfix">
+                                                <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
+                                                <button type="submit" class="primary">Send</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <footer style="width: 80%;margin-left: auto; margin-right: auto;" class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <img class="mb-2" src="Pricing%20example%20for%20Bootstrap_files/bootstrap-solid.svg" alt="" width="24" height="24">
+                    <small class="d-block mb-3 text-muted">© 2019</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Features</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Cool stuff</a></li>
+                        <li><a class="text-muted" href="#">Random feature</a></li>
+                        <li><a class="text-muted" href="#">Team feature</a></li>
+                        <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                        <li><a class="text-muted" href="#">Another one</a></li>
+                        <li><a class="text-muted" href="#">Last time</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Resource</a></li>
+                        <li><a class="text-muted" href="#">Resource name</a></li>
+                        <li><a class="text-muted" href="#">Another resource</a></li>
+                        <li><a class="text-muted" href="#">Final resource</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>About</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Team</a></li>
+                        <li><a class="text-muted" href="#">Locations</a></li>
+                        <li><a class="text-muted" href="#">Privacy</a></li>
+                        <li><a class="text-muted" href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/holder.js"></script>
+        <script src="js/eCasinoController.js"></script>
+        <script src="js/usersController.js"></script>
+        <script src="js/chat.js"></script>
+        <script src="js/gamesController.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+                Holder.addTheme('thumb', {
+                    bg: '#55595c',
+                    fg: '#eceeef',
+                    text: 'Thumbnail'
+                });
+        </script>
+
+
+    </body>
+</html>
