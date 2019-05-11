@@ -24,6 +24,7 @@ public class LobbyController {
 	@RequestMapping(value = "/lobbies", method = RequestMethod.GET)
 	public ResponseEntity<?> getLobbies() {
 		try {
+                        System.out.println(lobbyServices.list());
                     	return new ResponseEntity<>(lobbyServices.list(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -44,7 +45,6 @@ public class LobbyController {
 	@RequestMapping(value = "/lobbies", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> createLobby(@RequestBody Lobby lobby) {
 		try {
-                        System.out.println("lobby: "+lobby.getNameGame());
 			return new ResponseEntity<>(lobbyServices.create(lobby), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);

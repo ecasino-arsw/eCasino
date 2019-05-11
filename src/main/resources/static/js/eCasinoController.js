@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var lobbiesLoad = false;
+if (!lobbiesLoad){
+    loadPanel();
+}
 
 function loadBalance() {
     axios.get('/players/' + localStorage.getItem('Actual'))
@@ -22,6 +25,7 @@ function loadPanel() {
     saveLobbies();
     loadTables();
     loadBalance();
+    
     
 }
 
@@ -73,8 +77,9 @@ function saveLobbies() {
                 var lobbies = response.data;
                 for (var i = 0; i < lobbies.length; i++) {
                     var key = 'lobby' + lobbies[i]['id'];
-
+                    
                     localStorage.setItem(key, lobbies[i]['nameGame']);
+                    lobbiesLoad = true;
                 }
 
             })
