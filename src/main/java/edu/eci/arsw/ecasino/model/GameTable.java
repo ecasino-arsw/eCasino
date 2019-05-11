@@ -14,6 +14,7 @@ public class GameTable {
 	private Long lobbyId;
         private String name;
         private double stakes;
+        private int capacity;
 	
 	protected GameTable() {
 	}
@@ -23,6 +24,7 @@ public class GameTable {
 		this.lobbyId = lobbyId;
 		this.name = name;
 		this.stakes = stakes;
+                this.capacity = capacity;
                 
 	}
 	
@@ -57,6 +59,16 @@ public class GameTable {
         public void setStakes(double stakes) {
             this.stakes = stakes;
         }
+
+        public int getCapacity() {
+            return capacity;
+        }
+
+        public void setCapacity(int capacity) {
+            this.capacity = capacity;
+        }
+        
+        
 
         
         
