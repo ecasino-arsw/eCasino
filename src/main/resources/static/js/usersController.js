@@ -55,12 +55,6 @@ function iniciarSesion() {
                             document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
                         }
 
-                        /*if (response.data["contraseñaUsuario"] === document.getElementById("inContraseña").value) {
-                         iniciarLocalStorageUsuario(response.data["cedulaUsuario"])
-                         location.href = "panelUsuario.html";
-                         } else {
-                         alert("Contraseña incorrecta");
-                         }*/
                     })
                     .catch(function (error) {
                         alerta = ' Incorrect username or password.';
@@ -131,8 +125,9 @@ function registarse() {
         })
                 .then(function (response) {
                     console.log(response.data);
-                    alert('Registered User')
-                    location.href = "login.html";
+                    var text = ["Success","Registered User"];
+                    var web = "login.html";
+                    callAlert(text, web ); 
                 })
     }
 
@@ -160,4 +155,15 @@ function loadProfile() {
                 alert("Error, No se pudo cargar usuario");
             })
 
+}
+
+
+function callAlert(text, web){
+    if(web!==null){
+        alertify.alert(text[0],text[1]).set('label', 'OK');
+        location.href = web;
+    } else {
+        alertify.alert(text[0],text[1]).set('label', 'OK');
+    }
+    
 }
