@@ -66,7 +66,6 @@ public class LobbyController {
 	@RequestMapping(value = "/lobbies", method = RequestMethod.DELETE, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> deleteLobby(@RequestBody Lobby lobby) {
 		try {
-			lobbyServices.delete(lobby);
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getStackTrace(), HttpStatus.CONFLICT);
