@@ -76,9 +76,7 @@ public class GameTableController {
 	@RequestMapping(value = "/lobbies/{lobbyId}/tables/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteTableById(@RequestBody Long id) {
 		try { 
-                        System.out.println("mesa:"+id);
                         GameTable selectTable = tableServices.get(id);
-                        System.out.println("mesa:"+tableServices.get(id));
 			tableServices.delete(selectTable);
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		} catch (Exception e) {
