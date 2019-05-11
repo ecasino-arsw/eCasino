@@ -17,10 +17,10 @@ public class HoldEm implements IGame {
 
 	public static void main(String[] args) {
 		ArrayList<Player> players = new ArrayList<>();
-		players.add(new Player(new Long(1), "johnDoe", "test1", "John Doe", "johndoe@domain.com", 1000));
-		players.add(new Player(new Long(2), "janeDoe", "test2", "Jane Doe", "janedoe@domain.com", 1000));
-		players.add(new Player(new Long(3), "jamesDoe", "test3", "James Doe", "jamesdoe@domain.com", 1000));
-		players.add(new Player(new Long(4), "jackDoe", "test4", "Jack Doe", "jackdoe@domain.com", 1000));
+		players.add(new Player("johnDoe", "test1", "John Doe", "johndoe@domain.com"));
+		players.add(new Player("janeDoe", "test2", "Jane Doe", "janedoe@domain.com"));
+		players.add(new Player("jamesDoe", "test3", "James Doe", "jamesdoe@domain.com"));
+		players.add(new Player("jackDoe", "test4", "Jack Doe", "jackdoe@domain.com"));
 		HoldEm game = new HoldEm(players);
 		game.setupGame();
 		game.playHand();
