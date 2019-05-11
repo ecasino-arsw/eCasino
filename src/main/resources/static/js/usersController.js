@@ -39,24 +39,36 @@ function iniciarSesion() {
         nullAlert = true;
         alerta = ' Enter your password.';
         document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
-    } 
+    }
     if (!nullAlert) {
-        axios.get('/players/' + document.getElementById("usernameIn").value)
-                .then(function (response) {
-                    iniciarLocalStorageUser(document.getElementById("usernameIn").value);
-                    location.href = "lobby.html";
-                    /*if (response.data["contraseñaUsuario"] === document.getElementById("inContraseña").value) {
-                     iniciarLocalStorageUsuario(response.data["cedulaUsuario"])
-                     location.href = "panelUsuario.html";
-                     } else {
-                     alert("Contraseña incorrecta");
-                     }*/
-                })
-                .catch(function (error) {
-                    alerta = ' This Users not found.';
-                    document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        if ('admin' === document.getElementById("passIn").value && 'admin' === document.getElementById("usernameIn").value) {
+            location.href = "paneladmin.html";
+        } else {
+            axios.get('/players/' + document.getElementById("usernameIn").value)
+                    .then(function (response) {
+                        if (response.data['password'] === document.getElementById("passIn").value) {
+                            iniciarLocalStorageUser(document.getElementById("usernameIn").value);
+                            location.href = "lobby.html";
 
-                })
+                        } else {
+                            alerta = ' Incorrect username or password.';
+                            document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+                        }
+
+                        /*if (response.data["contraseñaUsuario"] === document.getElementById("inContraseña").value) {
+                         iniciarLocalStorageUsuario(response.data["cedulaUsuario"])
+                         location.href = "panelUsuario.html";
+                         } else {
+                         alert("Contraseña incorrecta");
+                         }*/
+                    })
+                    .catch(function (error) {
+                        alerta = ' Incorrect username or password.';
+                        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+
+                    })
+        }
+
     }
 
 }
@@ -111,11 +123,11 @@ function registarse() {
 
     if (!nullAlert) {
         axios.post('/players/', {
-                username: document.getElementById("usernameUp").value,
-                password: document.getElementById("passUp").value,
-                fullName: document.getElementById("fullNameUp").value,
-                email: document.getElementById("emailUp").value
-            
+            username: document.getElementById("usernameUp").value,
+            password: document.getElementById("passUp").value,
+            fullName: document.getElementById("fullNameUp").value,
+            email: document.getElementById("emailUp").value
+
         })
                 .then(function (response) {
                     console.log(response.data);
