@@ -13,7 +13,7 @@ function loadBalance() {
 
             })
             .catch(function (error) {
-                alert("Error, No se pudo cargar Balance");
+                alert("Error, balance not loaded");
             })
 
 }
@@ -62,7 +62,7 @@ function loadTables() {
                 }
             })
             .catch(function (error) {
-                alert("Error, prueba fallida");
+                alert("Error, lobbies not loaded");
             })
 
 }
@@ -92,12 +92,15 @@ function joinGame(id,lobbyId){
                 var lobby = localStorage.getItem(nameGame);
                 alert("Esta apunto de ir a la mesa: "+table['name']+" de "+lobby);
                 localStorage.setItem('currentTable',table['id']);
+                localStorage.setItem('currentLobby',lobby);
+                localStorage.setItem('currentNameTable',table['name']);
+                
                 location.href = "game.html";
                 
 
             })
             .catch(function (error) {
-                alert("Error, no se pudo unir");
+                alert("Error, could not join");
             })
     
 }
