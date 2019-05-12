@@ -44,8 +44,8 @@ function loadTableroRoulette() {
     var fila2 = "<tr></tr>";
     var fila3 = "<tr></tr>";
 
-    fila2 += ("<td><button style='border:1px solid black;' class='btn btn-success' onclick='numberSelect(0)'>0 <span class='badge'>" + times[0] + "</span> </button></td>");
-    fila3 += ("<td><button style='border:1px solid black;' class='btn btn-success' onclick='numberSelect(37)'>00 <span class='badge'>" + times[37] + "</span></button></td>");
+    fila2 += ("<td ><button id='number0' style='border:1px solid black;' class='btn btn-success' onclick='numberSelect(0)'>0 <span class='badge'>" + times[0] + "</span> </button></td>");
+    fila3 += ("<td  ><button id='number37' style='border:1px solid black;' class='btn btn-success' onclick='numberSelect(37)'>00 <span class='badge'>" + times[37] + "</span></button></td>");
     fila1 += ("<td></td>");
 
     var listRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
@@ -59,13 +59,13 @@ function loadTableroRoulette() {
             color = 'btn btn';
         }
         if (cont === 1) {
-            fila1 += "<td><button style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
+            fila1 += "<td  ><button id='number"+i+"' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
             cont += 1;
         } else if (cont === 2) {
-            fila2 += "<td><button style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
+            fila2 += "<td ><button id='number"+i+"' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
             cont += 1;
         } else {
-            fila3 += "<td><button style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
+            fila3 += "<td ><button id='number"+i+"' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
             cont = 1;
         }
     }
@@ -93,6 +93,9 @@ function numberSelect(number) {
             times[number] += coin;
         }
     }
+    localStorage.setItem('listNumbers', listNumbers) 
+    localStorage.setItem('listTimes', times) 
+    
     loadTablero();
 }
 
