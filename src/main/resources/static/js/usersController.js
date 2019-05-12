@@ -28,17 +28,16 @@ function cerrarLocalStorageUsuario() {
  */
 function iniciarSesion() {
     var nullAlert = false;
-    document.getElementById("alertDiv").innerHTML = "";
     var alerta;
     if (document.getElementById("usernameIn").value === '') {
         nullAlert = true;
         alerta = ' Enter your username.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
     }
     if (document.getElementById("passIn").value === '') {
         nullAlert = true;
         alerta = ' Enter your password.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
     }
     if (!nullAlert) {
         if ('admin' === document.getElementById("passIn").value && 'admin' === document.getElementById("usernameIn").value) {
@@ -52,13 +51,13 @@ function iniciarSesion() {
 
                         } else {
                             alerta = ' Incorrect username or password.';
-                            document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+                            alertify.error(alerta);
                         }
 
                     })
                     .catch(function (error) {
                         alerta = ' Incorrect username or password.';
-                        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+                        alertify.error(alerta);
 
                     })
         }
@@ -66,52 +65,47 @@ function iniciarSesion() {
     }
 
 }
-function divAlerta(alerta) {
-    return '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            '<strong>Error!</strong>' + alerta +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '</button>' +
-            '</div>';
-}
+
 
 function registarse() {
     var nullAlert = false;
-    document.getElementById("alertDiv").innerHTML = "";
+    //document.getElementById("alertDiv").innerHTML = "";
     var alerta;
     if (document.getElementById("usernameUp").value === '') {
         nullAlert = true;
+        
         alerta = ' Enter your username.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
+        //document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
     }
     if (document.getElementById("fullNameUp").value === '') {
         nullAlert = true;
         alerta = ' Enter your Full Name.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
 
     }
     if (document.getElementById("emailUp").value === '') {
         nullAlert = true;
         alerta = ' Enter your Email.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
 
     }
     if (document.getElementById("passUp").value === '') {
         nullAlert = true;
         alerta = ' Enter your Password.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
     }
 
     if (document.getElementById("passUp2").value === '') {
         nullAlert = true;
         alerta = ' Please, Repeat de Password.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
 
     }
     if (document.getElementById("passUp2").value !== document.getElementById("passUp").value) {
         nullAlert = true;
         alerta = ' The Passwords not similars.';
-        document.getElementById("alertDiv").innerHTML += divAlerta(alerta);
+        alertify.error(alerta);
 
     }
 
@@ -127,8 +121,15 @@ function registarse() {
                     console.log(response.data);
                     var text = ["Success","Registered User"];
                     var web = "login.html";
-                    callAlert(text, web ); 
+                    //alertify.success(text[0]);
+                    //alert(text[1]);
+                    alertify.alert(text[0],text[1]).set('label', 'OK');
+                    alert(text[1]);
+                    callAlert(text, web);
+                    
                 })
+    } else {
+        alertify.error("<b>>>Please, fill in all the required fields.<<</b>");
     }
 
 }
