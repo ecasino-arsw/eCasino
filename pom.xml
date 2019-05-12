@@ -78,28 +78,28 @@
 			<artifactId>bootstrap</artifactId>
 			<version>${webjars-bootstrap.version}</version>
 		</dependency>
-	 <dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-messaging</artifactId>
-	  <type>jar</type>
-	 </dependency>
-	 <dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-websocket</artifactId>
-	  <type>jar</type>
-	 </dependency>
-	 <dependency>
-	  <groupId>log4j</groupId>
-	  <artifactId>log4j</artifactId>
-	  <version>1.2.14</version>
-	  <type>jar</type>
-	 </dependency>
-	 <dependency>
-	  <groupId>org.perf4j</groupId>
-	  <artifactId>perf4j</artifactId>
-	  <version>0.9.12</version>
-	  <type>jar</type>
-	 </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.perf4j</groupId>
+			<artifactId>perf4j</artifactId>
+			<version>0.9.12</version>
+			<type>jar</type>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
