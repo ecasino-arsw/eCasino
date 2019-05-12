@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import edu.eci.arsw.ecasino.model.game.RouletteResponse;
+import edu.eci.arsw.ecasino.model.game.roulette.RouletteResponse;
 
 @Component
 public class WebSocketEventListenerRoulette {

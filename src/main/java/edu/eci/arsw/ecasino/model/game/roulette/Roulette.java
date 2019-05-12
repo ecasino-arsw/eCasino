@@ -1,4 +1,4 @@
-package edu.eci.arsw.ecasino.model.game;
+package edu.eci.arsw.ecasino.model.game.roulette;
 
 import edu.eci.arsw.ecasino.model.Player;
 import edu.eci.arsw.ecasino.model.game.interf.IGame;

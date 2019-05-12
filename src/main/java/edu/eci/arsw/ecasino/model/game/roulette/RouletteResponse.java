@@ -1,4 +1,4 @@
-package edu.eci.arsw.ecasino.model.game;
+package edu.eci.arsw.ecasino.model.game.roulette;
 
 import java.util.ArrayList;
 import java.util.Arrays;
