@@ -19,6 +19,7 @@ package edu.eci.arsw.ecasino.model.game.texasholdem;
 
 import java.util.List;
 
+import edu.eci.arsw.ecasino.model.Player;
 import edu.eci.arsw.ecasino.model.game.texasholdem.actions.Action;
 
 /**
@@ -30,25 +31,19 @@ import edu.eci.arsw.ecasino.model.game.texasholdem.actions.Action;
  * 
  * @author Oscar Stigter
  */
-public class Player {
-
-    /** Name. */
-    private final String name;
+public class TexasHoldemPlayer extends Player {
 
     /** Client application responsible for the actual behavior. */
     private final Client client;
 
     /** Hand of cards. */
     private final Hand hand;
-
-    /** Current amount of cash. */
-    private int cash;
     
     /** Whether the player has hole cards. */
     private boolean hasCards;
 
     /** Current bet. */
-    private int bet;
+    private double bet;
 
     /** Last action performed. */
     private Action action;
@@ -63,9 +58,9 @@ public class Player {
      * @param client
      *            The client application.
      */
-    public Player(String name, int cash, Client client) {
-        this.name = name;
-        this.cash = cash;
+    public TexasHoldemPlayer(String name, double money, Client client) {
+        this.username = name;
+        this.money = money;
         this.client = client;
 
         hand = new Hand();
@@ -96,7 +91,7 @@ public class Player {
      */
     public void resetBet() {
         bet = 0;
-        action = (hasCards() && cash == 0) ? Action.ALL_IN : null;
+        action = (hasCards() && money == 0) ? Action.ALL_IN : null;
     }
 
     /**
@@ -108,7 +103,7 @@ public class Player {
             if (cards.size() == 2) {
                 hand.addCards(cards);
                 hasCards = true;
-                System.out.format("[CHEAT] %s's cards:\t%s\n", name, hand);
+                System.out.format("[CHEAT] %s's cards:\t%s\n", money, hand);
             } else {
                 throw new IllegalArgumentException("Invalid number of cards");
             }
@@ -125,40 +120,22 @@ public class Player {
     }
 
     /**
-     * Returns the player's name.
-     * 
-     * @return The name.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Returns the player's current amount of cash.
-     * 
-     * @return The amount of cash.
-     */
-    public int getCash() {
-        return cash;
-    }
-
-    /**
      * Returns the player's current bet.
      * 
      * @return The current bet.
      */
-    public int getBet() {
+    public double getBet() {
         return bet;
     }
     
     /**
      * Sets the player's current bet.
      * 
-     * @param bet
+     * @param d
      *            The current bet.
      */
-    public void setBet(int bet) {
-        this.bet = bet;
+    public void setBet(double d) {
+        this.bet = d;
     }
 
     /**
@@ -186,7 +163,7 @@ public class Player {
      * @return True if all-in, otherwise false.
      */
     public boolean isAllIn() {
-        return hasCards() && (cash == 0);
+        return hasCards() && (money == 0);
     }
 
     /**
@@ -206,7 +183,7 @@ public class Player {
      */
     public void postSmallBlind(int blind) {
         action = Action.SMALL_BLIND;
-        cash -= blind;
+        money -= blind;
         bet += blind;
     }
 
@@ -218,31 +195,31 @@ public class Player {
      */
     public void postBigBlind(int blind) {
         action = Action.BIG_BLIND;
-        cash -= blind;
+        money -= blind;
         bet += blind;
     }
     
     /**
      * Pays an amount of cash.
      * 
-     * @param amount
+     * @param betIncrement
      *            The amount of cash to pay.
      */
-    public void payCash(int amount) {
-        if (amount > cash) {
+    public void payCash(double betIncrement) {
+        if (betIncrement > money) {
             throw new IllegalStateException("Player asked to pay more cash than he owns!");
         }
-        cash -= amount;
+        money -= betIncrement;
     }
     
     /**
      * Wins an amount of money.
      * 
-     * @param amount
+     * @param potShare
      *            The amount won.
      */
-    public void win(int amount) {
-        cash += amount;
+    public void win(double potShare) {
+    	money += potShare;
     }
 
     /**
@@ -250,8 +227,8 @@ public class Player {
      * 
      * @return The cloned player.
      */
-    public Player publicClone() {
-        Player clone = new Player(name, cash, null);
+    public TexasHoldemPlayer publicClone() {
+        TexasHoldemPlayer clone = new TexasHoldemPlayer(username, money, null);
         clone.hasCards = hasCards;
         clone.bet = bet;
         clone.action = action;
@@ -261,7 +238,7 @@ public class Player {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return name;
+        return username;
     }
 
 }

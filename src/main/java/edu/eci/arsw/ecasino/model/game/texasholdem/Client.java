@@ -51,7 +51,7 @@ public interface Client {
      * @param players
      *            The players at the table (including this player).
      */
-    void joinedTable(TableType type, int bigBlind, List<Player> players);
+    void joinedTable(TableType type, int bigBlind, List<TexasHoldemPlayer> players);
     
     /**
      * Handles the start of a new hand.
@@ -59,7 +59,7 @@ public interface Client {
      * @param dealer
      *            The dealer.
      */
-    void handStarted(Player dealer);
+    void handStarted(TexasHoldemPlayer dealer);
     
     /**
      * Handles the rotation of the actor (the player who's turn it is).
@@ -67,7 +67,7 @@ public interface Client {
      * @param actor
      *            The new actor.
      */
-    void actorRotated(Player actor);
+    void actorRotated(TexasHoldemPlayer actor);
     
     /**
      * Handles an update of this player.
@@ -75,7 +75,7 @@ public interface Client {
      * @param player
      *            The player.
      */
-    void playerUpdated(Player player);
+    void playerUpdated(TexasHoldemPlayer player);
     
     /**
      * Handles an update of the board.
@@ -87,7 +87,7 @@ public interface Client {
      * @param pot
      *            The current pot.
      */
-    void boardUpdated(List<Card> cards, int bet, int pot);
+    void boardUpdated(List<Card> cards, double bet, double pot);
     
     /**
      * Handles the event of a player acting.
@@ -95,20 +95,20 @@ public interface Client {
      * @param player
      *            The player that has acted.
      */
-    void playerActed(Player player);
+    void playerActed(TexasHoldemPlayer player);
 
     /**
      * Requests this player to act, selecting one of the allowed actions.
      * 
      * @param minBet
      *            The minimum bet.
-     * @param currentBet
+     * @param bet
      *            The current bet.
      * @param allowedActions
      *            The allowed actions.
      * 
      * @return The selected action.
      */
-    Action act(int minBet, int currentBet, Set<Action> allowedActions);
+    Action act(double minBet, double bet, Set<Action> allowedActions);
 
 }
