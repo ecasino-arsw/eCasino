@@ -51,19 +51,19 @@ function loadTables() {
                     if (lobby === "blackJack") {
                         cont = contBlack;
                         var onclick = 'onclick="joinGame(' + selectTable['id'] + ',' + selectTable['lobbyId'] + ')"';
-                        tableBlack.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/6" + "</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + ' >Join</button></td>')
+                        tableBlack.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/"+selectTable['capacity']+"</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + ' >Join</button></td>')
                         contBlack++;
                     }
                     if (lobby === "rulette") {
                         cont = contRoulette;
                         var onclick = 'onclick="joinGame(' + selectTable['id'] + ',' + selectTable['lobbyId'] + ')"';
-                        tableRoulette.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/6" + "</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + ' >Join</button></td>')
+                        tableRoulette.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/"+selectTable['capacity']+"</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + ' >Join</button></td>')
                         contRoulette++;
                     }
                     if (lobby === "holdEm") {
                         cont = contHoldEm;
                         var onclick = 'onclick="joinGame(' + selectTable['id'] + ',' + selectTable['lobbyId'] + ')"';
-                        tableHoldEm.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/6" + "</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Join</button></td>')
+                        tableHoldEm.append('<tr><td scope="row">' + cont + "</td><td>" + selectTable['name'] + "</td><td>" + lobby + "</td><td>/"+selectTable['capacity']+"</td><td>" + "$" + selectTable['stakes'] + " USD" + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Join</button></td>')
                         contHoldEm++;
                     }
 
