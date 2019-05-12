@@ -33,20 +33,20 @@ import java.util.Set;
 public class Pot {
 
     /** Bet for this pot. */
-    private int bet;
+    private double bet;
 
     /** Contributing players to this pot. */
-    public final Set<Player> contributors;
+    public final Set<TexasHoldemPlayer> contributors;
 
     /**
      * Constructor.
      * 
-     * @param bet
+     * @param d
      *            The bet for this pot.
      */
-    public Pot(int bet) {
-        this.bet = bet;
-        contributors = new HashSet<Player>();
+    public Pot(double d) {
+        this.bet = d;
+        contributors = new HashSet<TexasHoldemPlayer>();
     }
 
     /**
@@ -54,7 +54,7 @@ public class Pot {
      * 
      * @return The bet.
      */
-    public int getBet() {
+    public double getBet() {
         return bet;
     }
     
@@ -63,7 +63,7 @@ public class Pot {
      * 
      * @return The conributing players.
      */
-    public Set<Player> getContributors() {
+    public Set<TexasHoldemPlayer> getContributors() {
         return Collections.unmodifiableSet(contributors);
     }
 
@@ -73,7 +73,7 @@ public class Pot {
      * @param player
      *            The player.
      */
-    public void addContributer(Player player) {
+    public void addContributer(TexasHoldemPlayer player) {
         contributors.add(player);
     }
 
@@ -85,7 +85,7 @@ public class Pot {
      * 
      * @return True if the player has contributed, otherwise false.
      */
-    public boolean hasContributer(Player player) {
+    public boolean hasContributer(TexasHoldemPlayer player) {
         return contributors.contains(player);
     }
 
@@ -94,7 +94,7 @@ public class Pot {
      * 
      * @return The total value.
      */
-    public int getValue() {
+    public double getValue() {
         return bet * contributors.size();
     }
 
@@ -104,17 +104,17 @@ public class Pot {
      * 
      * @param player
      *            The player with the partial call, bet or raise.
-     * @param partialBet
+     * @param betIncrement
      *            The amount of the partial bet.
      * 
      * @return The other pot, with the remainder.
      */
-    public Pot split(Player player, int partialBet) {
-        Pot pot = new Pot(bet - partialBet);
-        for (Player contributer : contributors) {
+    public Pot split(TexasHoldemPlayer player, double betIncrement) {
+        Pot pot = new Pot(bet - betIncrement);
+        for (TexasHoldemPlayer contributer : contributors) {
             pot.addContributer(contributer);
         }
-        bet = partialBet;
+        bet = betIncrement;
         contributors.add(player);
         return pot;
     }
@@ -134,13 +134,13 @@ public class Pot {
         sb.append(String.valueOf(bet));
         sb.append(": {");
         boolean isFirst = true;
-        for (Player contributer : contributors) {
+        for (TexasHoldemPlayer contributer : contributors) {
             if (isFirst) {
                 isFirst = false;
             } else {
                 sb.append(", ");
             }
-            sb.append(contributer.getName());
+            sb.append(contributer.getUsername());
         }
         sb.append('}');
         sb.append(" (Total: ");

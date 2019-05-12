@@ -39,7 +39,7 @@ public enum TableType {
      * Constructor.
      * 
      * @param name
-     *            The display name.
+     * The display name.
      */
     TableType(String name) {
         this.name = name;
