@@ -36,7 +36,7 @@ public class Pot {
     private double bet;
 
     /** Contributing players to this pot. */
-    public final Set<TexasHoldemPlayer> contributors;
+    public final Set<HoldemPlayer> contributors;
 
     /**
      * Constructor.
@@ -46,7 +46,7 @@ public class Pot {
      */
     public Pot(double d) {
         this.bet = d;
-        contributors = new HashSet<TexasHoldemPlayer>();
+        contributors = new HashSet<HoldemPlayer>();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Pot {
      * 
      * @return The conributing players.
      */
-    public Set<TexasHoldemPlayer> getContributors() {
+    public Set<HoldemPlayer> getContributors() {
         return Collections.unmodifiableSet(contributors);
     }
 
@@ -73,7 +73,7 @@ public class Pot {
      * @param player
      *            The player.
      */
-    public void addContributer(TexasHoldemPlayer player) {
+    public void addContributer(HoldemPlayer player) {
         contributors.add(player);
     }
 
@@ -85,7 +85,7 @@ public class Pot {
      * 
      * @return True if the player has contributed, otherwise false.
      */
-    public boolean hasContributer(TexasHoldemPlayer player) {
+    public boolean hasContributer(HoldemPlayer player) {
         return contributors.contains(player);
     }
 
@@ -109,9 +109,9 @@ public class Pot {
      * 
      * @return The other pot, with the remainder.
      */
-    public Pot split(TexasHoldemPlayer player, double betIncrement) {
+    public Pot split(HoldemPlayer player, double betIncrement) {
         Pot pot = new Pot(bet - betIncrement);
-        for (TexasHoldemPlayer contributer : contributors) {
+        for (HoldemPlayer contributer : contributors) {
             pot.addContributer(contributer);
         }
         bet = betIncrement;
@@ -134,7 +134,7 @@ public class Pot {
         sb.append(String.valueOf(bet));
         sb.append(": {");
         boolean isFirst = true;
-        for (TexasHoldemPlayer contributer : contributors) {
+        for (HoldemPlayer contributer : contributors) {
             if (isFirst) {
                 isFirst = false;
             } else {

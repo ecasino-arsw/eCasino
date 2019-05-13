@@ -1,3 +1,20 @@
+// This file is part of the 'texasholdem' project, an open source
+// Texas Hold'em poker application written in Java.
+//
+// Copyright 2009 Oscar Stigter
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package edu.eci.arsw.ecasino.model.game.texasholdem;
 
 import java.util.ArrayList;
@@ -12,49 +29,49 @@ import edu.eci.arsw.ecasino.model.game.texasholdem.actions.Action;
 import edu.eci.arsw.ecasino.model.game.texasholdem.actions.BetAction;
 import edu.eci.arsw.ecasino.model.game.texasholdem.actions.RaiseAction;
 
-public class TexasHoldem {
+public class Holdem {
 
     private static final int MAX_RAISES = 3;
     private static final boolean ALWAYS_CALL_SHOWDOWN = false;
     private final TableType tableType;
     private final int bigBlind;
-    private final List<TexasHoldemPlayer> players;
-    private final List<TexasHoldemPlayer> activePlayers;
+    private final List<HoldemPlayer> players;
+    private final List<HoldemPlayer> activePlayers;
     private final Deck deck;
     private final List<Card> board;
     private int dealerPosition;
-    private TexasHoldemPlayer dealer;
+    private HoldemPlayer dealer;
     private int actorPosition;
-    private TexasHoldemPlayer actor;
+    private HoldemPlayer actor;
     private double minBet;
     private double bet;
     private final List<Pot> pots;
-    private TexasHoldemPlayer lastBettor;
+    private HoldemPlayer lastBettor;
     private double raises;
 
-    public TexasHoldem(TableType type, int bigBlind) {
+    public Holdem(TableType type, int bigBlind) {
         this.tableType = type;
         this.bigBlind = bigBlind;
-        players = new ArrayList<TexasHoldemPlayer>();
-        activePlayers = new ArrayList<TexasHoldemPlayer>();
+        players = new ArrayList<HoldemPlayer>();
+        activePlayers = new ArrayList<HoldemPlayer>();
         deck = new Deck();
         board = new ArrayList<Card>();
         pots = new ArrayList<Pot>();
     }
 
-    public void addPlayer(TexasHoldemPlayer player) {
+    public void addPlayer(HoldemPlayer player) {
         players.add(player);
     }
 
     public void run() {
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.getClient().joinedTable(tableType, bigBlind, players);
         }
         dealerPosition = -1;
         actorPosition = -1;
         while (true) {
             int noOfActivePlayers = 0;
-            for (TexasHoldemPlayer player : players) {
+            for (HoldemPlayer player : players) {
                 if (player.getMoney() >= bigBlind) {
                     noOfActivePlayers++;
                 }
@@ -71,7 +88,7 @@ public class TexasHoldem {
         pots.clear();
         bet = 0;
         notifyBoardUpdated();
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.resetHand();
         }
         notifyPlayersUpdated(false);
@@ -143,7 +160,7 @@ public class TexasHoldem {
         
         // Determine the active players.
         activePlayers.clear();
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.resetHand();
             // Player must be able to afford at least the big blind.
             if (player.getMoney() >= bigBlind) {
@@ -167,7 +184,7 @@ public class TexasHoldem {
         bet = minBet;
         
         // Notify all clients a new hand has started.
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.getClient().handStarted(dealer);
         }
         notifyPlayersUpdated(false);
@@ -177,7 +194,7 @@ public class TexasHoldem {
     private void rotateActor() {
         actorPosition = (actorPosition + 1) % activePlayers.size();
         actor = activePlayers.get(actorPosition);
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.getClient().actorRotated(actor);
         }
     }
@@ -198,7 +215,7 @@ public class TexasHoldem {
     }
 
     private void dealHoleCards() {
-        for (TexasHoldemPlayer player : activePlayers) {
+        for (HoldemPlayer player : activePlayers) {
             player.setCards(deck.deal(2));
         }
         System.out.println();
@@ -317,7 +334,7 @@ public class TexasHoldem {
                         // Only one player left, so he wins the entire pot.
                         notifyBoardUpdated();
                         notifyPlayerActed();
-                        TexasHoldemPlayer winner = activePlayers.get(0);
+                        HoldemPlayer winner = activePlayers.get(0);
                         int amount = getTotalPot();
                         winner.win(amount);
                         notifyBoardUpdated();
@@ -337,14 +354,14 @@ public class TexasHoldem {
         }
         
         // Reset player's bets.
-        for (TexasHoldemPlayer player : activePlayers) {
+        for (HoldemPlayer player : activePlayers) {
             player.resetBet();
         }
         notifyBoardUpdated();
         notifyPlayersUpdated(false);
     }
 
-    private Set<Action> getAllowedActions(TexasHoldemPlayer player) {
+    private Set<Action> getAllowedActions(HoldemPlayer player) {
         Set<Action> actions = new HashSet<Action>();
         if (player.isAllIn()) {
             actions.add(Action.CHECK);
@@ -406,9 +423,9 @@ public class TexasHoldem {
 //        System.out.format("[DEBUG]  Total: %d\n", getTotalPot());
         
         // Determine show order; start with all-in players...
-        List<TexasHoldemPlayer> showingPlayers = new ArrayList<TexasHoldemPlayer>();
+        List<HoldemPlayer> showingPlayers = new ArrayList<HoldemPlayer>();
         for (Pot pot : pots) {
-            for (TexasHoldemPlayer contributor : pot.getContributors()) {
+            for (HoldemPlayer contributor : pot.getContributors()) {
                 if (!showingPlayers.contains(contributor) && contributor.isAllIn()) {
                     showingPlayers.add(contributor);
                 }
@@ -423,7 +440,7 @@ public class TexasHoldem {
         //...and finally the remaining players, starting left of the button.
         int pos = (dealerPosition + 1) % activePlayers.size();
         while (showingPlayers.size() < activePlayers.size()) {
-            TexasHoldemPlayer player = activePlayers.get(pos);
+            HoldemPlayer player = activePlayers.get(pos);
             if (!showingPlayers.contains(player)) {
                 showingPlayers.add(player);
             }
@@ -433,7 +450,7 @@ public class TexasHoldem {
         // Players automatically show or fold in order.
         boolean firstToShow = true;
         int bestHandValue = -1;
-        for (TexasHoldemPlayer playerToShow : showingPlayers) {
+        for (HoldemPlayer playerToShow : showingPlayers) {
             Hand hand = new Hand(board);
             hand.addCards(playerToShow.getCards());
             HandValue handValue = new HandValue(hand);
@@ -458,7 +475,7 @@ public class TexasHoldem {
             }
             if (doShow) {
                 // Show hand.
-                for (TexasHoldemPlayer player : players) {
+                for (HoldemPlayer player : players) {
                     player.getClient().playerUpdated(playerToShow);
                 }
                 notifyMessage("%s has %s.", playerToShow, handValue.getDescription());
@@ -466,7 +483,7 @@ public class TexasHoldem {
                 // Fold.
                 playerToShow.setCards(null);
                 activePlayers.remove(playerToShow);
-                for (TexasHoldemPlayer player : players) {
+                for (HoldemPlayer player : players) {
                     if (player.equals(playerToShow)) {
                         player.getClient().playerUpdated(playerToShow);
                     } else {
@@ -479,17 +496,17 @@ public class TexasHoldem {
         }
         
         // Sort players by hand value (highest to lowest).
-        Map<HandValue, List<TexasHoldemPlayer>> rankedPlayers = new TreeMap<HandValue, List<TexasHoldemPlayer>>();
-        for (TexasHoldemPlayer player : activePlayers) {
+        Map<HandValue, List<HoldemPlayer>> rankedPlayers = new TreeMap<HandValue, List<HoldemPlayer>>();
+        for (HoldemPlayer player : activePlayers) {
             // Create a hand with the community cards and the player's hole cards.
             Hand hand = new Hand(board);
             hand.addCards(player.getCards());
             // Store the player together with other players with the same hand value.
             HandValue handValue = new HandValue(hand);
 //            System.out.format("[DEBUG] %s: %s\n", player, handValue);
-            List<TexasHoldemPlayer> playerList = rankedPlayers.get(handValue);
+            List<HoldemPlayer> playerList = rankedPlayers.get(handValue);
             if (playerList == null) {
-                playerList = new ArrayList<TexasHoldemPlayer>();
+                playerList = new ArrayList<HoldemPlayer>();
             }
             playerList.add(player);
             rankedPlayers.put(handValue, playerList);
@@ -497,13 +514,13 @@ public class TexasHoldem {
 
         // Per rank (single or multiple winners), calculate pot distribution.
         int totalPot = getTotalPot();
-        Map<TexasHoldemPlayer, Double> potDivision = new HashMap<TexasHoldemPlayer, Double>();
+        Map<HoldemPlayer, Double> potDivision = new HashMap<HoldemPlayer, Double>();
         for (HandValue handValue : rankedPlayers.keySet()) {
-            List<TexasHoldemPlayer> winners = rankedPlayers.get(handValue);
+            List<HoldemPlayer> winners = rankedPlayers.get(handValue);
             for (Pot pot : pots) {
                 // Determine how many winners share this pot.
                 int noOfWinnersInPot = 0;
-                for (TexasHoldemPlayer winner : winners) {
+                for (HoldemPlayer winner : winners) {
                     if (pot.hasContributer(winner)) {
                         noOfWinnersInPot++;
                     }
@@ -511,7 +528,7 @@ public class TexasHoldem {
                 if (noOfWinnersInPot > 0) {
                     // Divide pot over winners.
                     double potShare = pot.getValue() / noOfWinnersInPot;
-                    for (TexasHoldemPlayer winner : winners) {
+                    for (HoldemPlayer winner : winners) {
                         if (pot.hasContributer(winner)) {
                             Double oldShare = potDivision.get(winner);
                             if (oldShare != null) {
@@ -529,7 +546,7 @@ public class TexasHoldem {
                         pos = dealerPosition;
                         while (oddChips > 0) {
                             pos = (pos + 1) % activePlayers.size();
-                            TexasHoldemPlayer winner = activePlayers.get(pos);
+                            HoldemPlayer winner = activePlayers.get(pos);
                             Double oldShare = potDivision.get(winner);
                             if (oldShare != null) {
                                 potDivision.put(winner, oldShare + 1);
@@ -547,7 +564,7 @@ public class TexasHoldem {
         // Divide winnings.
         StringBuilder winnerText = new StringBuilder();
         int totalWon = 0;
-        for (TexasHoldemPlayer winner : potDivision.keySet()) {
+        for (HoldemPlayer winner : potDivision.keySet()) {
             Double potShare = potDivision.get(winner);
             winner.win(potShare);
             totalWon += potShare;
@@ -568,14 +585,14 @@ public class TexasHoldem {
 
     private void notifyMessage(String message, Object... args) {
         message = String.format(message, args);
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.getClient().messageReceived(message);
         }
     }
 
     private void notifyBoardUpdated() {
         int pot = getTotalPot();
-        for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer player : players) {
             player.getClient().boardUpdated(board, bet, pot);
         }
     }
@@ -589,8 +606,8 @@ public class TexasHoldem {
     }
 
     private void notifyPlayersUpdated(boolean showdown) {
-        for (TexasHoldemPlayer playerToNotify : players) {
-            for (TexasHoldemPlayer player : players) {
+        for (HoldemPlayer playerToNotify : players) {
+            for (HoldemPlayer player : players) {
                 if (!showdown && !player.equals(playerToNotify)) {
                     // Hide secret information to other players.
                     player = player.publicClone();
@@ -601,8 +618,8 @@ public class TexasHoldem {
     }
 
     private void notifyPlayerActed() {
-        for (TexasHoldemPlayer p : players) {
-            TexasHoldemPlayer playerInfo = p.equals(actor) ? actor : actor.publicClone();
+        for (HoldemPlayer p : players) {
+            HoldemPlayer playerInfo = p.equals(actor) ? actor : actor.publicClone();
             p.getClient().playerActed(playerInfo);
         }
     }

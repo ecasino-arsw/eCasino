@@ -26,15 +26,15 @@ import edu.eci.arsw.ecasino.model.game.texasholdem.actions.Action;
  * A Texas Hold'em player. <br />
  * <br />
  * 
- * The player's actions are delegated to a {@link Client}, which can be either
+ * The player's actions are delegated to a {@link HoldemResponse}, which can be either
  * human-controlled or AI-controlled (bot).
  * 
  * @author Oscar Stigter
  */
-public class TexasHoldemPlayer extends Player {
+public class HoldemPlayer extends Player {
 
     /** Client application responsible for the actual behavior. */
-    private final Client client;
+    private final HoldemResponse client;
 
     /** Hand of cards. */
     private final Hand hand;
@@ -58,7 +58,7 @@ public class TexasHoldemPlayer extends Player {
      * @param client
      *            The client application.
      */
-    public TexasHoldemPlayer(String name, double money, Client client) {
+    public HoldemPlayer(String name, double money, HoldemResponse client) {
         this.username = name;
         this.money = money;
         this.client = client;
@@ -73,7 +73,7 @@ public class TexasHoldemPlayer extends Player {
      * 
      * @return The client.
      */
-    public Client getClient() {
+    public HoldemResponse getClient() {
         return client;
     }
 
@@ -227,8 +227,8 @@ public class TexasHoldemPlayer extends Player {
      * 
      * @return The cloned player.
      */
-    public TexasHoldemPlayer publicClone() {
-        TexasHoldemPlayer clone = new TexasHoldemPlayer(username, money, null);
+    public HoldemPlayer publicClone() {
+        HoldemPlayer clone = new HoldemPlayer(username, money, null);
         clone.hasCards = hasCards;
         clone.bet = bet;
         clone.action = action;
