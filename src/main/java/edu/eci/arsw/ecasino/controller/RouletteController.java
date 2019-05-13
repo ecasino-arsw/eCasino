@@ -54,16 +54,16 @@ public class RouletteController {
         if (!current.isActive()) {
             TimerTask timeTurn = new TimerTask() {
                 int cont = 0;
-                current.turnRoulette();
                 @Override
                 public void run() {
                     if (cont<=20) {
-                        System.out.println("falta: " + cont);
+                        //System.out.println("falta: " + cont);
                         msgt.convertAndSend("/topic/newgame" + channel,new RouletteResponse(cont));
                         current.setTimeRulette(cont);
                         cont+=1;
+                        if(cont==1){current.turnRoulette();}
                     }else{
-                        current.turnRoulette();
+                        
                         cont=0;
                     }if(!current.verifyPlayersActives()){
                         System.out.println("sin jugadores");
