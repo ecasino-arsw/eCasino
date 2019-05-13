@@ -164,14 +164,13 @@ public class Roulette implements IGame {
         return false;
     }
 
-    public int turnRoulette() {
+    public void turnRoulette() {
         int winner;
 
         ArrayList<Integer> list = getListNumbersRoulette();
         winner = list.get(rand.nextInt(37));
         setNumberWin(winner);
         addNumbersOldInList(winner);
-        return winner;
     }
 
 }
