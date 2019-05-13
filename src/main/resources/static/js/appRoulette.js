@@ -45,35 +45,44 @@ function connectGame(event) {
     event.preventDefault();
 }
 
+function timeRoulette() {
+
+    if (isConnect) {
+        stompClient.send("/app/newgame" + channel + '/time', {}, null);
+
+    }
+
+}
 
 
 function disconnectGame() {
-    if (stompClient !== null) {
-        stompClient.disconnect();
-    }
-    setConnectedGame(false);
-    console.log("Disconnected");
+     stompClient.send("/app/newgame/"+channel+"/disconnect",
+            {},
+            JSON.stringify({sender: username})
+            )
 }
 
 function play() {
-    if (isConnect) {
-        if(localStorage.getItem('listNumbers')===null || localStorage.getItem('listNumbers')===undefined){
+    console.log(timeTurn);
+    if (timeTurn === 1) {
+        if (localStorage.getItem('listNumbers') === null || localStorage.getItem('listNumbers') === undefined) {
             var lisNumbers = "null";
-            var lisTimes =  "null";
-        }else{
+            var lisTimes = times;
+        } else {
             var lisNumbers = localStorage.getItem('listNumbers');
             var lisTimes = localStorage.getItem('listTimes');
-        };
-        
+        }
+        ;
+
         var moneyU = localStorage.getItem('currentBalance');
-        
+
         console.log(lisNumbers);
         console.log(lisTimes);
         var data = JSON.stringify({'username': username, 'channel': channel, 'selectNumbers': lisNumbers, 'timesNumbers': lisTimes, 'money': moneyU});
         stompClient.send("/app/newgame" + channel + '/content', {}, data);
         var height = document.getElementById('listaPastGames').scrollHeight;
         $("#listaPastGames").scrollTop(height);
-
+        
     } else {
         alert("first connect.");
     }
@@ -82,8 +91,26 @@ function play() {
 
 function showGreeting(message) {
     console.log(message);
-    if (message[2]===null) {
-        alertify.success("<b>"+message[4]+'</b> has connected');
+    var trans = 20 - message[8];
+    if (message[9] === 2) {
+        if (trans === 0) {
+            alertify.success("Your time is over, number already fell.");
+            play();
+        } else if (trans < 10) {
+            alertify.success("you have <b>" + trans + "</b> seconds to place your bet");
+
+
+        }
+        timeTurn = trans;
+
+    } else if (message[9] === 1) {
+        alertify.success("<b>" + message[4] + '</b> has connected');
+        alertify.success("You have <b>" + trans + "</b> seconds to bet");
+
+        timeRoulette();
+        //play();
+
+
     } else {
         var numberWinner = message[0];
         var color = message[2];
@@ -113,9 +140,10 @@ function showGreeting(message) {
                 "</tr>";
         $("#userinfo").append(content);
     }
+    //alertify.success("you have <b>"+message[8]+"</b> seconds to place your bet");
+    //timeTurn = message[8]
 
-
-
+    //window.setTimeout("timeRoulette()", timeTurn);
 
 
 }

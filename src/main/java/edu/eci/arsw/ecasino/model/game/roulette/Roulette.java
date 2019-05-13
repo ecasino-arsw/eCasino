@@ -9,14 +9,15 @@ import java.util.Random;
 public class Roulette implements IGame {
 
     private long tableId;
-    private long lobbyId;
     private Random rand = new Random();
     private int numberWin;
     private int timeRulette;
     private ArrayList<Integer> listNumbersRoulette;
     private ArrayList<Player> listPlayers;
+    private int numPlayers;
     private String listNumbersOld;
     private String dozen;
+    private boolean active; 
 
     protected Roulette() {
         this.listNumbersRoulette = generateNumbersRoulette();
@@ -28,21 +29,32 @@ public class Roulette implements IGame {
 	 * this.tableId = lobbyId; this.listNumbersRoulette = generateNumbersRoulette();
 	 * }
      */
+    
+    public Roulette(long tableId, Player player){
+        this.listNumbersRoulette = generateNumbersRoulette();
+        this.tableId = tableId;
+        this.listPlayers = new ArrayList<Player>();
+        this.active = false;
+        addPlayerInList(player);
+        
+        
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
+    
+    
     public long getTableId() {
         return tableId;
     }
 
-    public void setTableId(long tableId) {
-        this.tableId = tableId;
-    }
-
-    public long getLobbyId() {
-        return lobbyId;
-    }
-
-    public void setLobbyId(long lobbyId) {
-        this.lobbyId = lobbyId;
-    }
+   
 
     public ArrayList<Player> getListPlayers() {
         return listPlayers;
@@ -52,14 +64,25 @@ public class Roulette implements IGame {
         this.listPlayers = listPlayers;
     }
 
-    public void setPlayerInList(Player player) {
-        System.out.println("user: "+ player.getFullName());
+    public void addPlayerInList(Player player) {
         ArrayList<Player> nuevo= listPlayers;
-        System.out.println("lista"+nuevo);
         nuevo.add(player);
-        System.out.println("anadido.."+nuevo.get(0).getEmail());
         this.listPlayers = nuevo;
     }
+    
+    public boolean verifyPlayersActives(){
+        if(listPlayers.size()==0){
+            this.active = false;
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public int getNumPlayers() {
+        numPlayers = getListPlayers().size();
+        return numPlayers;
+    }    
 
     public void deletePlayer(Player player) {
         this.listPlayers.remove(player);

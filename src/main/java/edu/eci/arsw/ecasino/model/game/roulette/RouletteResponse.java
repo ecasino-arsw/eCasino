@@ -7,6 +7,7 @@ import java.util.List;
 
 public class RouletteResponse {
 
+    int type;
     int winningNumber;
     String numbersOld;
     String winningColor;
@@ -16,29 +17,43 @@ public class RouletteResponse {
     String playerWin;
     float moneyEarn;
     String player;
+    int timeTurn;
+    int timeElapsed;
 
     public RouletteResponse() {
     }
 
     public ArrayList<Object> getContent() {
-        this.content = new ArrayList<>(Arrays.asList(winningNumber, winningNumber, winningColor, winningDozen, username, playerWin, moneyEarn, player));
+        this.content = new ArrayList<>(Arrays.asList(winningNumber, winningNumber, winningColor, winningDozen, username, playerWin, moneyEarn, player, timeElapsed, type));
         return content;
     }
 
     public RouletteResponse(int winner, String dozen, String numbersOld, List<String> numbersPlayer, List<String> timesSelect, String player) {
+        this.type = 3;
         this.winningNumber = winner;
         this.numbersOld = numbersOld;
         this.winningDozen = dozen;
         this.player = player;
+        
         getPlayerWinner(numbersPlayer);
         calculateEarn(timesSelect);
         setWinningDozen();
         setWinningColor();
+        turnTimeRoulette();
     }
 
-    public RouletteResponse(String username) {
+    public RouletteResponse(String username, int timeElapsed) {
+        this.type = 1;
         this.username = username;
+        this.timeElapsed = timeElapsed;
+        turnTimeRoulette();
     }
+    public RouletteResponse(int timeElapsed) {
+        this.type = 2;
+        this.timeElapsed = timeElapsed;
+    }
+    
+   
 
     public int getWinningNumber() {
         return winningNumber;
@@ -98,9 +113,8 @@ public class RouletteResponse {
 
     private void calculateEarn(List<String> timesSelect) {
         int cant= Integer.parseInt(timesSelect.get(winningNumber));
-        System.out.println("cantida>" + cant);
         if (cant > 0) {
-            this.moneyEarn = cant * 100;
+            this.moneyEarn = cant * 100 * 36;
         } else{
             //calcular fichas jugadas
             int fichas=0;
@@ -116,5 +130,9 @@ public class RouletteResponse {
         if (playerWin == "lose") {
             this.moneyEarn *= -1;
         }
+    }
+
+    private void turnTimeRoulette() {
+        this.timeTurn = 27000;
     }
 }

@@ -98,6 +98,7 @@ function onMessageReceived(payload) {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
         alertify.error("<b>"+ message.sender+'</b> has disconnected');
+        disconnectGame();
         localStorage.setItem('connect', 'false');
         
         
