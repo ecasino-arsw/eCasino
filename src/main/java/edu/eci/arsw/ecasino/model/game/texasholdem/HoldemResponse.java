@@ -31,84 +31,86 @@ import edu.eci.arsw.ecasino.model.game.texasholdem.actions.Action;
  * 
  * @author Oscar Stigter
  */
-public interface Client {
+public class HoldemResponse {
     
     /**
      * Handles a game message.
      * 
-     * @param message
-     *            The message.
+     * @param message The message.
      */
-    void messageReceived(String message);
+    public void messageReceived(String message) {
+    	
+    };
 
     /**
      * Handles the player joining a table.
      * 
-     * @param type
-     *            The table type (betting structure).
-     * @param bigBlind
-     *            The table's big blind.
-     * @param players
-     *            The players at the table (including this player).
+     * @param type The table type (betting structure).
+     * @param bigBlind The table's big blind.
+     * @param players The players at the table (including this player).
      */
-    void joinedTable(TableType type, int bigBlind, List<TexasHoldemPlayer> players);
+    void joinedTable(TableType type, int bigBlind, List<HoldemPlayer> players) {
+    	
+    };
     
     /**
      * Handles the start of a new hand.
      * 
-     * @param dealer
-     *            The dealer.
+     * @param dealer The dealer.
      */
-    void handStarted(TexasHoldemPlayer dealer);
+    void handStarted(HoldemPlayer dealer) {
+    	
+    };
     
     /**
      * Handles the rotation of the actor (the player who's turn it is).
      * 
-     * @param actor
-     *            The new actor.
+     * @param actor The new actor.
      */
-    void actorRotated(TexasHoldemPlayer actor);
+    void actorRotated(HoldemPlayer actor) {
+    
+    };
     
     /**
      * Handles an update of this player.
      * 
-     * @param player
-     *            The player.
+     * @param player The player.
      */
-    void playerUpdated(TexasHoldemPlayer player);
+    void playerUpdated(HoldemPlayer player) {
+    	
+    };
     
     /**
      * Handles an update of the board.
      * 
-     * @param cards
-     *            The community cards.
-     * @param bet
-     *            The current bet.
-     * @param pot
-     *            The current pot.
+     * @param cards The community cards.
+     * @param bet The current bet.
+     * @param pot The current pot.
      */
-    void boardUpdated(List<Card> cards, double bet, double pot);
+   void boardUpdated(List<Card> cards, double bet, double pot) {
+	   
+   };
     
     /**
      * Handles the event of a player acting.
      * 
-     * @param player
-     *            The player that has acted.
+     * @param player The player that has acted.
      */
-    void playerActed(TexasHoldemPlayer player);
+    void playerActed(HoldemPlayer player) {
+    	
+    };
 
     /**
      * Requests this player to act, selecting one of the allowed actions.
      * 
-     * @param minBet
-     *            The minimum bet.
-     * @param bet
-     *            The current bet.
-     * @param allowedActions
-     *            The allowed actions.
+     * @param minBet The minimum bet.
+     * @param bet The current bet.
+     * @param allowedActions The allowed actions.
      * 
      * @return The selected action.
      */
-    Action act(double minBet, double bet, Set<Action> allowedActions);
+    Action act(double minBet, double bet, Set<Action> allowedActions) {
+		return null;
+    };
 
 }
