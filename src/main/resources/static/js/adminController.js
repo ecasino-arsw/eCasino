@@ -139,10 +139,15 @@ function deleteUser(id) {
 }
 
 function deleteTable(id, lobbyId) {
-    alert(id);
+    alert(id+"lobby"+lobbyId);
     axios.delete('/lobbies/' + lobbyId + '/tables/' + id)
             .then(function (response) {
+                console(response);
                 var text = ["Success", "Table Delete"];
+                callAlert(text);
+            })
+            .catch(function (error) {
+                var text = ["Error", "users could not be loaded by: "+error]
                 callAlert(text);
             })
 

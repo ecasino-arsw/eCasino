@@ -9,6 +9,13 @@ var times = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 var coin = 1;
 var playGame = false;
 
+var reload = function () {
+    listNumbers = [];
+    times = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    
+    playGame = false;
+    loadGame();
+}
 function loadGame() {
     document.getElementById("moneyG").innerHTML = localStorage.getItem('currentBalance');
     document.getElementById("tableIdG").innerHTML = localStorage.getItem('currentTable');
@@ -59,13 +66,13 @@ function loadTableroRoulette() {
             color = 'btn btn';
         }
         if (cont === 1) {
-            fila1 += "<td  ><button id='number"+i+"' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
+            fila1 += "<td  ><button id='number" + i + "' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
             cont += 1;
         } else if (cont === 2) {
-            fila2 += "<td ><button id='number"+i+"' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
+            fila2 += "<td ><button id='number" + i + "' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
             cont += 1;
         } else {
-            fila3 += "<td ><button id='number"+i+"' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
+            fila3 += "<td ><button id='number" + i + "' style='border:1px solid black;' class='" + color + "' onclick='numberSelect(" + i + ")'>" + i + " <span class='badge'>" + times[i] + "</span> </button></td>";
             cont = 1;
         }
     }
@@ -93,9 +100,9 @@ function numberSelect(number) {
             times[number] += coin;
         }
     }
-    localStorage.setItem('listNumbers', listNumbers) 
-    localStorage.setItem('listTimes', times) 
-    
+    localStorage.setItem('listNumbers', listNumbers)
+    localStorage.setItem('listTimes', times)
+
     loadTablero();
 }
 
