@@ -97,6 +97,7 @@ function onMessageReceived(payload) {
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
+        alertify.error("<b>"+ message.sender+'</b> has disconnected');
         localStorage.setItem('connect', 'false');
         
         

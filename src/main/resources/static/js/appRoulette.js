@@ -38,6 +38,8 @@ function connectGame(event) {
         stompClient.subscribe('/topic/newgame' + channel, function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
+        var user = JSON.stringify({'username': username})
+        stompClient.send("/app/newgame" + channel + '/user', {}, user);
     });
     isConnect = true;
     event.preventDefault();
@@ -55,15 +57,23 @@ function disconnectGame() {
 
 function play() {
     if (isConnect) {
-        var lisNumbers = localStorage.getItem('listNumbers');
-        var lisTimes = localStorage.getItem('listTimes');
+        if(localStorage.getItem('listNumbers')===null || localStorage.getItem('listNumbers')===undefined){
+            var lisNumbers = "null";
+            var lisTimes =  "null";
+        }else{
+            var lisNumbers = localStorage.getItem('listNumbers');
+            var lisTimes = localStorage.getItem('listTimes');
+        };
+        
+        var moneyU = localStorage.getItem('currentBalance');
+        
         console.log(lisNumbers);
-        console.log(lisNumbers);
-        var content = [JSON.stringify({'username': username}), JSON.stringify({'tableId': channel}), JSON.stringify({'numbers': listNumbers}), JSON.stringify({'times': times})];
-        stompClient.send("/app/newgame" + channel, {}, content);
-        //stompClient.send("/app/newgame" + channel, {}, JSON.stringify({'name': username}));
+        console.log(lisTimes);
+        var data = JSON.stringify({'username': username, 'channel': channel, 'selectNumbers': lisNumbers, 'timesNumbers': lisTimes, 'money': moneyU});
+        stompClient.send("/app/newgame" + channel + '/content', {}, data);
         var height = document.getElementById('listaPastGames').scrollHeight;
         $("#listaPastGames").scrollTop(height);
+
     } else {
         alert("first connect.");
     }
@@ -71,29 +81,41 @@ function play() {
 }
 
 function showGreeting(message) {
-    var numberWinner = message[0];
-    var color = message[2];
-    var dozen = message[3];
-    var opt = message[3];
-    var money = message[3];
-    var d = new Date();
-    var h = addZero(d.getHours());
-    var m = addZero(d.getMinutes());
-    var s = addZero(d.getSeconds());
-    if (numberWinner === 37) {
-        numberWinner = "00";
+    console.log(message);
+    if (message[2]===null) {
+        alertify.success("<b>"+message[4]+'</b> has connected');
+    } else {
+        var numberWinner = message[0];
+        var color = message[2];
+        var dozen = message[3];
+        var opt = message[5];
+        var money = message[6];
+        var user = message[7];
+        var d = new Date();
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var s = addZero(d.getSeconds());
+        if (numberWinner === 37) {
+            numberWinner = "00";
+        }
+        ;
+
+        clearTablero();
+        document.getElementById('number' + message[0]).innerHTML = "<button style='border:1px solid black;' class='btn btn-info'><b>" + numberWinner + "</b></button>";
+        var content = "<tr><td>Username: <b>" + user + "</b></td>" +
+                "<td><td>Winner Number: <b>" + numberWinner + "</b></td>" +
+                "<td>Winner Color: <b><font color='" + color + "'>" + color + "</font></b></td>" +
+                "<td>Winner Dozen: <b>" + dozen + "</b></td>" +
+                "<td><b>" + opt + "</b></td>" +
+                "<td>Money: <b>" + money + "</b></td>" +
+                "<td><b>" + h + ":" + m + ":" + s;
+        +"</b></td>" +
+                "</tr>";
+        $("#userinfo").append(content);
     }
-    ;
-    document.getElementById('number' + message[0]).innerHTML = "<button style='border:1px solid black;' class='btn btn-info'><b>" + numberWinner + "</b></button>";
-    var content = "<tr><td>Winner Number: <b>" + numberWinner + "</b></td>" +
-            "<td>Winner Color: <b><font color='" + color + "'>" + color + "</font></b></td>" +
-            "<td>Winner Dozen: <b>" + dozen + "</b></td>" +
-            "<td>You <b>" + opt + "</b></td>" +
-            "<td>Money: <b>" + money + "</b></td>" +
-            "<td><b>" + h + ":" + m + ":" + s;
-    +"</b></td>" +
-            "</tr>";
-    $("#userinfo").append(content);
+
+
+
 
 
 }
@@ -102,6 +124,13 @@ function addZero(i) {
         i = "0" + i;
     }
     return i;
+}
+
+function clearTablero() {
+    //times = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    reload();
+    localStorage.setItem('listNumbers', "null");
+    localStorage.setItem('listTimes', times);
 }
 
 $(function () {
@@ -119,5 +148,7 @@ $(function () {
     });
 });
 
-
+function callAlert(text) {
+    alertify.alert(text[0], text[1]).set('label', 'OK');
+}
 
