@@ -20,23 +20,23 @@ function updateBalance() {
             .then(function (response) {
                 var player = response.data;
 
-                var newBalance = localStorage.getItem('currentBalance');
+                var newBalance = parseFloat(localStorage.getItem('currentBalance'));
 
-                axios.put('/players', {
-                    id: player['id'],
-                    username: player['username'],
-                    password: player['password'],
-                    fullName: player['fullName'],
-                    email: player['email'],
-                    money: newBalance
-                })
-                        .then(function (response) {
-                            loadBalance();
-
-                        })
-                        .catch(function (error) {
-                            alert("Error, not exit player in table");
-                        })
+                /*axios.put('/players', {
+                 id: player['id'],
+                 username: player['username'],
+                 password: player['password'],
+                 fullName: player['fullName'],
+                 email: player['email'],
+                 money: newBalance
+                 })
+                 .then(function (response) {
+                 loadBalance();
+                 
+                 })
+                 .catch(function (error) {
+                 alert("Error, not exit player in table");
+                 })*/
 
 
 
@@ -176,8 +176,8 @@ function showGreeting(message) {
             +"</b></td>" +
                     "</tr>";
             $("#userinfo").append(content);
-            var newBalance = localStorage.getItem('currentBalance')+parseInt(money);
-            localStorage.setItem('currentBalance', newBalance );
+            var newBalance = parseFloat(localStorage.getItem('currentBalance')) + parseFloat(money);
+            localStorage.setItem('currentBalance', newBalance);
             updateBalance();
         } else {
             if (opt === "win") {
