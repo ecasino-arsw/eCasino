@@ -16,12 +16,14 @@ var isConnect = false;
 
 function updateBalance() {
     console.log('entro actualizar balance');
+    console.log('balacnce'+localStorage.getItem('currentBalance'));
+    console.log('usuario'+localStorage.getItem('Actual'));
     axios.get('/players/' + localStorage.getItem('Actual'))
             .then(function (response) {
                 var player = response.data;
 
                 var newBalance = parseFloat(localStorage.getItem('currentBalance'));
-
+                loadGame();
                 /*axios.put('/players', {
                  id: player['id'],
                  username: player['username'],
@@ -177,7 +179,9 @@ function showGreeting(message) {
                     "</tr>";
             $("#userinfo").append(content);
             var newBalance = parseFloat(localStorage.getItem('currentBalance')) + parseFloat(money);
+            console.log(newBalance);
             localStorage.setItem('currentBalance', newBalance);
+            console.log(localStorage.getItem('currentBalance'));
             updateBalance();
         } else {
             if (opt === "win") {
