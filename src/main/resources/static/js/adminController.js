@@ -95,7 +95,7 @@ function loadTables() {
                     var selectTable = tables[i];
                     console.log(selectTable);
                     var onclick = 'onclick="deleteTable(' + selectTable['id'] + ',' + selectTable['lobbyId'] + ')"';
-                    table.append('<tr><td scope="row">' + selectTable['id'] + "</td><td>" + selectTable['lobbyId'] + "</td><td>" + selectTable['name'] + "</td><td>" + "</td><td>" + "$" + selectTable['stakes'] + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Delete</button></td>')
+                    table.append('<tr><td scope="row">' + selectTable['id'] + "</td><td>" + selectTable['lobbyId'] + "</td><td>" + selectTable['name'] + "</td>"+ selectTable['currentPlayers'] +"<td>" + "</td><td>" + "$" + selectTable['stakes'] + '</td><td><button class="btn btn-info" name="button" ' + onclick + '>Delete</button></td>')
 
                 }
 

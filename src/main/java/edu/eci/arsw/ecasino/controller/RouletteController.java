@@ -56,7 +56,7 @@ public class RouletteController {
                 int cont = 0;
                 @Override
                 public void run() {
-                    if (cont<=20) {
+                    if (cont<=29) {
                         //System.out.println("falta: " + cont);
                         msgt.convertAndSend("/topic/newgame" + channel,new RouletteResponse(cont));
                         current.setTimeRulette(cont);

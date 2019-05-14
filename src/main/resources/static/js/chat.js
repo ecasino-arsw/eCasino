@@ -4,18 +4,71 @@
  * and open the template in the editor.
  */
 
-
+var actualizado = false;
 
 function loadConnect() {
-    
+
     connect();
-   
+
 
 }
+function disconnectAll(){
+    if (actualizado) {
+        disconnected()
 
-function exitTable(){
-    disconnected()
-    location.href = "lobby.html";
+        location.href = "lobby.html";
+    }
+}
+
+
+function exitTable() {
+
+
+    if (username === localStorage.getItem('Actual')) {
+        exitPlayerInTable();
+
+    }
+    
+}
+
+function exitPlayerInTable() {
+    
+    axios.get('/lobbies/' + localStorage.getItem('currentLobbyId') + '/tables/' + localStorage.getItem('currentTable'))
+            .then(function (response) {
+                var table = response.data;
+               
+                var currentPlayers = table['currentPlayers'];
+                localStorage.setItem('playersInTable', currentPlayers);
+                var capacity = parseInt(localStorage.getItem('capacityTable'));
+                var players = parseInt(localStorage.getItem('playersInTable'));
+                if (0 < players) {
+                    var players = players - 1;
+
+                    axios.put('/lobbies/' + localStorage.getItem('currentLobbyId') + '/tables', {
+                        id: localStorage.getItem('currentTable'),
+                        lobbyId: localStorage.getItem('currentLobbyId'),
+                        name: localStorage.getItem('currentNameTable'),
+                        stakes: localStorage.getItem('currentStakes'),
+                        capacity: capacity,
+                        currentPlayers: players
+                    })
+                            .then(function (response) {
+                                localStorage.setItem('playersInTable', players);
+                                
+                                actualizado = true;
+                                disconnectAll();
+
+                            })
+                            .catch(function (error) {
+                                alert("Error, not exit player in table");
+                            })
+                }
+
+
+            })
+            .catch(function (error) {
+                alert("Error, not update players in table");
+            })
 
 }
 
@@ -52,19 +105,18 @@ function connect(event) {
 
 }
 function onConnected() {
-    // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public'+channel, onMessageReceived);
+// Subscribe to the Public Topic
+    stompClient.subscribe('/topic/public' + channel, onMessageReceived);
     // Tell your username to the server
-    stompClient.send("/app/chat.addUser"+channel,
+    stompClient.send("/app/chat.addUser" + channel,
             {},
             JSON.stringify({sender: username, type: 'JOIN'})
             )
     connectingElement.classList.add('hidden');
 }
 function disconnected() {
-    
-    // Tell your username to the server
-    stompClient.send("/app/chat.addUser"+channel,
+// Tell your username to the server
+    stompClient.send("/app/chat.addUser" + channel,
             {},
             JSON.stringify({sender: username, type: 'LEAVE'})
             )
@@ -82,7 +134,7 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-        stompClient.send("/topic/public"+channel, {}, JSON.stringify(chatMessage));
+        stompClient.send("/topic/public" + channel, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -93,15 +145,12 @@ function onMessageReceived(payload) {
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
-        
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
-        alertify.error("<b>"+ message.sender+'</b> has disconnected');
-        disconnectGame();
+        alertify.error("<b>" + message.sender + '</b> has disconnected');
+        
         localStorage.setItem('connect', 'false');
-        
-        
     } else {
         messageElement.classList.add('chat-message');
         var avatarElement = document.createElement('i');
@@ -113,6 +162,7 @@ function onMessageReceived(payload) {
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
+        
     }
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.content);

@@ -4,47 +4,13 @@
  * and open the template in the editor.
  */
 
-
-var lisNumbers = "null";
-var lisTimes = times;
-var username = null;
+var moneyU = localStorage.getItem('currentBalance');
 var channel = null;
 var stompClient = null;
-var height = 200;
 var isConnect = false;
 
 
-function updateBalance() {
-    console.log('entro actualizar balance');
-    axios.get('/players/' + localStorage.getItem('Actual'))
-            .then(function (response) {
-                var player = response.data;
 
-                var newBalance = localStorage.getItem('currentBalance');
-
-                axios.put('/players', {
-                    id: player['id'],
-                    username: player['username'],
-                    password: player['password'],
-                    fullName: player['fullName'],
-                    email: player['email'],
-                    money: newBalance
-                })
-                        .then(function (response) {
-                            loadBalance();
-
-                        })
-                        .catch(function (error) {
-                            alert("Error, not exit player in table");
-                        })
-
-
-
-            })
-            .catch(function (error) {
-                alert("Error, not update players in table");
-            })
-}
 
 function setConnectedGame(connected) {
     $("#connectGame").prop("disabled", connected);
@@ -66,11 +32,11 @@ function connectGame(event) {
     stompClient.connect({}, function (frame) {
         setConnectedGame(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/newgame' + channel, function (greeting) {
+        stompClient.subscribe('/topic/gameholdem' + channel, function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
-        var user = JSON.stringify({'username': username})
-        stompClient.send("/app/newgame" + channel + '/user', {}, user);
+        var user = JSON.stringify({'username': username, 'money':moneyU, 'bigBlind':100})
+        stompClient.send("/app/gameholdem" + channel + '/user', {}, user);
     });
     isConnect = true;
     event.preventDefault();
@@ -79,7 +45,7 @@ function connectGame(event) {
 function timeRoulette() {
 
     if (isConnect) {
-        stompClient.send("/app/newgame" + channel + '/time', {}, null);
+        stompClient.send("/app/gameholdem" + channel + '/time', {}, null);
 
     }
 
@@ -87,41 +53,44 @@ function timeRoulette() {
 
 
 function disconnectGame() {
-    stompClient.send("/app/newgame/" + channel + "/disconnect",
+    stompClient.send("/app/gameholdem/" + channel + "/disconnect",
             {},
             JSON.stringify({sender: username})
             )
 }
 
 function play() {
-    console.log(timeTurn);
-    if (timeTurn === 1) {
-        if (localStorage.getItem('listNumbers') === null || localStorage.getItem('listNumbers') === undefined) {
-            lisNumbers = "null";
-            lisTimes = times;
-        } else {
-            lisNumbers = localStorage.getItem('listNumbers');
-            lisTimes = localStorage.getItem('listTimes');
-        }
-        ;
-
-        var moneyU = localStorage.getItem('currentBalance');
-
-        console.log(lisNumbers);
-        console.log(lisTimes);
-        var data = JSON.stringify({'username': username, 'channel': channel, 'selectNumbers': lisNumbers, 'timesNumbers': lisTimes, 'money': moneyU});
-        stompClient.send("/app/newgame" + channel + '/content', {}, data);
-        var height = document.getElementById('listaPastGames').scrollHeight;
-        $("#listaPastGames").scrollTop(height);
-
-    } else {
-        alert("first connect.");
-    }
+    //console.log(timeTurn);
+    
+    stompClient.send("/app/gameholdem" + channel + '/play', {}, null);
+    /*if (timeTurn === 1) {
+     if (localStorage.getItem('listNumbers') === null || localStorage.getItem('listNumbers')=== undefined) {
+     lisNumbers = "null";
+     lisTimes = times;
+     } else {
+     lisNumbers = localStorage.getItem('listNumbers');
+     lisTimes = localStorage.getItem('listTimes');
+     }
+     ;
+     
+     var moneyU = localStorage.getItem('currentBalance');
+     
+     console.log(lisNumbers);
+     console.log(lisTimes);
+     var data = JSON.stringify({'username': username, 'channel': channel, 'selectNumbers': lisNumbers, 'timesNumbers': lisTimes, 'money': moneyU});
+     stompClient.send("/app/gameholdem" + channel + '/content', {}, data);
+     var height = document.getElementById('listaPastGames').scrollHeight;
+     $("#listaPastGames").scrollTop(height);
+     
+     } else {
+     alert("first connect.");
+     }*/
 
 }
 
 function showGreeting(message) {
     console.log(message);
+    console.log(message[7] + "===" + username);
 
     var trans = 29 - message[8];
     if (message[9] === 2) {
@@ -144,6 +113,7 @@ function showGreeting(message) {
 
 
     } else {
+        console.log(message[7] + "==" + username);
         if (message[7] === username) {
             var numberWinner = message[0];
             var color = message[2];
@@ -176,9 +146,6 @@ function showGreeting(message) {
             +"</b></td>" +
                     "</tr>";
             $("#userinfo").append(content);
-            var newBalance = localStorage.getItem('currentBalance')+parseInt(money);
-            localStorage.setItem('currentBalance', newBalance );
-            updateBalance();
         } else {
             if (opt === "win") {
                 alertify.success("<b>" + message[7] + "</b> has won <b>$" + message[6] + 'USD</b> ');

@@ -15,6 +15,7 @@ public class GameTable {
         private String name;
         private double stakes;
         private int capacity;
+        private int currentPlayers;
 	
 	protected GameTable() {
 	}
@@ -25,6 +26,7 @@ public class GameTable {
 		this.name = name;
 		this.stakes = stakes;
                 this.capacity = capacity;
+                this.currentPlayers = 0;
                 
 	}
 	
@@ -67,6 +69,15 @@ public class GameTable {
         public void setCapacity(int capacity) {
             this.capacity = capacity;
         }
+
+        public int getCurrentPlayers() {
+            return currentPlayers;
+        }
+
+        public void setCurrentPlayers(int currentPlayers) {
+            this.currentPlayers = currentPlayers;
+        }
+        
         
         
 
